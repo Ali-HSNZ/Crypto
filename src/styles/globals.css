@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* iranYekan Fonts */
+@import url('iranyekan.fonts.css');
+
+/* others Styles */
+@import url('others.styles.css');
