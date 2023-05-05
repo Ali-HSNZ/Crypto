@@ -1,0 +1,45 @@
+._swiper .swiper-button-next {
+     --swiper-navigation-size : 20px;
+     background-color: rgb(255, 255, 255);
+     padding: 16px 16px; 
+     border-radius: 10px;
+     margin: 0 0px;
+     border: 2px solid rgb(55, 55, 55);
+
+     position: absolute;
+     left: 0px !important;
+ 
+     /*! Change Icon */
+     background-image: url(../images/left-arrow.png);
+     background-repeat: no-repeat;
+     background-size: 40% auto;
+     background-position: center;
+}
+._swiper .swiper-button-next::after {
+     display: none;
+}
+ 
+._swiper .swiper-button-prev {
+     --swiper-navigation-size : 20px;
+     background-color: rgb(255, 255, 255);
+     border: 2px solid rgb(55, 55, 55);
+     padding: 16px 16px; 
+     border-radius: 10px;
+     position: absolute;
+     right: 0px !important;
+     
+
+     /*! Change Icon */
+     background-image: url(../images/right-arrow.png);
+     background-repeat: no-repeat;
+     background-size: 40% auto;
+     background-position: center;
+     
+}
+._swiper .swiper-button-prev::after {
+     display: none;
+}
+.swiper{
+     padding: 0 !important;
+     position: unset !important;
+}

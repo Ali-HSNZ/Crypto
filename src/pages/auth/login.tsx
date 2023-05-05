@@ -4,22 +4,44 @@ import logo from '@/images/Logo.png'
 import Rectangle from '@/images/Rectangle.png'
 import Link from "next/link";
 import InputCommon from "@/common/InputCommon";
-
+import axios from 'axios'
+import { toast } from "react-toastify";
+import { VALIDATION_EMAIL } from "@/utils/regix";
+import { toEnDigits } from "@/utils/methods";
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
-
-     const onSubmit = () => {}
+     const router = useRouter()
+     const onSubmit = (values : {email : string, password : string}) => {
+          axios.post('https://apingweb.com/api/login', {
+               email : values.email,
+               password : toEnDigits(values.password)
+          } , {headers : {"Content-Type" : 'application/json'}})
+          .then(res => {
+               toast.success("با موفقیت لاگین شده‌اید.")
+               setTimeout(() => {
+                    router.push('/')
+               }, 1500);
+          })
+          .catch(error => {
+               error?.response?.data?.errors.forEach((message : string) => toast.error(message))
+               // throw error
+          })
+     }
 
      const initialValues = {
-          username : "",
+          email : "",
           password : ""
      }
 
      const validationSchema = yup.object({
-          username : 
-               yup.string()
-               .required('username must be required')
-               .max(16 , 'username cannot be longer than 16 characters '),
+          email : yup.string()
+               .required('ایمیل الزامی میباشد.')
+               .test('validate',"ایمیل وارد شده معتبر نیست." , (values) => {
+                    if(VALIDATION_EMAIL.test(values))
+                    return true;
+                    else return false
+               }),
           password : 
                yup.string()
                .required('password must be required')
@@ -51,7 +73,7 @@ const LoginPage = () => {
                </div>
 
                {/* Login Form */}
-               <div className="bg-white w-full rounded-l-md py-16 flex items-center flex-col h-full">
+               <form onSubmit={formik.handleSubmit} className="bg-white w-full rounded-l-md py-16 flex items-center flex-col h-full">
                     <div>
                          <img src={logo.src} alt="" className="w-20" />
                     </div>
@@ -64,7 +86,9 @@ const LoginPage = () => {
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
                                    </svg>
                               }
-                              inputType="text"
+                              inputType="email"
+                              formik={formik}
+                              name="email"
                               title="ایمیل"
                               placeholder="exmaple@gmail.com"
                          />
@@ -75,17 +99,19 @@ const LoginPage = () => {
                                    </svg>
                               }
                               inputType="password"
+                              formik={formik}
+                              name="password"
                               title="رمز عبور"
-                              placeholder="exmaple@gmail.com"
+                              placeholder="حداقل ۸ کاراکتر"
                          />
                     </section>
-                    <button className="bg-blue-500 hover:bg-blue-600 duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3">
+                    <button type="submit" className="bg-blue-500 hover:bg-blue-600 duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3">
                          ورود به حساب
                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                          </svg>
                     </button>
-               </div>
+               </form>
           </section>
      );
 }

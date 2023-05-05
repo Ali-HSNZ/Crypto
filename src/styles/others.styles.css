@@ -5,7 +5,7 @@ body{
 /* ---------------- autoFull Styles ---------------- */
 input[type=text],
 input[type=password]:-webkit-autofill{
-     -webkit-text-fill-color: #1F2937 !important;
+     /* -webkit-text-fill-color: #1F2937 !important; */
      -webkit-box-shadow: 0 0 0 40px #FFFFFF  inset !important;
 }
 

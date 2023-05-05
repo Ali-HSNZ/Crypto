@@ -1,17 +1,50 @@
 import { useFormik } from "formik";
-import * as yup from 'yup'
 import logo from '@/images/Logo.png'
 import InputCommon from "@/common/InputCommon";
 import Link from "next/link";
 import OTPInput  from 'react-otp-input';
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { TAppDispatch, TRootState } from "@/redux/store/store";
+import { useRouter } from "next/router";
+import { toPersianDigits } from "@/utils/toPersianDigits";
+import { confirm_phone_number } from "@/redux/slices/auth/register";
+import { IRegister } from "src/types/register.types";
+import Loading from "@/common/Loading";
 
-const RegisterPage = () => {
+const RegisterPage = ({loading}) => {
+     
+     const dispatch = useDispatch<TAppDispatch>()
+     const {otp , phone , password} = useSelector<TRootState>(state => state.register) as IRegister
+     
+     console.log("password : ",password);
+     
 
-     const [otp, setOtp] = useState('654654');
-     const handleOTPChange = (otp: string) => {
-          setOtp(otp);
-        };
+     const [isCurrectOtp , setIsCurrectOtp] = useState<boolean | null>(null)
+     const [inputNumbers, setInputNumbers] = useState<string>('');
+
+     const router = useRouter()
+
+
+     const checkCurrectlyOtp = () : void => {
+          inputNumbers === otp ? setIsCurrectOtp(true) : setIsCurrectOtp(false)
+     }
+
+     const onSubmit = (value : object) : void => {
+          dispatch(confirm_phone_number(value)) 
+          router.push('/auth/register/contact_information')
+     }
+
+
+     const formik = useFormik({
+          initialValues : {
+               phone : phone ?? "",
+               password : ""
+          },
+          onSubmit,
+          validateOnMount : true,
+          enableReinitialize : true,
+     })
 
      return (  
           <section className="w-full h-screen xl:p-8 bg-transparent flex flex-col md:flex-row">
@@ -47,7 +80,7 @@ const RegisterPage = () => {
                </div>
 
                {/* Login Form */}
-               <div className="bg-white w-full rounded-l-md pt-8 flex items-center flex-col h-full">
+               <form onSubmit={formik.handleSubmit} className="bg-white w-full rounded-l-md pt-8 flex items-center flex-col h-full">
                     <p className="font-iranyekan-bold text-blue-600 text-sm">مرحله ۲ از ۳</p>
                     <h1 className="text-lg mt-6 font-iranyekan-extraBold">لطفا اطلاعات خود را با دقت وارد نمائید</h1>
                     {/* <section className="flex w-[700px] flex-col mt-8 flex-1 px-6 sm:px-14 py-6"> */}
@@ -60,6 +93,9 @@ const RegisterPage = () => {
                                    </svg>
                               }
                               inputType="tel"
+                              name="phone"
+                              disabled={true}
+                              formik={formik}
                               title="شماره همراه"
                               placeholder="۰۹۱۱۲۵۶۴۷۹۸"
                          />
@@ -67,22 +103,34 @@ const RegisterPage = () => {
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-blue-700">
                                    <path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
                               </svg>
-                              <p className="text-xs font-iranyekan-regular leading-6">کد تائید به شماره ۰۹۰۱۵۶۷۱۳۴۶ ارسال شده است. این کد تا ۰۲:۰۰ دقیقه دیگر معتبر است</p>
+                              <p className="text-xs font-iranyekan-regular leading-6">کد تائید به شماره {toPersianDigits(phone)} ارسال شده است. این کد تا ۰۲:۰۰ دقیقه دیگر معتبر است</p>
                          </div>
                          <p className="w-full text-center font-iranyekan-bold text-gray-800 mt-6">کد تائید</p>
                          <div className="w-full flex flex-row-reverse justify-center items-center mt-4">
                               <OTPInput 
-                                   value={otp}
-                                   onChange={handleOTPChange}
+                                   value={inputNumbers}
+                                   onChange={(num)=> setInputNumbers(num)}
                                    numInputs={4}
                                    inputStyle={'text-red-500 p-6'}
                                    inputType="tel"
-                                   containerStyle={'flex gap-x-4 flex-row-reverse'}
-                                   renderInput={(props) => <input {...props} className="border-2 otp_inputs rounded-xl"/>}
+                                   containerStyle={'flex gap-x-4 flex-row-reverse'} //
+                                   renderInput={(props) => <input {...props} disabled={isCurrectOtp === true} className={`border-2 otp_inputs ${isCurrectOtp === true ? "border-green-300" : isCurrectOtp === false ? "border-red-300" : "border-gray-300"} rounded-xl font-iranyekan-bold text-gray-700`}/>}
                              />
                          </div>
-                         <div className="w-full flex justify-center items-center">
-                              <button className="bg-blue-600 hover:bg-blue-700 duration-150 font-iranyekan-bold text-blue-100 w-fit px-6 py-3 rounded-xl mt-6">تایید شماه همراه</button>
+                         <div className="w-full flex justify-center items-center flex-col gap-y-4">
+                              <button type={"button"} disabled={isCurrectOtp === true} onClick={checkCurrectlyOtp} className={`disabled:bg-gray-400 disabled:cursor-not-allowed bg-blue-600 hover:bg-blue-700 duration-150 font-iranyekan-bold text-blue-100 w-fit px-6 py-3 rounded-xl mt-6`}>تایید شماه همراه</button>
+                              <InputCommon 
+                                   icon={
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-600">
+                                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                                        </svg>
+                                   }
+                                   inputType="password"
+                                   name="password"
+                                   formik={formik}
+                                   title="رمز عبور"
+                                   placeholder="حداقل ۸ کاراکتر"
+                              />
                          </div>
                     </section>
                     <hr className="w-full border-gray-300"/>
@@ -90,14 +138,20 @@ const RegisterPage = () => {
                          <Link href={'/auth/register/contact_information'} className="mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
                               مرحله قبل 
                          </Link>
-                         <Link href={'/auth/register/check_information'} className="bg-blue-500 hover:bg-blue-600 duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3">
-                              مرحله بعد
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                   <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                              </svg>
-                         </Link>
+                         <button type={'submit'} disabled={!isCurrectOtp} className={`disabled:bg-gray-400 disabled:cursor-not-allowed bg-blue-500 hover:bg-blue-600     duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                              {loading ? (
+                                   <Loading color="white" scale={20} type="spin"/>
+                              ) : (
+                                   <>
+                                        مرحله بعد 
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                                        </svg>
+                                   </>
+                              )}
+                         </button>
                     </section>
-               </div>
+               </form>
           </section>
      );
 }
