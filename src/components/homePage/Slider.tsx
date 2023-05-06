@@ -162,27 +162,6 @@ const Slider = () => {
           </div>
         </SwiperSlide>
 
-        {/* solana */}
-        <SwiperSlide>
-          <div className="w-full bg-white p-4 rounded-lg">
-            <div className='w-full flex justify-between'>
-              <div className='flex gap-x-4 justify-center items-center'>
-                <img src={`https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg`} className='w-14 h-auto object-cover' alt="" />
-                <div className='flex flex-col gap-y-2'>
-                  <p className='font-iranyekan-bold '>{solana?.fa_name}</p>
-                  <p className='font-iranyekan-bold text-gray-400'>{solana?.name}</p>
-                </div>
-              </div>
-              <div className='flex flex-col items-end'>
-                <p className={` font-iranyekan-bold text-green-600 `}>{toPersianDigits(truncateNumber(solana?.usd_24h_change, 2))}%</p>
-                <p className='font-iranyekan-bold text-gray-700'>{toPersianPrice(solana?.usd)} دلار</p>
-              </div>
-            </div>
-            <div className='w-full pt-4'>
-              {solana && <Chart chart={solana} />}
-            </div>
-          </div>
-        </SwiperSlide>
       </Swiper>
     </div>
   );

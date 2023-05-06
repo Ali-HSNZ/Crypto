@@ -1,9 +1,17 @@
 import logo from '@/images/Logo.png'
+import {FC} from 'react'
 
-const Header = () => {
+type THeaderProps = {
+     isOpenMenu : boolean,
+     setIsOpenMenu : React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Header : FC<THeaderProps> = ({isOpenMenu , setIsOpenMenu}) => {
+
      return (
           <div className="bg-white h-auto w-full rounded-xl p-4 flex justify-between items-center">
-               <button>
+               {/* Menu Button */}
+               <button onClick={()=>setIsOpenMenu(!isOpenMenu)}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
                          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>

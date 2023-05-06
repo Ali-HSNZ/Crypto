@@ -18,12 +18,11 @@ const Chart = () => {
     dispatch(fetchAccessWallet())
   }, [])
 
-  console.log("data : ", data);
 
   return (
     <section className="mt-8  flex flex-col lg:flex-row gap-6 font-iranyekan-bold">
       <div className="w-full ">
-        <div className="w-full flex flex-col md:flex-row justify-between  gap-6 ">
+        <div className="w-full flex flex-col xl:flex-row justify-between  gap-6 ">
 
           {/* دارایی‌های کیف پول */}
           <div className="w-full p-0 bg-white pr-6 pt-6 rounded-lg h-[300px]">
@@ -60,7 +59,7 @@ const Chart = () => {
 
       </div>
 
-      <div className="bg-white w-full lg:w-[500px] rounded-lg py-4 ">
+      <div className="bg-white w-full lg:w-[450px] rounded-lg py-4 ">
         <FavoriteCoins />
       </div>
 

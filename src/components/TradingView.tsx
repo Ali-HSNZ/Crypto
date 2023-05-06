@@ -16,7 +16,7 @@ const TradingView = () => {
                     console.log(error);
                }
           };
-          // fetchData();
+          fetchData();
      }, []);
 
 

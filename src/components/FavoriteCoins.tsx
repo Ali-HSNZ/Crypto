@@ -3,15 +3,18 @@ import { ICryptoState } from "@/types/crypto.types";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react'
 import { fetchFavoriteCoins, fetchLastWeekTransactions } from "@/redux/slices/crypto";
+import { toPersianDigits } from "@/utils/toPersianDigits";
+import { truncateNumber } from "@/utils/methods";
 const FavoriteCoins = () => {
 
      const dispatch = useDispatch<TAppDispatch>()
      const { favoriteCoins } = useSelector<TRootState>(state => state.crypto) as ICryptoState
 
      useEffect(()=>{
-          // dispatch(fetchFavoriteCoins())
+          dispatch(fetchFavoriteCoins())
      },[])
-
+     console.log("favoriteCoins : ",favoriteCoins);
+     
 
      return (
           <>
@@ -39,7 +42,7 @@ const FavoriteCoins = () => {
                                    </div>
                               </div>
                               {/* <p className="text-green-500">۱.۶۸%+</p> */}
-                              <p>{item?.circulating_supply}</p>
+                              <p className={`${item?.price_change_24h > 0 ? "text-green-600" : "text-red-600"}`}>{toPersianDigits(truncateNumber(item?.price_change_24h,3))}</p>
 
                          </div>
                     ))}

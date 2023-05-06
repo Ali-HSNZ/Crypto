@@ -7,6 +7,7 @@ export const fetchAccessWallet = (): AppThunk => async (dispatch) => {
      try {
           const {data} = await axios.get('http://localhost:5000/wallet')
           dispatch(fetchAccessWalletSuccess(data))
+          localStorage.setItem('access_wallet' , JSON.stringify(data))
      } catch (error : any) {
           dispatch(fetchAccessWalletFailure(error?.message))
      }

@@ -18,7 +18,7 @@ const ExampleChartBar = () => {
 
 
   useEffect(()=>{
-    // dispatch(fetchLastWeekTransactions())
+    dispatch(fetchLastWeekTransactions())
   },[])
 
 
