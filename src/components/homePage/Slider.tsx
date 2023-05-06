@@ -25,9 +25,6 @@ const Slider = () => {
 
   const dispatch = useDispatch<TAppDispatch>()
 
-console.log("bitcoin : ",bitcoin);
-
-
   useEffect(() => {
     // dispatch(fetchCrypto())
   }, [])

@@ -14,5 +14,7 @@ export interface ICryptoState {
      tether: null | TResponse;
      ethereum : null | TResponse
      ripple : null | TResponse
-     solana : null | TResponse
+     solana : null | TResponse,
+     lastWeekTransactions : null | Array<Array<number>>
+     favoriteCoins : null | any
 }

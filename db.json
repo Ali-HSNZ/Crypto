@@ -1,0 +1,22 @@
+{
+  "wallet": [
+    {
+      "id": 1,
+      "name": "بیتکوین",
+      "symbol": "BTC",
+      "balance": 45
+    },
+    {
+      "id": 2,
+      "name": "اتریوم", 
+      "symbol": "ETH",
+      "balance": 30
+    },
+    {
+      "id": 3,
+      "name": "ترون",
+      "symbol": "Tron",
+      "balance": 25
+    } 
+  ]
+}

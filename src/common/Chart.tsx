@@ -2,7 +2,6 @@ import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJs, 
   Title, 
-  Tooltip, 
   LineElement,
   Filler,
   Legend,
@@ -14,7 +13,6 @@ import { useEffect, useState } from "react";
 
 ChartJs.register(
   Title, 
-  Tooltip, 
   LineElement, 
   Legend,
   CategoryScale,

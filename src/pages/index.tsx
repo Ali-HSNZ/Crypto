@@ -4,7 +4,7 @@ import Header from '@/components/homePage/Header'
 import Slider from '@/components/homePage/Slider'
 export default function Home() {
   return (
-    <main className={'w-full h-screen p-6'}>
+    <main className={'w-full h-auto md:h-screen p-6'}>
         <Header/>
         <Slider/>
         <Chart />
