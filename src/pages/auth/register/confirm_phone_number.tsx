@@ -47,7 +47,7 @@ const RegisterPage = ({ loading }: { loading: boolean }) => {
      const validationSchema = Yup.object({
           password: Yup.string()
                .required('رمز عبور الزامی میباشد')
-               .min(6 , "رمز عبور نمی تواند کمتر از 6 کاراکتر باشد.")
+               .min(6 , "رمز عبور نمی تواند کمتر از ۶ کاراکتر باشد.")
                .test('validate', "رمز عبور معتبر نیست | رمز عبور میتواند ترکیبی از عدد و حروف انگلیسی باشد.", (values) => {
                     if (VALIDATION_PASSWORD.test(toEnDigits(values)))
                          return true;

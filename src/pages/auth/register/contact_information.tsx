@@ -53,7 +53,7 @@ const RegisterPage = ({ loading }: { loading: boolean }) => {
           email: yup.string()
                .required('ایمیل الزامی میباشد.')
                .test('validate', "ایمیل وارد شده معتبر نیست.", (values) => {
-                    if (VALIDATION_EMAIL.test(values))
+                    if (VALIDATION_EMAIL.test(toEnDigits(values)))
                          return true;
                     else return false
                })

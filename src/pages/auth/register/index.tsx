@@ -6,7 +6,7 @@ import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import "react-multi-date-picker/styles/layouts/mobile.css"
 
-import {useEffect, useRef, useState} from 'react'
+import {useRef, useState} from 'react'
 import { useFormik } from 'formik';
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,29 +22,17 @@ import {
      VALIDATION_PERSIAN_ALPHABET 
 } from '@/utils/regix';
 
+
 import { useRouter } from 'next/router';
 import Loading from '@/common/Loading'
+import { IRegister } from '@/types/register.types'
 
-interface IRegister {
-     name : string
-     national_code : string
-     birthday : string
-     phone : string
-     email : string
-     province : string
-     city : string
-     address : string
-     x_position : string
-     y_position : string
-     step : string
-     otp : string
-}
 
 const RegisterPage = ({loading} : {loading : boolean}) => {
      const dispatch = useDispatch<TAppDispatch>()
      const router = useRouter()
 
-     const {birthday,name, national_code , step} = useSelector<TRootState>(state => state.register) as IRegister
+     const {birthday,name, national_code} = useSelector<TRootState>(state => state.register) as IRegister
 
      const birthday_inputRef = useRef<HTMLInputElement>(null)
      const [birthday_date, setBirthday_date] = useState<string | any>(birthday ? toPersianDigits(birthday) : "")
@@ -81,7 +69,6 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
                .required('کد ملی الزامی میباشد.')
 
                .test('validate',"کد ملی وارد شده معتبر نیست." , (values) => {
-                    // console.log('values : ',toEnDigits(values))
                     if(VALIDATION_NATIONAL_CODE.test(toEnDigits(values)))
                     return true;
                     else return false

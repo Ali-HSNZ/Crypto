@@ -29,7 +29,6 @@ const LeafletMap = () => {
     const x = latLng.lat;
     const y = latLng.lng;
 
-    console.log("New coordinates of the marker:", x, y);
   };
 
   return (
