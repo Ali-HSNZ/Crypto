@@ -67,6 +67,7 @@ const Home = () => {
         </div>
 
       </Modal>
+      
       <main className={'w-full gap-x-6 grid  grid-cols-10 h-auto md:h-screen p-6'}>
 
         <div className={`${isOpenMenu ? "lg:col-span-2" : "hidden"} `}>

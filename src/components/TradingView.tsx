@@ -11,7 +11,7 @@ const TradingView = () => {
      const dispatch = useDispatch<TAppDispatch>()
 
      useEffect(() => {
-          // dispatch(fetchTradingView())
+          dispatch(fetchTradingView())
      }, []);
 
 
