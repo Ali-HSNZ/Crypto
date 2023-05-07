@@ -15,15 +15,15 @@ import Loading from "@/common/Loading";
 import { useEffect } from "react";
 
 
-const RegisterPage = ({loading} : {loading : boolean}) => {
+const RegisterPage = ({ loading }: { loading: boolean }) => {
 
      const dispatch = useDispatch<TAppDispatch>()
-     const {step , email , phone} = useSelector<TRootState>(state => state.register) as IRegister
-     
+     const { step, email, phone } = useSelector<TRootState>(state => state.register) as IRegister
+
 
      type TValues = {
-          phone : string,
-          email : string
+          phone: string,
+          email: string
      }
 
 
@@ -34,27 +34,27 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
           router.push('/auth/register/confirm_phone_number')
      }
 
-     const initialValues : TValues = {
-          phone : phone ? toPersianDigits(phone) : "",
-          email : email ? email :  "",
+     const initialValues: TValues = {
+          phone: phone ? toPersianDigits(phone) : "",
+          email: email ? email : "",
      }
-     const onSubmit = (values : TValues) => {
+     const onSubmit = (values: TValues) => {
           dispatch(contact_information(values))
           router.push('/auth/register/choose_location')
      }
      const validationSchema = yup.object({
-          phone : yup.string()
+          phone: yup.string()
                .required('شماره موبایل الزامی میباشد.')
-               .test('validate',"شماره موبایل وارد شده معتبر نیست." , (values) => {
-                    if(VALIDATION_PHONE_NUMBER.test(toEnDigits(values)))
-                    return true;
+               .test('validate', "شماره موبایل وارد شده معتبر نیست.", (values) => {
+                    if (VALIDATION_PHONE_NUMBER.test(toEnDigits(values)))
+                         return true;
                     else return false
                }),
-          email : yup.string()
+          email: yup.string()
                .required('ایمیل الزامی میباشد.')
-               .test('validate',"ایمیل وارد شده معتبر نیست." , (values) => {
-                    if(VALIDATION_EMAIL.test(values))
-                    return true;
+               .test('validate', "ایمیل وارد شده معتبر نیست.", (values) => {
+                    if (VALIDATION_EMAIL.test(values))
+                         return true;
                     else return false
                })
      })
@@ -63,11 +63,11 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
           initialValues,
           onSubmit,
           validationSchema,
-          validateOnMount : true,
-          enableReinitialize : true,
+          validateOnMount: true,
+          enableReinitialize: true,
      })
-     
-     return (  
+
+     return (
           <section className="w-full h-screen xl:p-8 bg-transparent flex flex-col md:flex-row">
 
                <div className="bg-white w-full md:w-[270px] md:min-w-[270px]">
@@ -105,7 +105,7 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
                     <p className="font-iranyekan-bold text-blue-600 text-sm">مرحله ۲ از ۳</p>
                     <h1 className="text-lg mt-6 font-iranyekan-extraBold">لطفا اطلاعات خود را با دقت وارد نمائید</h1>
                     <section className="flex w-full lg:w-[700px] flex-col mt-8 flex-1 px-6 sm:px-14 py-6 gap-y-10">
-                         <InputCommon 
+                         <InputCommon
                               icon={
                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-600">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
@@ -118,13 +118,12 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
                               name="phone"
                               maxLength={11}
                               disabled={step === "confirm_phone_number"}
-                              children={
-                                   <div>
-                                        {!formik.errors.phone && step !== "confirm_phone_number" && <button type="button" onClick={sendOtpCode_handler} className="font-iranyekan-bold text-sm text-blue-500 hover:text-blue-600">ارسال کد</button>}
-                                   </div>
-                              }
-                         />
-                         <InputCommon 
+                         >
+                              <>
+                                   {!formik.errors.phone && step !== "confirm_phone_number" && <button type="button" onClick={sendOtpCode_handler} className="font-iranyekan-bold text-sm text-blue-500 hover:text-blue-600">ارسال کد</button>}
+                              </>
+                         </InputCommon>
+                         <InputCommon
                               icon={
                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-600">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
@@ -138,17 +137,17 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
 
                          />
                     </section>
-                    <hr className="w-full border-gray-300"/>
+                    <hr className="w-full border-gray-300" />
                     <section className="w-full pb-6 flex justify-between items-center px-6">
                          <Link href={'/auth/register'} className="mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
-                              مرحله قبل 
+                              مرحله قبل
                          </Link>
                          <button type={'submit'} disabled={step !== "confirm_phone_number"} className={`${step !== "confirm_otp" && !formik.isValid ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}  disabled:bg-gray-600 disabled:cursor-not-allowed  duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                               {loading ? (
-                                   <Loading color="white" scale={20} type="spin"/>
+                                   <Loading color="white" scale={20} type="spin" />
                               ) : (
                                    <>
-                                        مرحله بعد 
+                                        مرحله بعد
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                                         </svg>
@@ -160,5 +159,5 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
           </section>
      );
 }
- 
+
 export default RegisterPage;
