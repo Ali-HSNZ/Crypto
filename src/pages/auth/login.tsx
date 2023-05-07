@@ -11,6 +11,7 @@ import { toEnDigits } from "@/utils/methods";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Loading from "@/common/Loading";
+import { toastify } from "@/utils/toast";
 
 const LoginPage = () => {
 
@@ -32,7 +33,8 @@ const LoginPage = () => {
                })
                .catch(error => {
                     setLoading(false)
-                    error?.response?.data?.errors.forEach((message: string) => toast.error(message))
+                    // error?.response?.data?.errors.forEach((message: string) => toast.error(message))
+                    toastify({message : error?.response?.data?.message ?? "خطای احراز هویت" , type : 'error'})
                })
      }
 
