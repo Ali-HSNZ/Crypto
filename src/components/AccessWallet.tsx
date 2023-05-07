@@ -44,7 +44,6 @@ const AccessWallet = () => {
 
   const { loading, data, error } = useSelector<TRootState>(state => state.access_wallet) as ICrypto_accessWallet
 
-  console.log("datadatadatadatadata : ",data);
   
   const dispatch = useDispatch<TAppDispatch>()
 
