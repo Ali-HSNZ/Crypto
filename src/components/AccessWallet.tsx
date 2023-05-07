@@ -48,7 +48,7 @@ const AccessWallet = () => {
   const dispatch = useDispatch<TAppDispatch>()
 
   useEffect(() => {
-    // dispatch(fetchAccessWallet())
+    dispatch(fetchAccessWallet())
   }, [])
 
   return (

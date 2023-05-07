@@ -24,7 +24,7 @@ const PriceChanges = () => {
   const dispatch = useDispatch<TAppDispatch>()
 
   useEffect(() => {
-    // dispatch(fetchCrypto_priceChange())
+    dispatch(fetchCrypto_priceChange())
   }, [])
 
   return (

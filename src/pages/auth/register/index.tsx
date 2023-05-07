@@ -1,7 +1,7 @@
 import logo from '@/images/Logo.png'
 
 //? Date Picker =>
-import DatePicker, { DateObject } from "react-multi-date-picker"
+import DatePicker from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import "react-multi-date-picker/styles/layouts/mobile.css"
@@ -40,7 +40,7 @@ interface IRegister {
      otp : string
 }
 
-const RegisterPage = ({loading}) => {
+const RegisterPage = ({loading} : {loading : boolean}) => {
      const dispatch = useDispatch<TAppDispatch>()
      const router = useRouter()
 
@@ -97,7 +97,7 @@ const RegisterPage = ({loading}) => {
      })
 
      return (  
-          <section className="w-full h-screen xl:p-8 bg-transparent flex flex-col md:flex-row">
+          <section className="w-full h-full md:h-screen xl:p-8 bg-transparent flex flex-col md:flex-row">
                {/* Information - Menubar */}
                <div className="bg-white w-full md:w-[270px] md:min-w-[270px]">
                     <div className="bg-[#388AEA]  w-full h-full gap-x-6 px-6 py-6 md:py-16 flex justify-between md:justify-start md:flex-col xl:rounded-r-md   ">

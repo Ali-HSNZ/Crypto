@@ -14,7 +14,7 @@ const FavoriteCoins = () => {
      const dispatch = useDispatch<TAppDispatch>()
 
      useEffect(()=>{
-          // dispatch(fetchFavoriteCoins())
+          dispatch(fetchFavoriteCoins())
      })
 
      return (

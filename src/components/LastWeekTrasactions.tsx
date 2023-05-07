@@ -24,7 +24,7 @@ const LastWeekTrasactions = () => {
 
 
   useEffect(() => {
-    // dispatch(fetchLastWeekTransactions())
+    dispatch(fetchLastWeekTransactions())
   }, [])
 
 

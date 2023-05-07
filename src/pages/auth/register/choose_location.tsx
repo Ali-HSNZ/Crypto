@@ -65,8 +65,8 @@ const RegisterPage = () => {
      const filteredCities : Array<TCity> | null = cityQuery === '' ? cities : cities && cities.filter((city) => city?.name?.toLowerCase().replace(/\s+/g, '').includes(cityQuery.toLocaleLowerCase().replace(/\s+/g, '')))
 
      useEffect(()=>{
-          const id = selectedProvience?.id || '';
-          if(id){
+          if(selectedProvience?.id){
+               setSelectedCity('')
                const cities = allCities.filter(city => city.province_id === selectedProvience?.id)
                setCities(cities)
           }else setCities(null)
@@ -244,7 +244,7 @@ const RegisterPage = () => {
                               <Link href={'/auth/register/contact_information'} className="mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
                                    مرحله قبل 
                               </Link>
-                              <button type={'submit'} className={`${!formik.isValid ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}    duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                              <button disabled={loading} type={'submit'} className={`${!formik.isValid ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"} disabled:bg-gray-400 disabled:cursor-not-allowed   duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                                   {loading ? (
                                         <Loading color="white" scale={20} type="spin"/>
                                    ) : (
