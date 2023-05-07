@@ -12,7 +12,7 @@ import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux';
 import { TAppDispatch, TRootState } from '@/redux/store/store';
 import InputCommon from '@/common/InputCommon';
-import { person_information } from '@/redux/slices/auth/register';
+import { person_information } from '@/redux/slices/register';
 
 //? utils
 import { toPersianDigits } from '@/utils/toPersianDigits';

@@ -2,52 +2,73 @@ import { useFormik } from "formik";
 import logo from '@/images/Logo.png'
 import InputCommon from "@/common/InputCommon";
 import Link from "next/link";
-import OTPInput  from 'react-otp-input';
-import { useState } from "react";
+import OTPInput from 'react-otp-input';
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TAppDispatch, TRootState } from "@/redux/store/store";
 import { useRouter } from "next/router";
 import { toPersianDigits } from "@/utils/toPersianDigits";
-import { confirm_phone_number } from "@/redux/slices/auth/register";
+import { confirm_phone_number } from "@/redux/slices/register";
 import { IRegister } from "src/types/register.types";
 import Loading from "@/common/Loading";
+import * as Yup from 'yup'
+import { VALIDATION_PASSWORD } from "@/utils/regix";
+import { toEnDigits } from "@/utils/methods";
+import { fetchCrypto_priceChange } from "@/redux/slices/crypto/priceChanges";
 
-const RegisterPage = ({loading}) => {
-     
+const RegisterPage = ({ loading }: { loading: boolean }) => {
+
      const dispatch = useDispatch<TAppDispatch>()
-     const {otp , phone , password} = useSelector<TRootState>(state => state.register) as IRegister
-     
-     console.log("password : ",password);
-     
+     const { otp, phone, password } = useSelector<TRootState>(state => state.register) as IRegister
 
-     const [isCurrectOtp , setIsCurrectOtp] = useState<boolean | null>(null)
+     useEffect(()=>{
+          dispatch(fetchCrypto_priceChange())
+     },[])
+
+     const [isCurrectOtp, setIsCurrectOtp] = useState<boolean | null>(null)
      const [inputNumbers, setInputNumbers] = useState<string>('');
 
      const router = useRouter()
 
 
-     const checkCurrectlyOtp = () : void => {
-          inputNumbers === otp ? setIsCurrectOtp(true) : setIsCurrectOtp(false)
+     const checkCurrectlyOtp = (): void => {
+          if(otp !== ""){
+               inputNumbers === otp ? setIsCurrectOtp(true) : setIsCurrectOtp(false)
+          }else{
+               setIsCurrectOtp(false)
+          }
      }
 
-     const onSubmit = (value : object) : void => {
-          dispatch(confirm_phone_number(value)) 
+     const onSubmit = (value: object): void => {
+          dispatch(confirm_phone_number(value))
           router.push('/auth/register/contact_information')
      }
 
-
-     const formik = useFormik({
-          initialValues : {
-               phone : phone ?? "",
-               password : ""
-          },
-          onSubmit,
-          validateOnMount : true,
-          enableReinitialize : true,
+     const validationSchema = Yup.object({
+          password: Yup.string()
+               .required('رمز عبور الزامی میباشد')
+               .min(6 , "رمز عبور نمی تواند کمتر از 6 کاراکتر باشد.")
+               .test('validate', "رمز عبور معتبر نیست | رمز عبور میتواند ترکیبی از عدد و حروف انگلیسی باشد.", (values) => {
+                    if (VALIDATION_PASSWORD.test(toEnDigits(values)))
+                         return true;
+                    else return false
+               }),
      })
 
-     return (  
-          <section className="w-full h-screen xl:p-8 bg-transparent flex flex-col md:flex-row">
+
+     const formik = useFormik({
+          initialValues: {
+               phone: phone ?? "",
+               password: ""
+          },
+          onSubmit,
+          validateOnMount: true,
+          enableReinitialize: true,
+          validationSchema
+     })
+
+     return (
+          <section className="w-full h-full 2xl:h-screen xl:p-8 bg-transparent flex flex-col md:flex-row">
                {/* Info */}
                <div className="bg-white w-full md:w-[270px] md:min-w-[270px]">
                     <div className="bg-[#388AEA]  w-full h-full gap-x-6 px-6 py-6 md:py-16 flex justify-between md:justify-start md:flex-col xl:rounded-r-md   ">
@@ -84,9 +105,9 @@ const RegisterPage = ({loading}) => {
                     <p className="font-iranyekan-bold text-blue-600 text-sm">مرحله ۲ از ۳</p>
                     <h1 className="text-lg mt-6 font-iranyekan-extraBold">لطفا اطلاعات خود را با دقت وارد نمائید</h1>
                     {/* <section className="flex w-[700px] flex-col mt-8 flex-1 px-6 sm:px-14 py-6"> */}
-                    <section className="flex w-full lg:w-[700px] flex-col mt-8 flex-1 px-6 sm:px-14 py-6 ">
+                    <section className="flex w-full lg:w-[700px] flex-col mt-6 flex-1 px-6 sm:px-14 py-6 ">
 
-                         <InputCommon 
+                         <InputCommon
                               icon={
                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-600">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
@@ -105,45 +126,47 @@ const RegisterPage = ({loading}) => {
                               </svg>
                               <p className="text-xs font-iranyekan-regular leading-6">کد تائید به شماره {toPersianDigits(phone)} ارسال شده است. این کد تا ۰۲:۰۰ دقیقه دیگر معتبر است</p>
                          </div>
-                         <p className="w-full text-center font-iranyekan-bold text-gray-800 mt-6">کد تائید</p>
-                         <div className="w-full flex flex-row-reverse justify-center items-center mt-4">
-                              <OTPInput 
+                         <p className="w-full text-center font-iranyekan-bold text-gray-800 mt-4">کد تائید</p>
+                         <div className="w-full flex flex-row-reverse justify-center items-center mt-3">
+                              <OTPInput
                                    value={inputNumbers}
-                                   onChange={(num)=> setInputNumbers(num)}
+                                   onChange={(num) => setInputNumbers(num)}
                                    numInputs={4}
                                    inputStyle={'text-red-500 p-6'}
                                    inputType="tel"
                                    containerStyle={'flex gap-x-4 flex-row-reverse'} //
-                                   renderInput={(props) => <input {...props} disabled={isCurrectOtp === true} className={`border-2 otp_inputs ${isCurrectOtp === true ? "border-green-300" : isCurrectOtp === false ? "border-red-300" : "border-gray-300"} rounded-xl font-iranyekan-bold text-gray-700`}/>}
-                             />
-                         </div>
-                         <div className="w-full flex justify-center items-center flex-col gap-y-4">
-                              <button type={"button"} disabled={isCurrectOtp === true} onClick={checkCurrectlyOtp} className={`disabled:bg-gray-400 disabled:cursor-not-allowed bg-blue-600 hover:bg-blue-700 duration-150 font-iranyekan-bold text-blue-100 w-fit px-6 py-3 rounded-xl mt-6`}>تایید شماه همراه</button>
-                              <InputCommon 
-                                   icon={
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-600">
-                                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
-                                        </svg>
-                                   }
-                                   inputType="password"
-                                   name="password"
-                                   formik={formik}
-                                   title="رمز عبور"
-                                   placeholder="حداقل ۸ کاراکتر"
+                                   renderInput={(props) => <input {...props} disabled={isCurrectOtp === true} className={`border-2 otp_inputs ${isCurrectOtp === true ? "border-green-300" : isCurrectOtp === false ? "border-red-300" : "border-gray-300"} rounded-xl font-iranyekan-bold text-gray-700`} />}
                               />
                          </div>
+                         <div className="w-full flex justify-center items-center flex-col gap-y-3">
+                              <button type={"button"} disabled={isCurrectOtp === true} onClick={checkCurrectlyOtp} className={`disabled:bg-gray-400 disabled:cursor-not-allowed bg-blue-600 hover:bg-blue-700 duration-150 font-iranyekan-bold text-blue-100 w-fit px-6 py-3 rounded-xl mt-4`}>تایید شماه همراه</button>
+                              <section className="mt-6 w-full">
+                                   <InputCommon
+                                        icon={
+                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-600">
+                                                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                                             </svg>
+                                        }
+                                        inputType="password"
+                                        name="password"
+                                        formik={formik}
+                                        title="رمز عبور"
+                                        placeholder="حداقل ۸ کاراکتر"
+                                   />
+                              </section>
+                         </div>
                     </section>
-                    <hr className="w-full border-gray-300"/>
+                    <hr className="w-full border-gray-300" />
                     <section className="w-full pb-6 flex justify-between items-center px-6">
                          <Link href={'/auth/register/contact_information'} className="mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
-                              مرحله قبل 
+                              مرحله قبل
                          </Link>
-                         <button type={'submit'} disabled={!isCurrectOtp} className={`disabled:bg-gray-400 disabled:cursor-not-allowed bg-blue-500 hover:bg-blue-600     duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                         <button type={'submit'} disabled={!isCurrectOtp && !formik.isValid} className={`disabled:bg-gray-400 disabled:cursor-not-allowed bg-blue-500 hover:bg-blue-600     duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                               {loading ? (
-                                   <Loading color="white" scale={20} type="spin"/>
+                                   <Loading color="white" scale={20} type="spin" />
                               ) : (
                                    <>
-                                        مرحله بعد 
+                                        مرحله بعد
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                                         </svg>
@@ -155,5 +178,5 @@ const RegisterPage = ({loading}) => {
           </section>
      );
 }
- 
+
 export default RegisterPage;

@@ -1,8 +1,5 @@
 import Chart from '@/common/Chart';
-import logo from '@/images/Logo.png'
-import axios from 'axios';
-import { useEffect, useState } from 'react'
-
+import { useEffect } from 'react'
 //! ====Swiper====>
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -10,23 +7,24 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation } from "swiper";
 import "swiper/css/free-mode";
+//! <====Swiper====
 import { toPersianDigits } from '@/utils/toPersianDigits';
 import { toPersianPrice, truncateNumber } from '@/utils/methods';
 import { useDispatch, useSelector } from 'react-redux';
 import { TAppDispatch, TRootState } from '@/redux/store/store';
-import { fetchCrypto } from '@/redux/slices/crypto';
-import { ICryptoState } from '@/types/crypto.types';
-//! <====Swiper====
+import { fetchCrypto_priceChange } from '@/redux/slices/crypto/priceChanges';
+import { ICrypto_priceChanges } from '@/types/crypto.types';
 
 
-const Slider = () => {
+const PriceChanges = () => {
 
-  const { bitcoin, ripple, solana, dogecoin, tether, ethereum, loading } = useSelector<TRootState>(state => state.crypto) as ICryptoState
+
+  const { bitcoin, ripple, dogecoin, tether, ethereum} = useSelector<TRootState>(state => state.priceChange) as ICrypto_priceChanges
 
   const dispatch = useDispatch<TAppDispatch>()
 
   useEffect(() => {
-    // dispatch(fetchCrypto())
+    // dispatch(fetchCrypto_priceChange())
   }, [])
 
   return (
@@ -38,18 +36,10 @@ const Slider = () => {
         spaceBetween={20}
         modules={[Navigation]}
         breakpoints={{
-          0: {
-            slidesPerView: 1,
-          },
-          720: {
-            slidesPerView: 2,
-          },
-          1000 : {
-            slidesPerView: 3,
-          },
-          1400: {
-            slidesPerView: 4,
-          }
+          0: { slidesPerView: 1 },
+          720: { slidesPerView: 2 },
+          1000: { slidesPerView: 3 },
+          1400: { slidesPerView: 4 }
         }}
       >
         {/* bitcoin */}
@@ -64,8 +54,8 @@ const Slider = () => {
                 </div>
               </div>
               <div className='flex flex-col items-end'>
-                <p className={` font-iranyekan-bold text-green-600 `}>{toPersianDigits(truncateNumber(bitcoin?.usd_24h_change, 2))}%</p>
-                <p className='font-iranyekan-bold text-gray-700'>{toPersianPrice(bitcoin?.usd)} دلار</p>
+                <p className={` font-iranyekan-bold text-green-600 `}>{toPersianDigits(truncateNumber(bitcoin?.usd_24h_change ?? 0, 2))}%</p>
+                <p className='font-iranyekan-bold text-gray-700'>{toPersianPrice(bitcoin?.usd ?? 0)} دلار</p>
               </div>
             </div>
             <div className='w-full pt-4'>
@@ -86,8 +76,8 @@ const Slider = () => {
                 </div>
               </div>
               <div className='flex flex-col items-end'>
-                <p className={` font-iranyekan-bold text-green-600 `}>{toPersianDigits(truncateNumber(dogecoin?.usd_24h_change, 2))}%</p>
-                <p className='font-iranyekan-bold text-gray-700'>{toPersianPrice(dogecoin?.usd)} دلار</p>
+                <p className={` font-iranyekan-bold text-green-600 `}>{toPersianDigits(truncateNumber(dogecoin?.usd_24h_change ?? 0, 2))}%</p>
+                <p className='font-iranyekan-bold text-gray-700'>{toPersianPrice(dogecoin?.usd ?? 0)} دلار</p>
               </div>
             </div>
             <div className='w-full pt-4'>
@@ -108,8 +98,8 @@ const Slider = () => {
                 </div>
               </div>
               <div className='flex flex-col items-end'>
-                <p className={` font-iranyekan-bold text-green-600 `}>{toPersianDigits(truncateNumber(tether?.usd_24h_change, 2))}%</p>
-                <p className='font-iranyekan-bold text-gray-700'>{toPersianPrice(tether?.usd)} دلار</p>
+                <p className={` font-iranyekan-bold text-green-600 `}>{toPersianDigits(truncateNumber(tether?.usd_24h_change ?? 0, 2))}%</p>
+                <p className='font-iranyekan-bold text-gray-700'>{toPersianPrice(tether?.usd ?? 0)} دلار</p>
               </div>
             </div>
             <div className='w-full pt-4'>
@@ -130,8 +120,8 @@ const Slider = () => {
                 </div>
               </div>
               <div className='flex flex-col items-end'>
-                <p className={` font-iranyekan-bold text-green-600 `}>{toPersianDigits(truncateNumber(ethereum?.usd_24h_change, 2))}%</p>
-                <p className='font-iranyekan-bold text-gray-700'>{toPersianPrice(ethereum?.usd)} دلار</p>
+                <p className={` font-iranyekan-bold text-green-600 `}>{toPersianDigits(truncateNumber(ethereum?.usd_24h_change ?? 0, 2))}%</p>
+                <p className='font-iranyekan-bold text-gray-700'>{toPersianPrice(ethereum?.usd ?? 0)} دلار</p>
               </div>
             </div>
             <div className='w-full pt-4'>
@@ -152,8 +142,8 @@ const Slider = () => {
                 </div>
               </div>
               <div className='flex flex-col items-end'>
-                <p className={` font-iranyekan-bold text-green-600 `}>{toPersianDigits(truncateNumber(ripple?.usd_24h_change, 2))}%</p>
-                <p className='font-iranyekan-bold text-gray-700'>{toPersianPrice(ripple?.usd)} دلار</p>
+                <p className={` font-iranyekan-bold text-green-600 `}>{toPersianDigits(truncateNumber(ripple?.usd_24h_change ?? 0, 2))}%</p>
+                <p className='font-iranyekan-bold text-gray-700'>{toPersianPrice(ripple?.usd ?? 0)} دلار</p>
               </div>
             </div>
             <div className='w-full pt-4'>
@@ -167,4 +157,4 @@ const Slider = () => {
   );
 }
 
-export default Slider;
+export default PriceChanges;

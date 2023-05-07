@@ -9,7 +9,7 @@ type TToastProps = {
 }
 
 
-export const toastify : FC<TToastProps> = ({type , message}) : any => {
+export const toastify : FC<TToastProps> = ({type , message} : {type : string , message : Array<string>}) : any => {
      if(typeof message === 'string'){
           toast[type](message)
           console.log("message String : ",message);

@@ -16,7 +16,7 @@ import {provinces} from '@/static/provinces';
 import {allCities} from '@/static/cities';
 import dynamic from "next/dynamic";
 import { IRegister, TCity, TPoition, TProvince } from "@/types/register.types";
-import { changeLoginState, registerAction } from "@/redux/slices/auth/register";
+import { changeLoginState, registerAction } from "@/redux/slices/register";
 import Loading from "@/common/Loading";
 
 
@@ -28,7 +28,7 @@ type TValues = {
 }
 
 
-const RegisterPage = ({loading}) => {
+const RegisterPage = ({loading} : {loading : boolean}) => {
 
      // Renderd Map in Client Side
      const Map = dynamic(() => import('@/components/Map'), { ssr: false });
@@ -38,10 +38,9 @@ const RegisterPage = ({loading}) => {
      const [isOpenLocation,setIsOpenLocation] = useState<boolean>(false)
 
      const dispatch = useDispatch<TAppDispatch>()
-     const {email , phone , registerStatus} = useSelector<TRootState>(state => state.register) as IRegister
+     const {email , phone , registerStatus , loading : registerLoading} = useSelector<TRootState>(state => state.register) as IRegister
      const registerState = useSelector<TRootState>(state => state.register) as IRegister
      
-     console.log("registerStatus : ",registerStatus);
 
      useEffect(() => {
           if(registerStatus){
@@ -62,7 +61,7 @@ const RegisterPage = ({loading}) => {
      // Choose City
      const [cities,setCities] = useState<Array<TCity> | null>(null)    
      const [cityQuery , setCityQuery] = useState<string>("")
-     const [selectedCity,setSelectedCity] = useState<TCity>()
+     const [selectedCity,setSelectedCity] = useState<TCity | string>()
      const filteredCities : Array<TCity> | null = cityQuery === '' ? cities : cities && cities.filter((city) => city?.name?.toLowerCase().replace(/\s+/g, '').includes(cityQuery.toLocaleLowerCase().replace(/\s+/g, '')))
 
      useEffect(()=>{
@@ -248,7 +247,7 @@ const RegisterPage = ({loading}) => {
                                    مرحله قبل 
                               </Link>
                               <button type={'submit'} className={`${!formik.isValid ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}    duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
-                                   {loading ? (
+                                   {registerLoading ? (
                                         <Loading color="white" scale={20} type="spin"/>
                                    ) : (
                                         <>

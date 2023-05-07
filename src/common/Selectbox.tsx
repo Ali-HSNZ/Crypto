@@ -3,12 +3,12 @@ import { Combobox, Transition } from '@headlessui/react'
 import { TCity, TProvince } from '@/types/register.types'
 
 type TSelectboxProps = {
-    setSelected : TProvince | TCity | string,
-    selected : string,
+    setSelected : TProvince | TCity | any,
+    selected : string | any,
     query : string,
     notFoundTitle : string,
     setQuery : React.Dispatch<React.SetStateAction<any>>,
-    filteredData : object | null,
+    filteredData : TProvince | TCity | any,
     icon: JSX.Element
     title : string
     
@@ -40,7 +40,7 @@ const SelectBox : FC<TSelectboxProps> = ({isDisabled,icon,title,placeholder ,dis
                          {/* line */}
                          <div className='w-fit h-fit px-2 border rotate-90 absolute right-[50px] top-7'></div>
 
-                        <Combobox.Input ref={inputRef} placeholder={isDisabled ? "ابتدا استان مورد نظر را انتخاب کنید" :  placeholder ? placeholder : ""}  onChange={(event) => setQuery(event.target.value)} className={`font-iranyekan-regular focus:border-gray-300 bg-white hover:border-gray-300 border-gray-200  placeholder:text-sm placeholder:text-gray-400 ${disabled && "cursor-not-allowed"}  pl-11 pr-[70px] border-2 w-full py-4 rounded-full outline-none`}   displayValue={(brand) => brand.name}/>
+                        <Combobox.Input ref={inputRef} placeholder={isDisabled ? "ابتدا استان مورد نظر را انتخاب کنید" :  placeholder ? placeholder : ""}  onChange={(event) => setQuery(event.target.value)} className={`font-iranyekan-regular focus:border-gray-300 bg-white hover:border-gray-300 border-gray-200  placeholder:text-sm placeholder:text-gray-400 ${disabled && "cursor-not-allowed"}  pl-11 pr-[70px] border-2 w-full py-4 rounded-full outline-none`}   displayValue={(item : TCity | TProvince) => item.name ?? ""}/>
                         <Combobox.Button>
                               <div className='absolute top-0 left-0 pl-4 flex items-center justify-center pr-2 bottom-0 rounded-l-full'>
                                    <button>
@@ -57,11 +57,11 @@ const SelectBox : FC<TSelectboxProps> = ({isDisabled,icon,title,placeholder ,dis
                             {filteredData && filteredData.length === 0 && query !== '' ? (
                                 <div className="relative cursor-pointer select-none py-2 px-4 text-gray-700 font-iranyekan-regular">{notFoundTitle}</div>
                             ) : (
-                                filteredData && filteredData.map((category) => (
-                                    <Combobox.Option  value={category} key={category.id} className={({ active }) => `relative cursor-pointer select-none py-2 pl-10 pr-4 ${active ? 'bg-gray-100' : 'text-gray-900'}`}>
+                                filteredData && filteredData.map((item : TProvince | TCity) => (
+                                    <Combobox.Option  value={item} key={item.id} className={({ active }) => `relative cursor-pointer select-none py-2 pl-10 pr-4 ${active ? 'bg-gray-100' : 'text-gray-900'}`}>
                                         {({ selected, active }) => (
                                             <>
-                                                <span className={`  font-iranyekan-regular text-sm block truncate text-gray-800 ${ selected && 'font-iranyekan-bold text-black' }`}> {category.name} </span>
+                                                <span className={`  font-iranyekan-regular text-sm block truncate text-gray-800 ${ selected && 'font-iranyekan-bold text-black' }`}> {item.name} </span>
                                                 {selected && (
                                                     <span className={`absolute  cursor-pointer inset-y-0 left-0 flex items-center pl-3 text-gray-700`}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">

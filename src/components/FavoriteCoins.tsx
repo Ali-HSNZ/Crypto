@@ -1,20 +1,21 @@
 import { TAppDispatch, TRootState } from "@/redux/store/store";
-import { ICryptoState } from "@/types/crypto.types";
+import { ICrypto_favoriteCoins, TFavoriteCoinsResponse } from "@/types/crypto.types";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react'
-import { fetchFavoriteCoins, fetchLastWeekTransactions } from "@/redux/slices/crypto";
+import { fetchFavoriteCoins } from "@/redux/slices/crypto/favoriteCoins";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import { truncateNumber } from "@/utils/methods";
+
+
 const FavoriteCoins = () => {
 
+     const { data } = useSelector<TRootState>(state => state.favoriteCoins) as ICrypto_favoriteCoins
+
      const dispatch = useDispatch<TAppDispatch>()
-     const { favoriteCoins } = useSelector<TRootState>(state => state.crypto) as ICryptoState
 
      useEffect(()=>{
-          dispatch(fetchFavoriteCoins())
-     },[])
-     console.log("favoriteCoins : ",favoriteCoins);
-     
+          // dispatch(fetchFavoriteCoins())
+     })
 
      return (
           <>
@@ -32,7 +33,7 @@ const FavoriteCoins = () => {
                     <p>۲۴ ساعت گذشته</p>
                </div>
                <section className="relative">
-                    {favoriteCoins?.map((item, index) => (
+                    {data?.map((item : TFavoriteCoinsResponse , index : number) => (
                          <div key={index} className="w-full flex flex-row items-center justify-between mt-6 border-b-2 pb-2 px-4">
                               <div className="flex gap-x-4 items-center">
                                    <img className="w-12  object-cover" src={item?.image} alt="" />
@@ -41,8 +42,7 @@ const FavoriteCoins = () => {
                                         <p className="font-iranyekan-bold text-gray-400">{String(item?.symbol).toUpperCase()}</p>
                                    </div>
                               </div>
-                              {/* <p className="text-green-500">۱.۶۸%+</p> */}
-                              <p className={`${item?.price_change_24h > 0 ? "text-green-600" : "text-red-600"}`}>{toPersianDigits(truncateNumber(item?.price_change_24h,3))}</p>
+                              <p className={`${item.price_change_24h > 0 ? "text-green-600" : "text-red-600"}`}>{toPersianDigits(truncateNumber(item?.price_change_24h, 3))}</p>
 
                          </div>
                     ))}

@@ -12,7 +12,8 @@ export interface IRegister {
      step : string
      otp : string
      password : string
-     registerStatus : boolean
+     registerStatus : boolean,
+     loading : boolean
 }
 // choose Location
 export type TProvince = {

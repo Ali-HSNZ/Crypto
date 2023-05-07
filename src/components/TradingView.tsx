@@ -1,37 +1,34 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import TradingViewWidget, { Themes } from 'react-tradingview-widget';
+import TradingViewWidget from 'react-tradingview-widget';
+import { fetchTradingView } from '@/redux/slices/crypto/tradingView';
+import { TAppDispatch, TRootState } from '@/redux/store/store';
+import { ICrypto_tradingView } from '@/types/crypto.types';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const TradingView = () => {
-     const [data, setData] = useState(null);
+
+     const { data, loading, error } = useSelector<TRootState>(state => state.tradingView) as ICrypto_tradingView
+     const dispatch = useDispatch<TAppDispatch>()
 
      useEffect(() => {
-          const fetchData = async () => {
-               try {
-                    const response = await axios.get(
-                         'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=14'
-                    );
-                    setData(response.data);
-               } catch (error) {
-                    console.log(error);
-               }
-          };
-          fetchData();
+          // dispatch(fetchTradingView())
      }, []);
 
 
      return (
           <div className='h-full w-full'>
                {data ? (
-                    <TradingViewWidget
-                         symbol='BITSTAMP:BTCUSD'
-                         // theme={Themes.DARK}
-                         autosize
-                         interval='D'
-                         timezone='Etc/UTC'
-                         range='2W'
-                         style='1'
-                    />
+                    <section className='w-full h-full'>
+                         {/* <TradingViewWidget
+                              symbol='BITSTAMP:BTCUSD'
+                              // theme={Themes.DARK}
+                              autosize
+                              interval='D'
+                              timezone='Etc/UTC'
+                              range='2W'
+                              style='1'
+                         /> */}
+                    </section>
                ) : (
                     <div>Loading...</div>
                )}

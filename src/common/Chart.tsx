@@ -26,15 +26,15 @@ import { timeStampToPersianDate } from "@/utils/methods";
 
 
 
-const Chart = ({chart}) => {
+const Chart = ({chart} : {chart : any}) => {
   
 // console.log("chart : ",chart);
 
   const data = {
-    labels : chart.history.map(e => timeStampToPersianDate(e[0])),
+    labels : chart.history.map((e : Array<number>) => timeStampToPersianDate(e[0])),
     datasets : [
       {
-        data : chart.history.map(e => e[1]),
+        data : chart.history.map((e : Array<number>) => e[1]),
         
         fill : true,
         // backgroundColor: '#2AC480',

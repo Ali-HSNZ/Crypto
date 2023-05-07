@@ -9,13 +9,13 @@ import { VALIDATION_EMAIL, VALIDATION_NATIONAL_CODE, VALIDATION_PERSIAN_ALPHABET
 import { toEnDigits } from "@/utils/methods";
 import { useDispatch, useSelector } from "react-redux";
 import { TAppDispatch, TRootState } from "@/redux/store/store";
-import { contact_information, sendOTPcode } from "@/redux/slices/auth/register";
+import { contact_information, sendOTPcode } from "@/redux/slices/register";
 import { IRegister } from "src/types/register.types";
 import Loading from "@/common/Loading";
 import { useEffect } from "react";
 
 
-const RegisterPage = ({loading}) => {
+const RegisterPage = ({loading} : {loading : boolean}) => {
 
      const dispatch = useDispatch<TAppDispatch>()
      const {step , email , phone} = useSelector<TRootState>(state => state.register) as IRegister
@@ -119,9 +119,9 @@ const RegisterPage = ({loading}) => {
                               maxLength={11}
                               disabled={step === "confirm_phone_number"}
                               children={
-                                   <>
+                                   <div>
                                         {!formik.errors.phone && step !== "confirm_phone_number" && <button type="button" onClick={sendOtpCode_handler} className="font-iranyekan-bold text-sm text-blue-500 hover:text-blue-600">ارسال کد</button>}
-                                   </>
+                                   </div>
                               }
                          />
                          <InputCommon 

@@ -48,7 +48,8 @@ const initialState : IRegister ={
      step : 'register',
      otp : "",
      password : "",
-     registerStatus : false
+     registerStatus : false,
+     loading : false
 }
 
 const register = createSlice({
@@ -86,18 +87,21 @@ const register = createSlice({
           },
           // step 4
           choose_location : (state , action) => {
-
+               state.name = action.payload
           }
      },
      extraReducers : ({addCase}) => {
           addCase(registerAction.pending , (state , action) => {
-               state.registerStatus = false
+               state.registerStatus = false,
+               state.loading = true
           }),
           addCase(registerAction.fulfilled , (state , action) => {
                state.registerStatus = true
+               state.loading = false
           }),
           addCase(registerAction.rejected , (state , action) => {
                state.registerStatus = false
+               state.loading = false
           })
      }
 })
