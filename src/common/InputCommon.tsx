@@ -1,5 +1,4 @@
 import { toPersianDigits } from '@/utils/toPersianDigits';
-import { FormikFormProps } from 'formik';
 import { FC, useRef, useState } from 'react';
 
 type TInputCommonProps = {
@@ -50,10 +49,10 @@ const InputCommon : FC<TInputCommonProps> = ({icon , disabled , inputType , titl
                     disabled={disabled ?? false}
                     name={name}
                     value={toPersianDigits(formik.values[name as typeof formik.values])}
-                    
+                    dir='rtl'
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className={`font-iranyekan-regular ${formik.errors[name] && formik.touched[name] ? "hover:border-red-300 focus:border-red-300 border-red-200" : "focus:border-gray-300 bg-white hover:border-gray-300 border-gray-200"} placeholder:text-sm placeholder:text-gray-400 ${disabled && "cursor-not-allowed"}  pl-11 pr-[70px] border-2 w-full py-4 rounded-full outline-none`} 
+                    className={`font-iranyekan-regular ${formik.errors[name as typeof formik.values] && formik.touched[name as typeof formik.values] ? "hover:border-red-300 focus:border-red-300 border-red-200" : "focus:border-gray-300 bg-white hover:border-gray-300 border-gray-200"} placeholder:text-sm placeholder:text-gray-400 ${disabled && "cursor-not-allowed"}  pl-11 pr-[70px] border-2 w-full py-4 rounded-full outline-none`} 
                />
                {/* Icon */}
                <label onClick={focusHandler} className='absolute top-0 right-0 pr-6 px-2 py-[17px] rounded-r-full'>{icon}</label>
@@ -75,7 +74,7 @@ const InputCommon : FC<TInputCommonProps> = ({icon , disabled , inputType , titl
                </button>}
                {/* children */}
                {inputType !== 'password' && <div className='absolute top-0 left-0 pl-4 flex items-center justify-center pr-2 bottom-0 rounded-l-full'>{children}</div>}
-                {formik.errors[name] && formik.touched[name] && <p className='absolute top-[-25px] left-[0] font-iranyekan-regular text-xs text-red-600'>{formik.errors[name]}</p>}
+                {formik.errors[name as typeof formik.values] && formik.touched[name as typeof formik.values] && <p className='absolute top-[-25px] left-[0] font-iranyekan-regular text-xs text-red-600'>{formik.errors[name as typeof formik.values]}</p>}
           </div>
      );
 }
