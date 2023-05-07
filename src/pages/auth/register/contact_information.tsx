@@ -5,7 +5,7 @@ import InputCommon from "@/common/InputCommon";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { toPersianDigits } from "@/utils/toPersianDigits";
-import { VALIDATION_EMAIL, VALIDATION_NATIONAL_CODE, VALIDATION_PERSIAN_ALPHABET, VALIDATION_PHONE_NUMBER } from "@/utils/regix";
+import { VALIDATION_EMAIL, VALIDATION_PHONE_NUMBER } from "@/utils/regix";
 import { toEnDigits } from "@/utils/methods";
 import { useDispatch, useSelector } from "react-redux";
 import { TAppDispatch, TRootState } from "@/redux/store/store";
@@ -73,7 +73,7 @@ const RegisterPage = ({ loading }: { loading: boolean }) => {
                <div className="bg-white w-full md:w-[270px] md:min-w-[270px]">
                     <div className="bg-[#388AEA]  w-full h-full gap-x-6 px-6 py-6 md:py-16 flex justify-between md:justify-start md:flex-col xl:rounded-r-md   ">
                          <div className="w-fit md:w-full flex justify-center  items-center flex-col">
-                              <img src={logo.src} alt="" className="w-24 md:w-36" />
+                              <img src={logo.src} alt="" className="w-24 md:w-32" />
                               <h1 className="font-iranyekan-extraBold text-2xl text-center text-blue-100 mt-6">ثبت نام</h1>
                          </div>
                          <div className="md:mt-10">
@@ -142,7 +142,7 @@ const RegisterPage = ({ loading }: { loading: boolean }) => {
                          <Link href={'/auth/register'} className="mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
                               مرحله قبل
                          </Link>
-                         <button type={'submit'} disabled={step !== "confirm_phone_number"} className={`${step !== "confirm_otp" && !formik.isValid ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}  disabled:bg-gray-600 disabled:cursor-not-allowed  duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                         <button type={'submit'} disabled={step !== "confirm_phone_number"} className={`${step !== "confirm_otp" && !formik.isValid ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}  disabled:bg-gray-400 disabled:cursor-not-allowed  duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                               {loading ? (
                                    <Loading color="white" scale={20} type="spin" />
                               ) : (
