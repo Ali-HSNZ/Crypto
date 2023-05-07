@@ -140,9 +140,9 @@ const RegisterPage = () => {
                               {/* Step 2 */}
                               <div className="flex items-center gap-x-4">
                                    <div className="p-3 rounded-full bg-blue-100 border-2 border-blue-100 w-fit h-fit"></div>
-                                   <p className="font-iranyekan-regular text-blue-200">اطلاعات ارتباطی</p>
+                                   <p className="font-iranyekan-regular text-blue-50">اطلاعات ارتباطی</p>
                               </div>
-                              <div className="w-2 px-3 h-fit rotate-90 border border-blue-300 my-6"></div>
+                              <div className="w-2 px-3 h-fit rotate-90 border border-blue-50 my-6"></div>
 
                               {/* Step 3 */}
                               <div className="flex items-center gap-x-4">
