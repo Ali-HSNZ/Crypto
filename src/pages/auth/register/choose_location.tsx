@@ -10,7 +10,7 @@ import { TAppDispatch, TRootState } from "@/redux/store/store";
 import { useRouter } from "next/router";
 import { toEnDigits, truncateNumber } from "@/utils/methods";
 import { toPersianDigits } from "@/utils/toPersianDigits";
-import { VALIDATION_MAP_POSITION, VALIDATION_PERSIAN_ALPHABET, VALIDATION_PHONE_NUMBER } from "@/utils/regix";
+import { VALIDATION_MAP_POSITION, VALIDATION_PERSIAN_ALPHABET } from "@/utils/regix";
 import SelectBox from "@/common/Selectbox";
 import {provinces} from '@/static/provinces';
 import {allCities} from '@/static/cities';
@@ -28,7 +28,7 @@ type TValues = {
 }
 
 
-const RegisterPage = ({loading} : {loading : boolean}) => {
+const RegisterPage = () => {
 
      // Renderd Map in Client Side
      const Map = dynamic(() => import('@/components/Map'), { ssr: false });
@@ -38,7 +38,7 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
      const [isOpenLocation,setIsOpenLocation] = useState<boolean>(false)
 
      const dispatch = useDispatch<TAppDispatch>()
-     const {email , phone , registerStatus , loading : registerLoading} = useSelector<TRootState>(state => state.register) as IRegister
+     const {email , phone , registerStatus , loading} = useSelector<TRootState>(state => state.register) as IRegister
      const registerState = useSelector<TRootState>(state => state.register) as IRegister
      
 
@@ -70,7 +70,7 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
                const cities = allCities.filter(city => city.province_id === selectedProvience?.id)
                setCities(cities)
           }else setCities(null)
-     },[provienceQuery])
+     },[selectedProvience])
 
      const initialValues : TValues = {
           phone : phone ? toPersianDigits(phone) : "",
@@ -80,8 +80,6 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
      }
 
      const onSubmit = (values : TValues) => {
-          // router.push('/auth/register/choose_location')
-          
           dispatch(registerAction({...registerState , ...values}))
      }
 
@@ -247,7 +245,7 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
                                    مرحله قبل 
                               </Link>
                               <button type={'submit'} className={`${!formik.isValid ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}    duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
-                                   {registerLoading ? (
+                                  {loading ? (
                                         <Loading color="white" scale={20} type="spin"/>
                                    ) : (
                                         <>
