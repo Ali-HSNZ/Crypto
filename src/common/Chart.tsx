@@ -1,3 +1,4 @@
+import { timeStampToPersianDate } from "@/utils/methods";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJs, 
@@ -9,7 +10,8 @@ import {
   LinearScale,
   PointElement
 } from 'chart.js'
-import { useEffect, useState } from "react";
+import { TPriceChangesResponse } from "@/types/crypto.types";
+
 
 ChartJs.register(
   Title, 
@@ -21,24 +23,20 @@ ChartJs.register(
   Filler,
 )
 
-import axios from 'axios';
-import { timeStampToPersianDate } from "@/utils/methods";
 
 
 
-const Chart = ({chart} : {chart : any}) => {
+const Chart = ({chart} : {chart : TPriceChangesResponse}) => {
   
-// console.log("chart : ",chart);
 
-  const data = {
+  const data : any = {
     labels : chart.history.map((e : Array<number>) => timeStampToPersianDate(e[0])),
     datasets : [
       {
         data : chart.history.map((e : Array<number>) => e[1]),
         
         fill : true,
-        // backgroundColor: '#2AC480',
-        
+
         // Line
         borderWidth : 4,
         borderColor : '#2AC479',
@@ -54,7 +52,7 @@ const Chart = ({chart} : {chart : any}) => {
     ]
   }
 
-  const options= {
+  const options : object = {
     maintainAspectRatio : false,
     responsive : true,
       plugins: {
@@ -72,7 +70,6 @@ const Chart = ({chart} : {chart : any}) => {
   return (  
     <div className="w-[full] h-auto max-h-[120px]">
       <Line data={data} options={options}>Data</Line>
-      
     </div>
   );
 }
