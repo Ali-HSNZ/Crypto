@@ -12,7 +12,7 @@ type TInputCommonProps = {
      childrenParentHover? : string
      formik? : any
      name? : string
-     maxLength? : Number
+     maxLength? : number
      disabled? : boolean
 }
 
@@ -46,10 +46,11 @@ const InputCommon : FC<TInputCommonProps> = ({icon , disabled , inputType , titl
                     ref={inputRef} 
                     placeholder={placeholder} 
                     type={inputType || "text"}  
-                    maxLength={maxLength}
+                    maxLength={maxLength || 600}
                     disabled={disabled ?? false}
                     name={name}
-                    value={toPersianDigits(formik.values[name])}
+                    value={toPersianDigits(formik.values[name as typeof formik.values])}
+                    
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     className={`font-iranyekan-regular ${formik.errors[name] && formik.touched[name] ? "hover:border-red-300 focus:border-red-300 border-red-200" : "focus:border-gray-300 bg-white hover:border-gray-300 border-gray-200"} placeholder:text-sm placeholder:text-gray-400 ${disabled && "cursor-not-allowed"}  pl-11 pr-[70px] border-2 w-full py-4 rounded-full outline-none`} 
