@@ -114,7 +114,7 @@ const LoginPage = () => {
                               placeholder="حداقل ۸ کاراکتر"
                          />
                     </section>
-                    <button type={'submit'} className={`${!formik.isValid ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}    duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                    <button type={'submit'} disabled={loading} className={`${!formik.isValid ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}  disabled:bg-gray-400 disabled:cursor-not-allowed  duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                          {loading ? (
                               <Loading color="white" scale={20} type="spin" />
                          ) : (
