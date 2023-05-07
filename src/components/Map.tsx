@@ -12,7 +12,7 @@ type TMapProps = {
 }
 
 const Map : FC<TMapProps> = ({confirmLocation , onClose}) => {
-  const [position, setPosition] = useState([36.566270992709384, 53.05847167968751]);
+  const [position, setPosition] = useState<Array<number>>([36.566270992709384, 53.05847167968751]);
   
   const confirmLocation_handler = () => {
     confirmLocation(position)
