@@ -9,16 +9,12 @@ type TToastProps = {
 }
 
 
-export const toastify : FC<TToastProps> = ({type , message} : {type : string , message : Array<string>}) : any => {
+export const toastify : FC<TToastProps> = ({type , message} : {type : string , message : Array<string> | any}) : JSX.Element | any => {
      if(typeof message === 'string'){
           toast[type](message)
-          console.log("message String : ",message);
-          
      }else if(typeof message === 'object'){
-          message.forEach((item) => {
+          message.forEach((item : TToastProps) => {
                toast[type](item?.message)
-          });
-          console.log("message Object : ",message);
-          
+          });          
      }
 }
