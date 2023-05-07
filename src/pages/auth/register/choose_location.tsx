@@ -158,7 +158,7 @@ const RegisterPage = () => {
                     <div className="w-full  flex items-center flex-col flex-1">
                          <p className="font-iranyekan-bold text-blue-600 text-sm">مرحله ۳ از ۳</p>
                          <h1 className="text-lg mt-6 font-iranyekan-extraBold">لطفا اطلاعات خود را با دقت وارد نمائید</h1>
-                         <section className="w-full lg:w-[700px] px-6 grid sm:grid-cols-2 mt-8 py-6 gap-4">
+                         <section className="w-full lg:w-[700px] px-6 grid sm:grid-cols-2 mt-8 pt-6 gap-x-4 gap-y-10">
                               {/* Select province */}
                               <SelectBox 
                                    notFoundTitle="استان مورد نظر یافت نشد." 
@@ -193,7 +193,7 @@ const RegisterPage = () => {
                                    }
                               />
                          </section>
-                         <section className="w-full lg:w-[700px] px-6 mt-4">
+                         <section className="w-full lg:w-[700px] px-6 mt-10">
                               <InputCommon 
                                    icon={
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-600">
@@ -208,7 +208,7 @@ const RegisterPage = () => {
                                    placeholder="ایران مازندران ساری"
                               />
                          </section>
-                         <section className="w-full lg:w-[700px] px-6 grid  sm:grid-cols-2 mt-8  py-6 gap-4">
+                         <section className="w-full lg:w-[700px] px-6 grid  sm:grid-cols-2 mt-10   gap-y-10 gap-x-4">
                               <InputCommon 
                                    icon={
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-600">
@@ -236,7 +236,7 @@ const RegisterPage = () => {
                                    placeholder="۶۴.۵۶۹۱"
                               />
                          </section>
-                         <button onClick={()=> setIsOpenLocation(true)} className="text-blue-600 text-sm font-iranyekan-bold">انتخاب طول و عرض جغرافیایی از روی نقشه</button>
+                         <button onClick={()=> setIsOpenLocation(true)} className="text-blue-600 text-sm font-iranyekan-bold mt-6">انتخاب طول و عرض جغرافیایی از روی نقشه</button>
                     </div>
                     <div className="w-full mt-6">
                          <hr className="w-full border-gray-300 "/>

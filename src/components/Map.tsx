@@ -42,7 +42,7 @@ const Map : FC<TMapProps> = ({confirmLocation , onClose}) => {
       </MapContainer>
 
       <div className="absolute left-0 right-0 w-fit bottom-10 mx-auto flex gap-x-4 justify-center ">
-          <button type={'button'} className={`bg-gray-500 text-sm hover:bg-gray-600  duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>بستن</button>
+          <button type={'button'} onClick={()=>onClose(false)} className={`bg-gray-500 text-sm hover:bg-gray-600  duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>بستن</button>
           <button type={'button'} onClick={confirmLocation_handler} className={`bg-orange-500 text-sm hover:bg-orange-600  duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                ثبت موقعیت 
                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
