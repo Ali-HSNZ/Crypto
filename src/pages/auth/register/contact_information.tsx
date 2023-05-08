@@ -120,7 +120,7 @@ const RegisterPage = ({ loading }: { loading: boolean }) => {
                               disabled={step === "confirm_phone_number"}
                          >
                               <>
-                                   {!formik.errors.phone && step !== "confirm_phone_number" && <button type="button" onClick={sendOtpCode_handler} className="font-iranyekan-bold text-sm text-blue-500 hover:text-blue-600">ارسال کد</button>}
+                                   {!formik.errors.phone && step !== "confirm_phone_number" && !loading && <button type="button" onClick={sendOtpCode_handler} className="font-iranyekan-bold text-sm text-blue-500 hover:text-blue-600">ارسال کد</button>}
                               </>
                          </InputCommon>
                          <InputCommon
