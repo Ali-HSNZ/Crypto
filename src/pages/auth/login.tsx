@@ -6,7 +6,7 @@ import Link from "next/link";
 import InputCommon from "@/common/InputCommon";
 import axios from 'axios'
 import { toast } from "react-toastify";
-import { VALIDATION_EMAIL } from "@/utils/regix";
+import { VALIDATION_EMAIL, VALIDATION_PASSWORD } from "@/utils/regix";
 import { toEnDigits } from "@/utils/methods";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -51,10 +51,14 @@ const LoginPage = () => {
                          return true;
                     else return false
                }),
-          password:
-               yup.string()
-                    .required('password must be required')
-                    .max(16, 'password cannot be longer than 24 characters '),
+          password: yup.string()
+               .required('رمز عبور الزامی میباشد')
+               .min(8 , "رمز عبور نمی تواند کمتر از ۸ کاراکتر باشد.")
+               .test('validate', "رمز عبور معتبر نیست | رمز عبور میتواند ترکیبی از عدد و حروف انگلیسی باشد.", (values) => {
+                    if (VALIDATION_PASSWORD.test(toEnDigits(values)))
+                         return true;
+                    else return false
+               }),
      })
 
      const formik = useFormik({
