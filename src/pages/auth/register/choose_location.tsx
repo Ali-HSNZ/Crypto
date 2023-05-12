@@ -122,7 +122,7 @@ const RegisterPage = () => {
                          <Map onClose={setIsOpenLocation} confirmLocation={setPositions}/>
                     </section>
                </Modal>
-               {/* Info */}
+               {/* SidePanel */}
                <div className="bg-white w-full md:w-[270px] md:min-w-[270px]">
                     <div className="bg-[#388AEA]  w-full h-full gap-x-6 px-6 py-6 md:py-16 flex justify-between md:justify-start md:flex-col xl:rounded-r-md   ">
                          <div className="w-fit md:w-full flex justify-center  items-center  flex-col">
@@ -153,7 +153,7 @@ const RegisterPage = () => {
                     </div>
                </div>
 
-               {/* Login Form */}
+               {/* Register Form */}
                <form onSubmit={formik.handleSubmit} className="bg-white w-full rounded-l-md pt-8 flex items-center flex-col h-full">
                     <div className="w-full  flex items-center flex-col flex-1">
                          <p className="font-iranyekan-bold text-blue-600 text-sm">مرحله ۳ از ۳</p>

@@ -85,7 +85,8 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
 
      return (  
           <section className="w-full h-full md:h-screen xl:p-8 bg-transparent flex flex-col md:flex-row">
-               {/* Information - Menubar */}
+               
+               {/* SidePanel */}
                <div className="bg-white w-full md:w-[270px] md:min-w-[270px]">
                     <div className="bg-[#388AEA]  w-full h-full gap-x-6 px-6 py-6 md:py-16 flex justify-between md:justify-start md:flex-col xl:rounded-r-md   ">
                          <div className="w-fit md:w-full flex justify-center  items-center flex-col">
@@ -116,7 +117,7 @@ const RegisterPage = ({loading} : {loading : boolean}) => {
                     </div>
                </div>
 
-               {/* Login Form */}
+               {/* Register Form */}
                <form onSubmit={formik.handleSubmit} className="bg-white w-full rounded-l-md pt-8 flex items-center flex-col h-full">
                     <p className="font-iranyekan-bold text-blue-600 text-sm">مرحله ۱ از ۳</p>
                     <h1 className="text-lg mt-6 font-iranyekan-extraBold">لطفا اطلاعات خود را با دقت وارد نمائید</h1>
