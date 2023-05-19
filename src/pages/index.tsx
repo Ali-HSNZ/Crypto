@@ -55,7 +55,7 @@ const Home = (
         <div className={`${isOpenNavbar && isLgScreen ? "col-span-8" : "col-span-10"}  `}>
 
           {/* 429 error when Fetching data from the server */}
-          <p className='text-red-600 font-iranyekan-bold pb-6'>{serverError}</p>
+          {serverError && <p className='text-red-600 font-iranyekan-bold pb-6'>{serverError}</p>}
 
           <Header setIsOpenNavbar={setIsOpenNavbar} isOpenNavbar={isOpenNavbar} />
 
