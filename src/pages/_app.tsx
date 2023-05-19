@@ -1,21 +1,24 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { wrapper} from '@/redux/store/store'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 import { Router } from 'next/router';
+import { Provider } from 'react-redux';
+import store from '@/redux/store'
+
 
 function App({ Component, pageProps }: AppProps) {
-  const [loading, setLoading] = useState(false);
-  Router.events.on('routeChangeStart', () => setLoading(true));
-  Router.events.on('routeChangeComplete', () => setLoading(false));
-  Router.events.on('routeChangeError', () => setLoading(false));
+
+  const [buildingLoading, setBuildingLoading] = useState(false);
+  Router.events.on('routeChangeStart', () => setBuildingLoading(true));
+  Router.events.on('routeChangeComplete', () => setBuildingLoading(false));
+  Router.events.on('routeChangeError', () => setBuildingLoading(false));
 
   return(
-    <>
-      <Component {...pageProps} loading={loading}/>
+    <Provider store={store}>
+      <Component {...pageProps} loading={buildingLoading} isBuildingPageLoading={buildingLoading}/>
       <ToastContainer 
         position="top-right" 
         autoClose={4000} 
@@ -28,7 +31,7 @@ function App({ Component, pageProps }: AppProps) {
         pauseOnHover 
         theme="dark" 
       /> 
-    </>
+    </Provider>
   )
 }
-export default wrapper.withRedux(App)
+export default  App
