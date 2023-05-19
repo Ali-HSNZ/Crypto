@@ -10,7 +10,7 @@ export type TCrypto_favoriteCoinsRes = {
 export type TCrypto_priceHistoriesRes = {
      usd: number,
      usd_24h_change: number,
-     history: Array<Array<number>>
+     history: Array<[number,number]>
      name: string,
      fa_name: string
      symbol : string,
