@@ -4,11 +4,11 @@ import { toPersianDigits } from '@/utils/toPersianDigits';
 import { useDispatch, useSelector } from 'react-redux';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { useEffect } from 'react'
-import { fetchWalletAssets } from '@/redux/slices/access_wallet';
+import { fetchWalletAssets } from '@/redux/slices/wallet_assets';
 
 const WalletAssets = () => {
 
-  const { data } = useSelector<TRootState>(state => state.access_wallet) as ICrypto_walletAssets
+  const { data } = useSelector<TRootState>(state => state.wallet_assets) as ICrypto_walletAssets
 
   const dispatch = useDispatch<TAppDispatch>()
 
