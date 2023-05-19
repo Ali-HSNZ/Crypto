@@ -18,7 +18,7 @@ type TInputCommonProps = {
 const InputCommon: FC<TInputCommonProps> = ({ dir, icon, maxLength, disabled, type, title, placeholder, children, formik, name }): JSX.Element => {
 
      const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(true)
-     const inputRef = useRef<HTMLInputElement>()
+     const inputRef = useRef<HTMLInputElement>(null)
 
 
      const togglePasswordVisibility = () => {
