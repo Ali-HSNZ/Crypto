@@ -3,12 +3,12 @@ import Link from "next/link";
 import logo from '@/images/Logo.png'
 import {FC} from 'react'
 
-type TSideBarModalProps = {
+type TNavBarModalProps = {
      isOpenNavbar : boolean
      setIsOpenNavbar : React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SideBarModal : FC<TSideBarModalProps> = ({isOpenNavbar , setIsOpenNavbar}) => {
+const NavBarModal : FC<TNavBarModalProps> = ({isOpenNavbar , setIsOpenNavbar}) => {
 
      return (
           <Modal open={isOpenNavbar} onClose={() => setIsOpenNavbar(false)}>
@@ -67,4 +67,4 @@ const SideBarModal : FC<TSideBarModalProps> = ({isOpenNavbar , setIsOpenNavbar})
      );
 }
 
-export default SideBarModal;
+export default NavBarModal;
