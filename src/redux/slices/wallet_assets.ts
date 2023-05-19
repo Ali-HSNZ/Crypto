@@ -1,40 +1,40 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { AppThunk } from '../../store/store';
-import { ICrypto_accessWallet } from '@/types/crypto.types';
+import { AppThunk } from '../store/store';
+import { ICrypto_walletAssets} from '@/types/crypto.types';
 
-export const fetchAccessWallet = (): AppThunk => async (dispatch) => {
+export const fetchWalletAssets = (): AppThunk => async (dispatch) => {
      
-     dispatch(fetchAccessWalletStart());
+     dispatch(fetchWalletAssetsStart());
      try {
           const {data} = await axios.get('http://localhost:5000/wallet')
-          dispatch(fetchAccessWalletSuccess(data))
+          dispatch(fetchWalletAssetsSuccess(data))
           localStorage.setItem('access_wallet' , JSON.stringify(data))
      } catch (error : any) {
-          dispatch(fetchAccessWalletFailure(error?.message))
+          dispatch(fetchWalletAssetsFailure(error?.message))
      }
 }
 
-const initialState : ICrypto_accessWallet = {
+const initialState : ICrypto_walletAssets = {
      loading: false,
      error: null,
      data: null,
 };
 
 const cryptoSlice = createSlice({
-     name: 'crypto_access_wallet',
+     name: 'crypto_walletAssets',
      initialState,
      reducers: {
-          fetchAccessWalletStart(state){
+          fetchWalletAssetsStart(state){
                state.loading = true,
                state.data = state.data
           },
-          fetchAccessWalletSuccess(state , action){
+          fetchWalletAssetsSuccess(state , action){
                state.data = action.payload
                state.loading = false
                state.error = null
           },
-          fetchAccessWalletFailure(state , action){
+          fetchWalletAssetsFailure(state , action){
                state.data = null
                state.loading = false
                state.error = action.payload
@@ -43,9 +43,9 @@ const cryptoSlice = createSlice({
 });
 
 export const {
-     fetchAccessWalletFailure,
-     fetchAccessWalletStart,
-     fetchAccessWalletSuccess
+     fetchWalletAssetsStart,
+     fetchWalletAssetsSuccess,
+     fetchWalletAssetsFailure,
 } = cryptoSlice.actions;
 
 export default cryptoSlice.reducer;

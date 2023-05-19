@@ -1,117 +1,127 @@
 import { toEnDigits } from "@/utils/methods";
-import { toPersianDigits } from "@/utils/toPersianDigits";
-import { toastify } from "@/utils/toast";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { IRegister } from "src/types/register.types";
+import axios, { AxiosError } from "axios";
+import { IRegister, TRegisterActionPayload } from "src/types/register.types";
 import { toast } from "react-toastify";
 
 /**
- * All Steps ==> 
- * Step 1 => register 
- * Step 2 => confirm_otp & contact_information
- * Step 3 => confirm_phone_number
- * Step 4 => choose_location
-*/
+ * All Steps ==>
+ * Step 1 => register
+ * Step 2 => confirm_otp
+ * Step 3 => contact_information
+ * Step 4 => confirm_phone_number
+ * Step 5 => choose_location
+ */
 
-export const registerAction = createAsyncThunk('auth/register',async(payload : IRegister,{rejectWithValue})=>{
-     const {password , name , email } = payload;
-     const data = await axios.post('https://apingweb.com/api/register', {
-          password,
-          name,
-          phone : toEnDigits(payload.phone.substring(0,10)),
-          email,
-          password_confirmation : password,
+export const registerAction = createAsyncThunk(
+     "auth/register",
+     async (payload: TRegisterActionPayload) => {
+          const { password, name, email, phone } = payload;
 
-     } , {headers : {"Content-Type" : 'application/json'}})
-     .then(res => {
-          toast.success("با موفقیت ثبت‌نام کرده‌اید.")
-     })
-     .catch(error => {
-          error?.response?.data?.errors.forEach((message : string) => toast.error(message))
-          throw error
-     })
-     return data
-})
+          try {
+               await axios.post(
+                    "https://apingweb.com/api/register",
+                    {
+                         password,
+                         name,
+                         phone: toEnDigits(phone.substring(0, 10)),
+                         email,
+                         password_confirmation: password,
+                    }
+               );
+               toast.success("حساب کاربری شما با موفقیت ایجاد شد.")
 
-const initialState : IRegister ={
-     name : "",
-     national_code : "",
-     birthday : "",
-     phone : "",
-     email : "",
-     province : "",
-     city : "",
-     address : "",
-     x_position : "",
-     y_position : "",
-     step : 'register',
-     otp : "",
-     password : "",
-     registerStatus : false,
-     loading : false
-}
+               // Redirect to 'auth/login' After Registered
+               if(typeof window !== "undefined"){
+                    window.location.href = "/"
+               }
+          } catch (error: AxiosError | any) {
+               error?.response?.data?.errors.forEach((message: string) => toast.error(message));
+          }
+     }
+);
+
+const initialState: IRegister = {
+     name: "",
+     national_code: "",
+     birthday: "",
+     phone: "",
+     email: "",
+     province: "",
+     city: "",
+     address: "",
+     x_position: "",
+     y_position: "",
+     completedStep: "",
+     otp: "",
+     password: "",
+     loading: false,
+};
 
 const register = createSlice({
-     name:"auth/register",
-     initialState ,
-     reducers : {
-          changeLoginState : (state , action) => {
-               state.registerStatus = action.payload
-          },
+     name: "auth/register",
+     initialState,
+     reducers: {
           // step 1
-          person_information : (state , action) => {
-               const {name,national_code,birthday} = action.payload;
-               state.name = name
-               state.national_code = toEnDigits(national_code)
-               state.birthday = toEnDigits(birthday)
-               state.step = "person_information"
+          person_information: (state, action) => {
+               const { name, national_code, birthday } = action.payload;
+               state.name = name;
+               state.national_code = toEnDigits(national_code);
+               state.birthday = toEnDigits(birthday);
+          
+               state.completedStep = "person_information";
           },
           // step 2
-          sendOTPcode : (state , action) => {
-               state.phone = toEnDigits(action.payload);
-               state.step = "confirm_otp"
-               const randomNumber  = Math.floor(Math.random()*10000  + 10000)
-               const otp = String(randomNumber).substring(0,4)
-               state.otp = otp
-               toastify({message : `کد  تایید : ${otp}` , type : "success"})
-          },
-          contact_information : (state , action) => {
-               state.step = "contact_information"
-               state.email = action?.payload?.email
+          getOTPCode: (state, action) => {
+               const { phone, email } = action.payload;
+
+               state.email = toEnDigits(email);
+               state.phone = toEnDigits(phone)
+
+               // Generate OTP
+               const randomNumber = Math.floor(Math.random() * 10000 + 10000);
+               const otp = randomNumber.toString().substring(0, 4);
+               state.otp = otp;
+
+               toast.success(`کد  تایید : ${otp} `);
+
+               state.completedStep = "confirmed_OTP";
           },
           // step 3
-          confirm_phone_number : (state , action) => {
-               state.step = "confirm_phone_number"
-               state.password = toEnDigits(action.payload.password)
+          confirm_phone_number: (state, action) => {
+               state.password = toEnDigits(action.payload.password);
+
+               state.completedStep = "confirm_phone_number";
           },
           // step 4
-          choose_location : (state , action) => {
-               state.name = action.payload
-          }
-     },
-     extraReducers : ({addCase}) => {
-          addCase(registerAction.pending , (state , action) => {
-               state.registerStatus = false,
-               state.loading = true
-          }),
-          addCase(registerAction.fulfilled , (state , action) => {
-               state.registerStatus = true
-               state.loading = false
-          }),
-          addCase(registerAction.rejected , (state , action) => {
-               state.registerStatus = false
-               state.loading = false
-          })
-     }
-})
+          contact_information: (state, action) => {
+               state.email = toEnDigits(action?.payload?.email);
 
-export const registerReducer = register.reducer
-export const { 
-     choose_location, 
-     confirm_phone_number, 
+               state.completedStep = "contact_information";
+          },
+          // step 5
+          choose_location: (state, action) => {
+               state.name = action.payload;
+          },
+     },
+     extraReducers: ({ addCase }) => {
+          addCase(registerAction.pending, (state, action) => {
+               state.loading = true;
+          }),
+          addCase(registerAction.fulfilled, (state, action) => {
+               state.loading = false;
+          }),
+          addCase(registerAction.rejected, (state, action) => {
+               state.loading = false;
+          });
+     },
+});
+
+export const registerReducer = register.reducer;
+export const {
+     choose_location,
+     confirm_phone_number,
      person_information,
-     sendOTPcode,
+     getOTPCode,
      contact_information,
-     changeLoginState
-} = register.actions
+} = register.actions;
