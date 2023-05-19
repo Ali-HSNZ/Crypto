@@ -9,10 +9,9 @@ export interface IRegister {
      address : string
      x_position : string
      y_position : string
-     step : string
+     completedStep : "no_status" | "person_information" | "confirmed_OTP" | "contact_information" | "confirm_phone_number"
      otp : string
      password : string
-     registerStatus : boolean,
      loading : boolean
 }
 // choose Location
@@ -29,4 +28,10 @@ export type TCity = {
 export type TPoition = {
      lat? : number | string
      lng? : number | string
+}
+export type TRegisterActionPayload = {
+     name: string
+     phone: string
+     email: string
+     password: string
 }
