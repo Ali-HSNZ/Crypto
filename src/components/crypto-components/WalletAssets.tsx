@@ -1,4 +1,4 @@
-import { AppThunk, TAppDispatch, TRootState } from '@/redux/store/store';
+import { AppThunk, TAppDispatch, TRootState } from '@/redux/store';
 import { TCrypto_walletAssetsResponse, ICrypto_walletAssets } from '@/types/crypto.types';
 import { toPersianDigits } from '@/utils/toPersianDigits';
 import { useDispatch, useSelector } from 'react-redux';
