@@ -1,4 +1,3 @@
-import { timeStampToPersianDate } from "@/utils/methods";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJs, 
@@ -23,17 +22,15 @@ ChartJs.register(
 )
 
 
-
-
-const Chart = ({chart} : {chart : Array<Array<number>>}) => {
+const LineChart = ({chart} : {chart : Array<[number,number]>}) => {
 
   const data : any = {
     // For Get/Show Time
-    labels : chart.map((data : Array<number>) => data[0]),
+    labels : chart.map((data : [number,number]) => data[0]),
     datasets : [
       {
-        // or Get/Show Price
-        data : chart.map((data : Array<number>) => data[1]),
+        // for Get/Show Price
+        data : chart.map((data : [number,number]) => data[1]),
         
         fill : true,
 
@@ -74,4 +71,4 @@ const Chart = ({chart} : {chart : Array<Array<number>>}) => {
   );
 }
  
-export default Chart;
+export default LineChart;
