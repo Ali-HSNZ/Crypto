@@ -14,6 +14,7 @@ import {
   TCrypto_priceHistoriesRes,
   TCrypto_weekTransactions
 } from '@/types/crypto.types'
+import Head from 'next/head'
 
 
 const Home = (
@@ -33,8 +34,14 @@ const Home = (
 
   return (
     <>
-
-      <main className={'w-full gap-x-6 grid  grid-cols-10 grid-row-2 h-auto bg-red-500 p-6'}>
+      <Head>
+        <title>نیوکوین اسپیس</title>
+        <meta
+          name="description"
+          content="صرافی ارز دیجیتال نیوکوین اسپیس - خرید و فروش امن بیت‌کوین و ارزهای دیجیتال. به بزرگترین بازار ارز دیجیتال ایران بپیوندید."
+        />
+      </Head>
+      <main className={'w-full gap-x-6 grid  grid-cols-10 grid-row-2 h-auto p-6'}>
 
         {isLgScreen ? (
           <div className={`${isOpenNavbar ? "lg:col-span-2" : "hidden"} `}>
@@ -160,9 +167,6 @@ export const getServerSideProps = async () => {
       priceHistories: priceHistories,
       weekTransactions: weekTransactions.data.prices.slice(70, 80),
       favoriteCoins: favoriteCoins.data.sort((a: TCrypto_favoriteCoinsRes, b: TCrypto_favoriteCoinsRes) => b.circulating_supply - a.circulating_supply),
-
-
     }
-
   }
 };
