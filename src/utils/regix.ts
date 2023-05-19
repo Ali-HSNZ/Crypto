@@ -6,4 +6,5 @@ export const VALIDATION_PERSIAN_ALPHABET = /^[\u0600-\u06FF\s]+$/
 export const VALIDATION_NATIONAL_CODE = /^[0-9]{10}$/
 export const VALIDATION_EMAIL = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 export const VALIDATION_MAP_POSITION = /^-?\d{1,2}\.\d{1,5}$/
-
+export const VALIDATION_BIRTHDAY = /^\d{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])$/
+export const VALIDATION_ADDRESS = /r'^[0-9۰-۹a-zA-Zآ-ی,-]+$/
