@@ -5,7 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 
 const WeekTrasactions = ({ weekTransactions }: { weekTransactions: TCrypto_weekTransactions }) => {
 
   return (
-    <div className="w-full p-6 bg-white rounded-lg flex flex-col justify-center items-start">
+    <div className="w-full p-6 bg-white rounded-lg  flex flex-col justify-center items-start">
       <p className='font-iranyekan-bold'>ارزش معاملات هفته گذشته</p>
       <br />
       <ResponsiveContainer width="99%" height="100%">
@@ -25,7 +25,7 @@ const WeekTrasactions = ({ weekTransactions }: { weekTransactions: TCrypto_weekT
           }}
         >
           <XAxis tickMargin={10} axisLine={false} tick={false} />
-          <YAxis tickMargin={45} tickFormatter={(value) => new Intl.NumberFormat('fa-IR').format(value)} axisLine={false} />
+          <YAxis tickMargin={45} className='font-iranyekan-regular' tickFormatter={(value) => new Intl.NumberFormat('fa-IR').format(value)} axisLine={false} />
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <Bar dataKey="1" radius={5} fill="#388AEA" />
         </BarChart>
