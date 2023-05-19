@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { AppThunk } from '../store/store';
+import { AppThunk } from '../store';
 import { ICrypto_walletAssets} from '@/types/crypto.types';
 
 export const fetchWalletAssets = (): AppThunk => async (dispatch) => {
@@ -21,7 +21,7 @@ const initialState : ICrypto_walletAssets = {
      data: null,
 };
 
-const cryptoSlice = createSlice({
+const wallet_assets = createSlice({
      name: 'crypto_walletAssets',
      initialState,
      reducers: {
@@ -46,6 +46,6 @@ export const {
      fetchWalletAssetsStart,
      fetchWalletAssetsSuccess,
      fetchWalletAssetsFailure,
-} = cryptoSlice.actions;
+} = wallet_assets.actions;
 
-export default cryptoSlice.reducer;
+export default wallet_assets.reducer;
