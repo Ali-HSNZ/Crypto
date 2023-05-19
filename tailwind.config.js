@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     extend : {
       fontFamily : {
+        // iranyekan font
         'iranyekan-regular' : ['iranyekan-regular'],
         'iranyekan-bold' : ['iranyekan-bold'],
         'iranyekan-thin' : ['iranyekan-thin'],
@@ -14,6 +15,12 @@ module.exports = {
         'iranyekan-extraBold' : ['iranyekan-extraBold'],
         'iranyekan-black' : ['iranyekan-black'],
         'iranyekan-extraBlack' : ['iranyekan-extraBlack'],
+
+        // quicksand font
+        'quicksand-bold' : ['quicksand-bold'],
+        'quicksand-light' : ['quicksand-light'],
+        'quicksand-medium' : ['quicksand-medium'],
+        'quicksand-regular' : ['quicksand-regular'],
       }
     }
   },
