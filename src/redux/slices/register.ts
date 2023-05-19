@@ -52,7 +52,7 @@ const initialState: IRegister = {
      address: "",
      x_position: "",
      y_position: "",
-     completedStep: "",
+     completedStep: "no_status",
      otp: "",
      password: "",
      loading: false,
