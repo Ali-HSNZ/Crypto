@@ -5,7 +5,7 @@ Front-end : nextJs , Typescript , tailwind-css , redux redux-toolkit
 
 ##### 1. clone this repository
 
-##### 2. npm install --force
+##### 2. npm install
 for install all dependency packages
 
 
