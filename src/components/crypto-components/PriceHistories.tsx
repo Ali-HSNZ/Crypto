@@ -1,4 +1,4 @@
-import Chart from '@/components/crypto-components/Chart';
+import LineChart from '@/components/LineChart';
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -8,7 +8,7 @@ import { Navigation } from "swiper";
 import "swiper/css/free-mode";
 
 import { toPersianDigits } from '@/utils/toPersianDigits';
-import { toPersianPrice, truncateNumber } from '@/utils/methods';
+import { truncateNumber } from '@/utils/methods';
 import { TCrypto_priceHistoriesRes } from '@/types/crypto.types';
 
 
@@ -47,7 +47,7 @@ const PriceHistories = ({ priceHistories }: { priceHistories: Array<TCrypto_pric
                 </div>
               </div>
               <div className='w-full pt-4'>
-                <Chart chart={coin.history} />
+                <LineChart chart={coin.history} />
               </div>
             </div>
           </SwiperSlide>
