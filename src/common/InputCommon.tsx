@@ -1,25 +1,11 @@
+import { TInputCommonProps } from '@/types/other.types';
 import { toPersianDigits } from '@/utils/toPersianDigits';
 import { FC, useRef, useState } from 'react';
-
-type TInputCommonProps = {
-     title: string,
-     icon: JSX.Element,
-     placeholder?: string,
-     type: 'password' | 'tel' | 'text' | "email"
-     children?: JSX.Element,
-     dir?: 'rtl' | 'ltr',
-     formik?: any
-     name?: string | any
-     maxLength?: number | undefined;
-     disabled?: boolean | undefined
-}
-
 
 const InputCommon: FC<TInputCommonProps> = ({ dir, icon, maxLength, disabled, type, title, placeholder, children, formik, name }): JSX.Element => {
 
      const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(true)
      const inputRef = useRef<HTMLInputElement>(null)
-
 
      const togglePasswordVisibility = () => {
           setIsPasswordVisible(!isPasswordVisible)
