@@ -28,6 +28,7 @@ const wallet_assets = createSlice({
           fetchWalletAssetsStart(state){
                state.loading = true,
                state.data = state.data
+               state.error = null
           },
           fetchWalletAssetsSuccess(state , action){
                state.data = action.payload

@@ -8,7 +8,7 @@ import { fetchWalletAssets } from '@/redux/slices/wallet_assets';
 
 const WalletAssets = () => {
 
-  const { data } = useSelector<TRootState>(state => state.wallet_assets) as ICrypto_walletAssets
+  const { data , error } = useSelector<TRootState>(state => state.wallet_assets) as ICrypto_walletAssets
 
   const dispatch = useDispatch<TAppDispatch>()
 
@@ -39,6 +39,8 @@ const WalletAssets = () => {
 
           <div className=" flex flex-col  items-start h-full">
             <p className="font-iranyekan-bold  whitespace-nowrap">دارایی‌های کیف پول</p>
+            {error && <p className='mt-4 text-red-500 font-quicksand-bold'>{error}</p>}
+            
             <div className='mt-6 flex gap-y-4 flex-col items-start'>
               {data?.map((wallet: TCrypto_walletAssetsResponse) => (
                 <div key={wallet.id} className="flex items-center justify-center gap-x-3">
@@ -50,6 +52,7 @@ const WalletAssets = () => {
                 </div>
               ))}
             </div>
+
           </div>
 
           <div className="w-full h-full p-2">
