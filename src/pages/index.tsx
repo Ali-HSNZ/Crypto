@@ -42,6 +42,7 @@ const Home = (
           content="صرافی ارز دیجیتال نیوکوین اسپیس - خرید و فروش امن بیت‌کوین و ارزهای دیجیتال. به بزرگترین بازار ارز دیجیتال ایران بپیوندید."
         />
       </Head>
+
       <main className={'w-full gap-x-6 grid  grid-cols-10 grid-row-2 h-auto p-6'}>
 
         {isLgScreen ? (
@@ -171,7 +172,7 @@ export const getServerSideProps = async () => {
     return {
       props: {
         priceHistories: priceHistories,
-        weekTransactions: weekTransactions.data.prices.slice(70, 80),
+        weekTransactions: weekTransactions.data.prices.slice(65, 80),
         favoriteCoins: favoriteCoins.data.sort((a: TCrypto_favoriteCoinsRes, b: TCrypto_favoriteCoinsRes) => b.circulating_supply - a.circulating_supply),
       }
     }

@@ -12,6 +12,7 @@ import store from '@/redux/store'
 function App({ Component, pageProps }: AppProps) {
 
   const [buildingLoading, setBuildingLoading] = useState(false);
+
   Router.events.on('routeChangeStart', () => setBuildingLoading(true));
   Router.events.on('routeChangeComplete', () => setBuildingLoading(false));
   Router.events.on('routeChangeError', () => setBuildingLoading(false));
@@ -34,4 +35,4 @@ function App({ Component, pageProps }: AppProps) {
     </Provider>
   )
 }
-export default  App
+export default App
