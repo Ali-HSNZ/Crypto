@@ -21,23 +21,23 @@ const LoginPage = () => {
 
      const [loading, setLoading] = useState<boolean>(false)
 
-     const onSubmit = (values: { email: string, password: string }) => {
+     const onSubmit = (values: TPageInitailValues) => {
           setLoading(true)
           axios.post('https://apingweb.com/api/login', {
                email: values.email,
                password: toEnDigits(values.password)
           })
-               .then(res => {
-                    setLoading(false)
-                    toast.success("با موفقیت وارد حساب کاربری خود شدید.")
-                    if (typeof window !== "undefined") {
-                         window.location.href = "/"
-                    }
-               })
-               .catch(error => {
-                    setLoading(false)
-                    toast.error(error?.response?.data?.message ?? "خطای احراز هویت")
-               })
+          .then(res => {
+               setLoading(false)
+               toast.success("با موفقیت وارد حساب کاربری خود شدید.")
+               if (typeof window !== "undefined") {
+                    window.location.href = "/"
+               }
+          })
+          .catch(error => {
+               setLoading(false)
+               toast.error(error?.response?.data?.message ?? "خطای احراز هویت")
+          })
      }
 
      const initialValues: TPageInitailValues = {
