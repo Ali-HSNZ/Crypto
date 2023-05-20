@@ -3,7 +3,7 @@ import * as yup from 'yup'
 import logo from '@/images/Logo.png'
 import InputCommon from "@/common/InputCommon";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Modal } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { TAppDispatch, TRootState } from "@/redux/store";
@@ -41,28 +41,51 @@ const RegisterPage = () => {
      const { email, phone, password, name, loading } = useSelector<TRootState>(state => state.register) as IRegister
 
 
-     // Choose Province
-     const [provienceQuery, setProvienceQuery] = useState<string>('')
+     // Choose/Select Province
+     const [provinceQuery, setprovinceQuery] = useState<string>('')
      const [selectedProvience, setSelectedProvience] = useState<TProvince>()
-     const filteredProvinces: Array<TProvince> = provienceQuery === '' ? provinces : provinces && provinces.filter((province) => province.name.toLowerCase().replace(/\s+/g, '').includes(provienceQuery.toLocaleLowerCase().replace(/\s+/g, '')))
 
-     // Choose City
+     // find province 
+     const queriedProvinceResults: Array<TProvince> = useMemo(() => {
+          if (provinceQuery === "") {
+               // return all provinces if provinceQuery is empty
+               return provinces;
+          } else {
+               return provinces.filter((province) =>
+                    province.name
+                         .replace(/\s+/g, "")
+                         .includes(provinceQuery.replace(/\s+/g, ""))
+               );
+          }
+     }, [provinceQuery]);
+
+     // Choose/Select City
      const [cities, setCities] = useState<Array<TCity> | null>(null)
      const [cityQuery, setCityQuery] = useState<string>("")
      const [selectedCity, setSelectedCity] = useState<TCity | string>()
-     const filteredCities: Array<TCity> | null = cityQuery === '' ? cities : cities && cities.filter((city) => city?.name?.toLowerCase().replace(/\s+/g, '').includes(cityQuery.toLocaleLowerCase().replace(/\s+/g, '')))
 
-     // Clear City State When Province Has been Changed
+     // find city 
+     const queriedCityResults: Array<TCity> = useMemo(() => {
+          if (cityQuery === "") {
+               return cities;
+          } else {
+               return cities.filter((city) =>
+                    city?.name
+                         .replace(/\s+/g, "")
+                         .includes(cityQuery.replace(/\s+/g, ""))
+               );
+          }
+     }, [cityQuery]);
+
+     // Clearing and updating city state based on selected Province
      useEffect(() => {
-
+          formik.setFieldValue('city', "")
           if (selectedProvience?.id) {
                setSelectedCity('')
                const cities = allCities.filter(city => city.province_id === selectedProvience?.id)
                setCities(cities)
-               formik.setFieldValue('city', "")
           }
           else setCities(null)
-
      }, [selectedProvience])
 
 
@@ -92,14 +115,14 @@ const RegisterPage = () => {
           lat: yup.string()
                .required("موقعیت عرض جغرافیایی الزامی است.")
                .test('validate', "موقعیت عرض جغرافیایی معتبر نیست.", (values) => {
-                    if (VALIDATION_MAP_POSITION.test(toEnDigits(values))) 
+                    if (VALIDATION_MAP_POSITION.test(toEnDigits(values)))
                          return true;
                     else return false
                }),
           lng: yup.string()
                .required("موقعیت عرض جغرافیایی الزامی است.")
                .test('validate', "موقعیت عرض جغرافیایی معتبر نیست.", (values) => {
-                    if (VALIDATION_MAP_POSITION.test(toEnDigits(values))) 
+                    if (VALIDATION_MAP_POSITION.test(toEnDigits(values)))
                          return true;
                     else return false
                }),
@@ -128,7 +151,7 @@ const RegisterPage = () => {
                          <section className='bg-white md:p-6 relative w-full md:w-[700px]  h-[500px] rounded-xl'>
                               <Map
                                    onClose={setIsOpenMap}
-                                   setCurrentPosition={(pos: Array<number>) => {
+                                   setCurrentPosition={(pos: [number, number]) => {
                                         formik.setFieldValue("currentPosition", pos)
                                         formik.setFieldValue("lat", truncateNumber(pos[0], 5))
                                         formik.setFieldValue("lng", truncateNumber(pos[1], 5))
@@ -174,14 +197,14 @@ const RegisterPage = () => {
                               <p className="font-iranyekan-bold text-blue-600 text-sm">مرحله ۳ از ۳</p>
                               <h1 className="text-lg mt-6 font-iranyekan-extraBold">لطفا اطلاعات خود را با دقت وارد نمائید</h1>
                               <section className="w-full lg:w-[700px] px-6 grid sm:grid-cols-2 mt-8 pt-6 gap-x-4 gap-y-10">
-                                   {/* Select province */}
+                                   {/* province */}
                                    <SelectBox
                                         notFoundTitle="استان مورد نظر یافت نشد."
                                         placeholder="مازندران"
                                         title="استان"
-                                        query={provienceQuery}
-                                        setQuery={setProvienceQuery}
-                                        filteredData={filteredProvinces}
+                                        query={provinceQuery}
+                                        setQuery={setprovinceQuery}
+                                        filteredData={queriedProvinceResults}
                                         selected={selectedProvience}
                                         setSelected={setSelectedProvience}
                                         name="province"
@@ -193,13 +216,14 @@ const RegisterPage = () => {
                                              </svg>
                                         }
                                    />
+                                   {/* City */}
                                    <SelectBox
                                         notFoundTitle="شهر مورد نظر یافت نشد."
                                         placeholder="ساری"
                                         title="شهر"
                                         query={cityQuery}
                                         setQuery={setCityQuery}
-                                        filteredData={filteredCities}
+                                        filteredData={queriedCityResults}
                                         selected={selectedCity}
                                         setSelected={setSelectedCity}
                                         name="city"
