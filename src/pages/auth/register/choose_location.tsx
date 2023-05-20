@@ -67,6 +67,7 @@ const RegisterPage = () => {
      // find city 
      const queriedCityResults: Array<TCity> = useMemo(() => {
           if (cityQuery === "") {
+               // return all cities if cityQuery is empty
                return cities;
           } else {
                return cities.filter((city) =>
@@ -160,6 +161,7 @@ const RegisterPage = () => {
                               />
                          </section>
                     </Modal>
+
                     {/* SidePanel */}
                     <div className="bg-white w-full md:w-[270px] md:min-w-[270px]">
                          <div className="bg-[#388AEA]  w-full h-full gap-x-6 px-6 py-6 md:py-16 flex justify-between md:justify-start md:flex-col xl:rounded-r-md   ">
@@ -196,7 +198,7 @@ const RegisterPage = () => {
                          <div className="w-full  flex items-center flex-col flex-1">
                               <p className="font-iranyekan-bold text-blue-600 text-sm">مرحله ۳ از ۳</p>
                               <h1 className="text-lg mt-6 font-iranyekan-extraBold">لطفا اطلاعات خود را با دقت وارد نمائید</h1>
-                              <section className="w-full lg:w-[700px] px-6 grid sm:grid-cols-2 mt-8 pt-6 gap-x-4 gap-y-10">
+                              <section className="w-full lg:w-[700px] px-6 grid sm:grid-cols-2 mt-6 pt-6 gap-x-4 gap-y-10">
                                    {/* province */}
                                    <SelectBox
                                         notFoundTitle="استان مورد نظر یافت نشد."
@@ -284,11 +286,11 @@ const RegisterPage = () => {
                          </div>
                          <div className="w-full mt-6">
                               <hr className="w-full border-gray-300" />
-                              <section className="w-full pb-6 flex justify-between items-center px-6">
-                                   <Link href={'/auth/register/contact_information'} className="mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
+                              <section className="w-full p-5 flex justify-between items-center">
+                                   <Link href={'/auth/register/contact_information'} className="rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
                                         مرحله قبل
                                    </Link>
-                                   <button type={'submit'} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"} disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                                   <button type={'submit'} disabled={loading} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"} disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                                         {loading ? (
                                              <Loading color="white" width={20} height={20} type="spin" />
                                         ) : (

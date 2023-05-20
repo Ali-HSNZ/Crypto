@@ -116,7 +116,7 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                          <h1 className="text-lg mt-6 font-iranyekan-extraBold">
                               لطفا اطلاعات خود را با دقت وارد نمائید
                          </h1>
-                         <section className="flex w-full lg:w-[700px] flex-col mt-8 flex-1 px-6 sm:px-14 py-6 gap-y-10">
+                         <section className="flex w-full lg:w-[700px] flex-col mt-6 flex-1 px-6 sm:px-14 py-6 gap-y-10">
                               <Input
                                    type="tel"
                                    title="شماره همراه"
@@ -155,11 +155,11 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                          </section>
 
                          <hr className="w-full border-gray-300" />
-                         <section className="w-full pb-6 flex justify-between items-center px-6">
-                              <Link href={'/auth/register'} className="mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
+                         <section className="w-full p-5 flex justify-between items-center">
+                              <Link href={'/auth/register'} className=" rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
                                    مرحله قبل
                               </Link>
-                              <button type={'submit'} disabled={completedStep !== "confirm_phone_number"} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"}  disabled:bg-gray-400 disabled:cursor-not-allowed  duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                              <button type={'submit'} disabled={completedStep !== "confirm_phone_number"} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"} disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                                    {isBuildingPageLoading ? (
                                         <Loading color="white" width={20} height={20} type="spin" />
                                    ) : (

@@ -166,11 +166,11 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                                         renderInput={(props) => <input {...props} disabled={isOtpVerificationStatus === true} className={`border-2 otp_inputs ${isOtpVerificationStatus === true ? "border-green-400" : isOtpVerificationStatus === false ? "border-red-300" : "border-gray-300"} rounded-xl font-iranyekan-bold text-gray-700`} />}
                                    />
                               </div>
-                              <div className="w-full flex justify-center items-center flex-col gap-y-3">
+                              <div className="w-full flex justify-center items-center flex-col ">
                                    <button type={"button"} disabled={isOtpVerificationStatus === true} onClick={checkOtpValidity} className={`disabled:bg-gray-400 disabled:cursor-not-allowed bg-blue-600 hover:bg-blue-700 duration-150 font-iranyekan-bold text-blue-100 w-fit px-6 py-3 rounded-xl mt-4`}>
                                         تایید شماه همراه
                                    </button>
-                                   <section className="mt-6 w-full">
+                                   <section className="mt-8 w-full">
                                         <Input
                                              type="password"
                                              name="password"
@@ -187,11 +187,11 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                               </div>
                          </section>
                          <hr className="w-full border-gray-300" />
-                         <section className="w-full pb-6 flex justify-between items-center px-6">
-                              <Link href={'/auth/register/contact_information'} className="mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
+                         <section className="w-full p-5 flex justify-between items-center">
+                              <Link href={'/auth/register/contact_information'} className=" rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
                                    مرحله قبل
                               </Link>
-                              <button type={'submit'} disabled={!isOtpVerificationStatus} className={`${formik.isValid ? " bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"} disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                              <button type={'submit'} disabled={!isOtpVerificationStatus} className={`${formik.isValid ? " bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"} disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                                    {isBuildingPageLoading ? (
                                         <Loading color="white" width={20} height={20} type="spin" />
                                    ) : (
