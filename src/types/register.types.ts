@@ -25,10 +25,6 @@ export type TCity = {
      slug? : string,
      province_id? : number
 }
-export type TPoition = {
-     lat? : number | string
-     lng? : number | string
-}
 export type TRegisterActionPayload = {
      name: string
      phone: string
