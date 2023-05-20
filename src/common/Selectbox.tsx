@@ -1,24 +1,7 @@
 import { FC, Fragment } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
 import { TCity, TProvince } from '@/types/register.types'
-
-type TSelectboxProps = {
-    setSelected: TProvince | TCity | any,
-    selected: string | any,
-    query: string,
-    notFoundTitle: string,
-    setQuery: React.Dispatch<React.SetStateAction<any>>,
-    filteredData: TProvince | TCity | any,
-    icon: JSX.Element
-    title: string
-    name: string
-    formik: any,
-    // optional =>
-    isDisabled?: boolean,
-    placeholder?: string,
-    disabled?: boolean
-}
-
+import { TSelectboxProps } from '@/types/other.types'
 
 const SelectBox: FC<TSelectboxProps> = ({ name, formik, isDisabled, icon, title, placeholder, disabled, notFoundTitle, selected, query, setSelected, filteredData, setQuery }) => {
 
@@ -26,7 +9,6 @@ const SelectBox: FC<TSelectboxProps> = ({ name, formik, isDisabled, icon, title,
         setSelected(value);
         formik.setFieldValue(name, value.name); // تغییر مقدار فیلد فرم
     }
-
 
     return (
         <div className="flex items-center">
