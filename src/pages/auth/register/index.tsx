@@ -51,8 +51,8 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
      const validationSchema = yup.object({
           name: yup.string()
                .matches(VALIDATION_PERSIAN_ALPHABET, "نام و نام خوانوادگی معتبر نیست.")
-               .max(30, "نام و نام خانوادگی نمی‌تواند بیشتر از ۳۰ نویشه باشد.")
-               .min(4, "نام و نام خانوادگی نمی‌تواند کم تر از 4 نویشه باشد")
+               .max(30, "نام و نام خانوادگی نمی‌تواند بیشتر از ۳۰ نویسه باشد.")
+               .min(4, "نام و نام خانوادگی نمی‌تواند کم تر از 4 نویسه باشد")
                .required("نام و نام خوانوادگی الزامی است."),
           national_code: yup.string()
                .required("کد ملی الزامی میباشد.")
