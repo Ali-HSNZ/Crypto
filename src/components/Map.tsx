@@ -4,19 +4,19 @@ import L, { LatLngExpression } from 'leaflet';
 
 
 type TMapWrapperProps ={
-  setCurrentPosition: any
+  setSelectedLocation: any
   onClose: React.Dispatch<React.SetStateAction<boolean>>
-  currentPosition: [number , number] | undefined  
+  currentLocation: [number , number] | undefined  
 }
 
-const MapWrapper: React.FC<TMapWrapperProps> = ({ onClose, setCurrentPosition, currentPosition }) => {
+const MapWrapper: React.FC<TMapWrapperProps> = ({ onClose, setSelectedLocation, currentLocation }) => {
 
-  const [position, setPosition] = useState<LatLngExpression>(currentPosition ?? [36.5662, 53.0584]);
+  const [position, setPosition] = useState<LatLngExpression>(currentLocation ?? [36.5662, 53.0584]);
   const [mapClickHandler, setMapClickHandler] = useState<EventListener | null>(null);
 
   // handle selected/confirm location
   const confirmLocationHandler = () => {
-    setCurrentPosition(position);
+    setSelectedLocation(position);
     onClose(false);
   };
 

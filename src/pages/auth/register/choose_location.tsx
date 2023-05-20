@@ -25,21 +25,21 @@ type TPageInitailValues = {
      city: string
      lat: number | ''
      lng: number | ''
-     currentPosition: [number, number] | undefined
+     currentLocation: [number, number] | undefined
 }
 
 
 const RegisterPage = () => {
+
+     const dispatch = useDispatch<TAppDispatch>()
+     const { email, phone, password, name, loading } = useSelector<TRootState>(state => state.register) as IRegister
+
 
      // Map
      // Renderd Map in Client Side
      const Map = dynamic(() => import('@/components/Map'), { ssr: false });
 
      const [isOpenMap, setIsOpenMap] = useState<boolean>(false)
-
-     const dispatch = useDispatch<TAppDispatch>()
-     const { email, phone, password, name, loading } = useSelector<TRootState>(state => state.register) as IRegister
-
 
      // Choose/Select Province
      const [provinceQuery, setprovinceQuery] = useState<string>('')
@@ -50,43 +50,33 @@ const RegisterPage = () => {
           if (provinceQuery === "") {
                // return all provinces if provinceQuery is empty
                return provinces;
-          } else {
-               return provinces.filter((province) =>
-                    province.name
-                         .replace(/\s+/g, "")
-                         .includes(provinceQuery.replace(/\s+/g, ""))
-               );
           }
+          return provinces.filter((province) => province.name.includes(provinceQuery));
      }, [provinceQuery]);
 
+
      // Choose/Select City
-     const [cities, setCities] = useState<Array<TCity> | null>(null)
+     const [cities, setCities] = useState<Array<TCity>>()
      const [cityQuery, setCityQuery] = useState<string>("")
      const [selectedCity, setSelectedCity] = useState<TCity | string>()
 
-     // find city 
-     const queriedCityResults: Array<TCity> = useMemo(() => {
-          if (cityQuery === "") {
+     // find City
+     const queriedCityResults: Array<TProvince> = useMemo(() => {
+          if (cityQuery === "" || !cities) {
                // return all cities if cityQuery is empty
                return cities;
-          } else {
-               return cities.filter((city) =>
-                    city?.name
-                         .replace(/\s+/g, "")
-                         .includes(cityQuery.replace(/\s+/g, ""))
-               );
           }
-     }, [cityQuery]);
+          return cities.filter((city) => city.name.includes(cityQuery));
+     }, [cities, cityQuery]);
+
 
      // Clearing and updating city state based on selected Province
      useEffect(() => {
-          formik.setFieldValue('city', "")
           if (selectedProvience?.id) {
                setSelectedCity('')
                const cities = allCities.filter(city => city.province_id === selectedProvience?.id)
                setCities(cities)
-          }
-          else setCities(null)
+          } else setCities(null)
      }, [selectedProvience])
 
 
@@ -94,7 +84,7 @@ const RegisterPage = () => {
           address: "",
           city: "",
           province: "",
-          currentPosition: undefined,
+          currentLocation: undefined,
           lat: "",
           lng: "",
      }
@@ -133,10 +123,12 @@ const RegisterPage = () => {
           initialValues,
           onSubmit,
           validationSchema,
+          validateOnChange: true,
           validateOnMount: true,
+          validateOnBlur: true,
           enableReinitialize: true,
-     })
 
+     })
 
      return (
           <>
@@ -147,17 +139,20 @@ const RegisterPage = () => {
                          content="صرافی ارز دیجیتال نیوکوین اسپیس - خرید و فروش امن بیت‌کوین و ارزهای دیجیتال. به بزرگترین بازار ارز دیجیتال ایران بپیوندید."
                     />
                </Head>
-               <section className="w-full h-auto sm:h-screen xl:p-8 bg-transparent flex flex-col md:flex-row">
+               <section className="w-full h-auto sm:h-screen xl:p-8 flex flex-col md:flex-row">
                     <Modal className="flex justify-center items-center px-4 md:px-6" open={isOpenMap} onClose={() => setIsOpenMap(false)}>
                          <section className='bg-white md:p-6 relative w-full md:w-[700px]  h-[500px] rounded-xl'>
                               <Map
                                    onClose={setIsOpenMap}
-                                   setCurrentPosition={(pos: [number, number]) => {
-                                        formik.setFieldValue("currentPosition", pos)
-                                        formik.setFieldValue("lat", truncateNumber(pos[0], 5))
-                                        formik.setFieldValue("lng", truncateNumber(pos[1], 5))
+                                   setSelectedLocation={(pos: [number, number]) => {
+                                        formik.setValues({
+                                             ...formik.values,
+                                             lat: truncateNumber(pos[0], 5),
+                                             lng: truncateNumber(pos[1], 5),
+                                             currentLocation: pos
+                                        });
                                    }}
-                                   currentPosition={formik.values.currentPosition}
+                                   currentLocation={formik.values.currentLocation}
                               />
                          </section>
                     </Modal>
@@ -290,7 +285,7 @@ const RegisterPage = () => {
                                    <Link href={'/auth/register/contact_information'} className="rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
                                         مرحله قبل
                                    </Link>
-                                   <button type={'submit'} disabled={loading} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"} disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                                   <button type={'submit'} disabled={loading || !formik.isValid} className={`bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                                         {loading ? (
                                              <Loading color="white" width={20} height={20} type="spin" />
                                         ) : (
