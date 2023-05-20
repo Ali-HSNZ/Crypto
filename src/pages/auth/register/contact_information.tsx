@@ -159,7 +159,7 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                               <Link href={'/auth/register'} className="mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
                                    مرحله قبل
                               </Link>
-                              <button type={'submit'} disabled={completedStep !== "confirm_phone_number"} className={`${!formik.isValid ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}  disabled:bg-gray-400 disabled:cursor-not-allowed  duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                              <button type={'submit'} disabled={completedStep !== "confirm_phone_number"} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"}  disabled:bg-gray-400 disabled:cursor-not-allowed  duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                                    {isBuildingPageLoading ? (
                                         <Loading color="white" width={20} height={20} type="spin" />
                                    ) : (

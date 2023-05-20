@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { TAppDispatch, TRootState } from "@/redux/store";
 import InputCommon from "@/common/InputCommon";
 import { person_information } from "@/redux/slices/register";
+import Head from "next/head";
+
 //? utils
 import {
      VALIDATION_BIRTHDAY,
@@ -14,14 +16,13 @@ import {
 import { useRouter } from "next/router";
 import Loading from "react-loading";
 import { IRegister } from "@/types/register.types";
-import Head from "next/head";
+import { toEnDigits } from "@/utils/methods";
 
 //? Date Picker =>
 import DatePicker from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import "react-multi-date-picker/styles/layouts/mobile.css"
-import { toEnDigits } from "@/utils/methods";
 
 type TPageInitialValues = {
      name: string;
@@ -193,7 +194,6 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                                              )
                                         }}
                                         calendar={persian}
-                                        // weekDays={weekDays}
                                         locale={persian_fa}
                                         inputClass=""
                                         className="rmdp-mobile font-iranyekan-regular"
@@ -204,7 +204,7 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                          {/* Footer */}
                          <hr className="w-full border-gray-300" />
                          <section className="w-full pb-6 flex justify-end pl-6">
-                              <button type={"submit"} className={`${!formik.isValid ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"} disabled:bg-gray-600 disabled:cursor-not-allowed   duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                              <button type={"submit"} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed "} disabled:bg-gray-600 disabled:cursor-not-allowed   duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                                    {isBuildingPageLoading ? (
                                         <Loading color="white" width={20} height={20} type="spin" />
                                    ) : (
