@@ -66,7 +66,7 @@ const Input: FC<TInputProps> = ({ dir, icon, maxLength, disabled, type, title, p
                </button>}
 
                {/* children */}
-               <div className='absolute top-0 left-0 pl-4  flex items-center justify-center pr-2 bottom-0 rounded-l-full'>
+               <div className='absolute top-0 left-0 pl-3  flex items-center justify-center pr-2 bottom-0 rounded-l-full'>
                     {children}
                </div>
 
