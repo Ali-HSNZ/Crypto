@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { TAppDispatch, TRootState } from "@/redux/store";
-import InputCommon from "@/common/InputCommon";
+import Input from "@/common/Input";
 import { person_information } from "@/redux/slices/register";
 import Head from "next/head";
 
@@ -139,7 +139,7 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                          </h1>
                          <section className="flex w-full lg:w-[700px] flex-col mt-8 flex-1 px-6 sm:px-14 py-6 gap-y-10">
                               {/* Fullname Input */}
-                              <InputCommon
+                              <Input
                                    type="text"
                                    maxLength={30}
                                    title="نام و نام خانوادگی"
@@ -153,7 +153,7 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                                    }
                               />
                               {/* national code Input */}
-                              <InputCommon
+                              <Input
                                    type="tel"
                                    title="کدملی"
                                    placeholder="۲۰۸-۱۲۳۵-۴۵۶"
@@ -167,7 +167,7 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                                    }
                               />
                               {/* Birthday Input */}
-                              <InputCommon
+                              <Input
                                    type="text"
                                    title="تاریخ تولد"
                                    placeholder="۱۳۷۰/۰۶/۳۱"
@@ -198,7 +198,7 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                                         inputClass=""
                                         className="rmdp-mobile font-iranyekan-regular"
                                    />
-                              </InputCommon>
+                              </Input>
                          </section>
 
                          {/* Footer */}

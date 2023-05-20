@@ -1,8 +1,8 @@
-import { TInputCommonProps } from '@/types/other.types';
+import { TInputProps } from '@/types/other.types';
 import { toPersianDigits } from '@/utils/toPersianDigits';
 import { FC, useRef, useState } from 'react';
 
-const InputCommon: FC<TInputCommonProps> = ({ dir, icon, maxLength, disabled, type, title, placeholder, children, formik, name }): JSX.Element => {
+const Input: FC<TInputProps> = ({ dir, icon, maxLength, disabled, type, title, placeholder, children, formik, name }): JSX.Element => {
 
      const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(true)
      const inputRef = useRef<HTMLInputElement>(null)
@@ -80,4 +80,4 @@ const InputCommon: FC<TInputCommonProps> = ({ dir, icon, maxLength, disabled, ty
      );
 }
 
-export default InputCommon;
+export default Input;

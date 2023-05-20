@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import logo from '@/images/Logo.png'
-import InputCommon from "@/common/InputCommon";
+import Input from "@/common/Input";
 import Link from "next/link";
 import OTPInput from 'react-otp-input';
 import { useEffect, useState } from "react";
@@ -135,7 +135,7 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                          <h1 className="text-lg mt-6 font-iranyekan-extraBold">لطفا اطلاعات خود را با دقت وارد نمائید</h1>
                          <section className="flex w-full lg:w-[700px] flex-col mt-6 flex-1 px-6 sm:px-14 py-6 ">
 
-                              <InputCommon type="tel" name="phone" disabled={true} formik={formik} title="شماره همراه" placeholder="۰۹۱۱۲۵۶۴۷۹۸"
+                              <Input type="tel" name="phone" disabled={true} formik={formik} title="شماره همراه" placeholder="۰۹۱۱۲۵۶۴۷۹۸"
                                    icon={
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-600">
                                              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
@@ -157,10 +157,10 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
 
                               <div className="w-full flex flex-row-reverse justify-center items-center mt-3">
                                    <OTPInput
+                                        inputType="tel"
                                         value={enteredOtp}
                                         onChange={(num) => setEnteredOtp(num)}
                                         numInputs={4}
-                                        inputType="tel"
                                         inputStyle={'text-red-500 p-6'}
                                         containerStyle={'flex gap-x-4 flex-row-reverse'} //
                                         renderInput={(props) => <input {...props} disabled={isOtpVerificationStatus === true} className={`border-2 otp_inputs ${isOtpVerificationStatus === true ? "border-green-400" : isOtpVerificationStatus === false ? "border-red-300" : "border-gray-300"} rounded-xl font-iranyekan-bold text-gray-700`} />}
@@ -171,7 +171,12 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                                         تایید شماه همراه
                                    </button>
                                    <section className="mt-6 w-full">
-                                        <InputCommon type="password" name="password" formik={formik} title="رمز عبور" placeholder="حداقل ۸ کاراکتر"
+                                        <Input
+                                             type="password"
+                                             name="password"
+                                             formik={formik}
+                                             title="رمز عبور"
+                                             placeholder="حداقل ۸ کاراکتر"
                                              icon={
                                                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-600">
                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />

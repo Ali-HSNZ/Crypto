@@ -16,7 +16,7 @@ export type TSelectboxProps = {
      placeholder?: string,
      disabled?: boolean
 }
-export type TInputCommonProps = {
+export type TInputProps = {
      title: string,
      icon: JSX.Element,
      placeholder?: string,

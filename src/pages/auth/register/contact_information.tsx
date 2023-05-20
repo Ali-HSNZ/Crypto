@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as yup from 'yup'
 import logo from '@/images/Logo.png'
-import InputCommon from "@/common/InputCommon";
+import Input from "@/common/Input";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { VALIDATION_EMAIL, VALIDATION_PHONE_NUMBER } from "@/utils/regix";
@@ -117,7 +117,7 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                               لطفا اطلاعات خود را با دقت وارد نمائید
                          </h1>
                          <section className="flex w-full lg:w-[700px] flex-col mt-8 flex-1 px-6 sm:px-14 py-6 gap-y-10">
-                              <InputCommon
+                              <Input
                                    type="tel"
                                    title="شماره همراه"
                                    placeholder="۰۹۱۱۲۵۶۴۷۹۸"
@@ -138,9 +138,9 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                                              </button>
                                         )}
                                    </>
-                              </InputCommon>
+                              </Input>
 
-                              <InputCommon
+                              <Input
                                    type="text"
                                    name="email"
                                    title="ایمیل"
