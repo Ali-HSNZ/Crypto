@@ -172,7 +172,7 @@ export const getServerSideProps = async () => {
     return {
       props: {
         priceHistories: priceHistories,
-        weekTransactions: weekTransactions.data.prices.slice(65, 80),
+        weekTransactions: weekTransactions.data.prices.slice(0, 10),
         favoriteCoins: favoriteCoins.data.sort((a: TCrypto_favoriteCoinsRes, b: TCrypto_favoriteCoinsRes) => b.circulating_supply - a.circulating_supply),
       }
     }
