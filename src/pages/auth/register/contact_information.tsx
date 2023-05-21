@@ -78,43 +78,42 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                <section className="w-full h-screen xl:p-8 bg-transparent flex flex-col md:flex-row">
 
                     {/* SidePanel */}
-                    <div className="bg-white w-full md:w-[270px] md:min-w-[270px]">
-                         <div className="bg-[#388AEA]  w-full h-full gap-x-6 px-6 py-6 md:py-16 flex justify-between md:justify-start md:flex-col xl:rounded-r-md   ">
-                              <div className="w-fit md:w-full flex justify-center  items-center flex-col">
-                                   <img src={logo.src} alt="" className="w-[70px] md:w-20" />
-                                   <h1 className="font-iranyekan-extraBold text-xl xl:text-2xl text-center text-blue-100  mt-4 md:mt-6 xl:mt-8">
-                                        ثبت نام
-                                   </h1>
+                    <div className="bg-[#388AEA]  w-full md:w-[270px] md:min-w-[270px] h-fit md:h-full gap-x-6 px-6 py-6 md:py-16 flex justify-between items-center md:justify-start md:flex-col xl:rounded-r-md   ">
+                         <div className="w-fit md:w-full flex justify-center  items-center flex-col">
+                              <img src={logo.src} alt="" className="w-[70px] md:w-20" />
+                              <h1 className="font-iranyekan-extraBold text-xl xl:text-2xl text-center text-blue-100  mt-4 md:mt-6 xl:mt-8">
+                                   ثبت نام
+                              </h1>
+                         </div>
+                         <div className="md:mt-10 flex flex-col items-start">
+                              {/* Step 1 */}
+                              <div className="flex items-center  md:flex-row gap-x-4">
+                                   <div className="p-[10px] md:p-3 rounded-full bg-blue-100 border-[3px] border-blue-100 w-fit h-fit"></div>
+                                   <p className="font-iranyekan-bold text-sm md:text-base text-blue-50">
+                                        اطلاعات فردی
+                                   </p>
                               </div>
-                              <div className="md:mt-10 flex flex-col items-start">
-                                   {/* Step 1 */}
-                                   <div className="flex items-center  md:flex-row gap-x-4">
-                                        <div className="p-[10px] md:p-3 rounded-full bg-blue-100 border-[3px] border-blue-100 w-fit h-fit"></div>
-                                        <p className="font-iranyekan-bold text-sm md:text-base text-blue-50">
-                                             اطلاعات فردی
-                                        </p>
-                                   </div>
-                                   <div className="mr-[2px] px-2.5 md:px-3 h-fit rotate-90 border border-blue-100 my-4 md:my-6"></div>
+                              <div className="mr-[2px] px-2.5 md:px-3 h-fit rotate-90 border border-blue-100 my-4 md:my-6"></div>
 
-                                   {/* Step 2 */}
-                                   <div className="flex items-center gap-x-4">
-                                        <div className="p-[10px] md:p-3 rounded-full border-[3px] border-blue-100 bg-blue-400 w-fit h-fit"></div>
-                                        <p className="font-iranyekan-regular text-sm md:text-base text-blue-200">
-                                             اطلاعات ارتباطی
-                                        </p>
-                                   </div>
-                                   <div className="mr-[2px] px-2.5 md:px-3 h-fit rotate-90 border border-blue-300 my-4 md:my-6"></div>
+                              {/* Step 2 */}
+                              <div className="flex items-center gap-x-4">
+                                   <div className="p-[10px] md:p-3 rounded-full border-[3px] border-blue-100 bg-blue-400 w-fit h-fit"></div>
+                                   <p className="font-iranyekan-regular text-sm md:text-base text-blue-200">
+                                        اطلاعات ارتباطی
+                                   </p>
+                              </div>
+                              <div className="mr-[2px] px-2.5 md:px-3 h-fit rotate-90 border border-blue-300 my-4 md:my-6"></div>
 
-                                   {/* Step 3 */}
-                                   <div className="flex items-center gap-x-4">
-                                        <div className="p-[10px] md:p-3 rounded-full border-[3px] border-blue-400 bg-blue-400  w-fit h-fit"></div>
-                                        <p className="font-iranyekan-regular text-sm md:text-base text-blue-200">
-                                             اطلاعات مکانی
-                                        </p>
-                                   </div>
+                              {/* Step 3 */}
+                              <div className="flex items-center gap-x-4">
+                                   <div className="p-[10px] md:p-3 rounded-full border-[3px] border-blue-400 bg-blue-400  w-fit h-fit"></div>
+                                   <p className="font-iranyekan-regular text-sm md:text-base text-blue-200">
+                                        اطلاعات مکانی
+                                   </p>
                               </div>
                          </div>
                     </div>
+
 
                     {/* Register Form */}
                     <form onSubmit={formik.handleSubmit} className="bg-white w-full rounded-l-md pt-8 flex items-center flex-col h-full">
