@@ -72,8 +72,9 @@ const RegisterPage = () => {
 
      // Clearing and updating city state based on selected Province
      useEffect(() => {
+          setSelectedCity('')
+          formik.setFieldValue('city', "")
           if (selectedProvience?.id) {
-               setSelectedCity('')
                const cities = allCities.filter(city => city.province_id === selectedProvience?.id)
                setCities(cities)
           } else setCities(null)
@@ -292,7 +293,7 @@ const RegisterPage = () => {
                                    <Link href={'/auth/register/contact_information'} className="rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
                                         مرحله قبل
                                    </Link>
-                                   <button type={'submit'} disabled={loading || !formik.isValid} className={`bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                                   <button type={'submit'} disabled={loading} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"}  disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                                         {loading ? (
                                              <Loading color="white" width={20} height={20} type="spin" />
                                         ) : (
