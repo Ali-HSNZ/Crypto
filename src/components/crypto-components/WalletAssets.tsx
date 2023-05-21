@@ -8,7 +8,7 @@ import { fetchWalletAssets } from '@/redux/slices/wallet_assets';
 
 const WalletAssets = () => {
 
-  const { data , error } = useSelector<TRootState>(state => state.wallet_assets) as ICrypto_walletAssets
+  const { data, error } = useSelector<TRootState>(state => state.wallet_assets) as ICrypto_walletAssets
 
   const dispatch = useDispatch<TAppDispatch>()
 
@@ -28,8 +28,17 @@ const WalletAssets = () => {
 
   };
 
+  //this function to generate a random color
+  const generateColor = () => {
 
-  const COLORS = ['#7EB6F7', '#F7931A', '#2E2E2E',];
+    // Use RGB encoding based on coin value
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+
+    return `rgb(${r}, ${g}, ${b})`;
+  };
+
 
   return (
     <section className='w-full'>
@@ -40,7 +49,7 @@ const WalletAssets = () => {
           <div className=" flex flex-col  items-start h-full">
             <p className="font-iranyekan-bold  whitespace-nowrap">دارایی‌های کیف پول</p>
             {error && <p className='mt-4 text-red-500 font-quicksand-bold'>{error}</p>}
-            
+
             <div className='mt-6 flex gap-y-4 flex-col items-start'>
               {data?.map((wallet: TCrypto_walletAssetsResponse) => (
                 <div key={wallet.id} className="flex items-center justify-center gap-x-3">
@@ -72,7 +81,11 @@ const WalletAssets = () => {
                   dataKey="balance"
                 >
                   {data?.map((entry: any, index: number) => (
-                    <Cell className='outline-none focus:outline-none' key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell
+                      className='outline-none focus:outline-none'
+                      key={`cell-${index}`}
+                      fill={generateColor()}
+                    />
                   ))}
                 </Pie>
               </PieChart>
