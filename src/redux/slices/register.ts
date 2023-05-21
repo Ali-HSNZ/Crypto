@@ -1,17 +1,15 @@
 import { toEnDigits } from "@/utils/methods";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios, { AxiosError } from "axios";
-import { IRegister, TRegisterActionPayload } from "src/types/register.types";
+import { createSlice } from "@reduxjs/toolkit";
+import { IRegister } from "src/types/register.types";
 import { toast } from "react-toastify";
 
 /**
- * All Steps ==>
- * Step 1 => register
- * Step 2 => confirm_otp
- * Step 3 => contact_information
- * Step 4 => confirm_phone_number
- * Step 5 => choose_location
- */
+ * All Steps :
+ * Step 1 => person_information
+ * Step 2 => confirmed_OTP
+ * Step 3 => confirm_phone_number
+ * Step 4 => contact_information
+*/
 
 const initialState: IRegister = {
      name: "",
@@ -19,15 +17,9 @@ const initialState: IRegister = {
      birthday: "",
      phone: "",
      email: "",
-     province: "",
-     city: "",
-     address: "",
-     x_position: "",
-     y_position: "",
      completedStep: "no_status",
      otp: "",
      password: "",
-     loading: false,
 };
 
 const register = createSlice({
@@ -40,7 +32,7 @@ const register = createSlice({
                state.name = name;
                state.national_code = toEnDigits(national_code);
                state.birthday = toEnDigits(birthday);
-          
+
                state.completedStep = "person_information";
           },
           // step 2
@@ -61,7 +53,7 @@ const register = createSlice({
           },
           // step 3
           confirm_phone_number: (state, action) => {
-               state.password = toEnDigits(action.payload.password);
+               state.password = toEnDigits(action.payload);
 
                state.completedStep = "confirm_phone_number";
           },
@@ -70,17 +62,12 @@ const register = createSlice({
                state.email = toEnDigits(action?.payload?.email);
 
                state.completedStep = "contact_information";
-          },
-          // step 5
-          choose_location: (state, action) => {
-               state.name = action.payload;
-          },
+          }
      },
 });
 
 export const registerReducer = register.reducer;
 export const {
-     choose_location,
      confirm_phone_number,
      person_information,
      getOTPCode,
