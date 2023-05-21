@@ -4,15 +4,9 @@ export interface IRegister {
      birthday : string
      phone : string
      email : string
-     province : string
-     city : string
-     address : string
-     x_position : string
-     y_position : string
      completedStep : "no_status" | "person_information" | "confirmed_OTP" | "contact_information" | "confirm_phone_number"
      otp : string
      password : string
-     loading : boolean
 }
 // choose Location
 export type TProvince = {
