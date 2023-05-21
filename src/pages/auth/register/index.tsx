@@ -180,7 +180,7 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                               >
                                    <DatePicker
                                         value={formik.values.birthday}
-                                        onPropsChange={(input: any) => formik.setFieldValue("birthday", input.value?.toString())}
+                                        onChange={(value) => formik.setFieldValue("birthday", value?.toString())}
                                         buttons={true}
                                         render={(value, openCalendar) => {
                                              return (
