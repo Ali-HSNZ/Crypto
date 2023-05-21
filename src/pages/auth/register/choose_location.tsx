@@ -29,16 +29,16 @@ type TPageInitailValues = {
      currentLocation: [number, number] | undefined
 }
 
-
 const RegisterPage = () => {
 
-     const dispatch = useDispatch<TAppDispatch>()
-     const { email, phone, password, name, loading } = useSelector<TRootState>(state => state.register) as IRegister
+     const { email, phone, password, name } = useSelector<TRootState>(state => state.register) as IRegister
 
      const router = useRouter()
+     
+     // The variable isPendingRequest indicates whether a register request is pending or not.
      const [isPendingRequest , setIsPendingRequest] = useState<boolean>(false)
 
-     // Map
+
      // Renderd Map in Client Side
      const Map = dynamic(() => import('@/components/Map'), { ssr: false });
 
@@ -105,13 +105,12 @@ const RegisterPage = () => {
           })
           .then(res => {
                setIsPendingRequest(false)
-               toast.success("با موفقیت وارد حساب کاربری خود شدید.")
+               toast.success("حساب کاربری شما با موفقیت ایجاد شد.")
                router.push('/')
           })
           .catch(error => {
                setIsPendingRequest(false)
-               toast.error(error?.response?.data?.message ?? "خطای احراز هویت")
-          })
+               error?.response?.data?.errors.forEach((message: string) => toast.error(message));          })
      }
 
 
@@ -142,11 +141,8 @@ const RegisterPage = () => {
           initialValues,
           onSubmit,
           validationSchema,
-          validateOnChange: true,
           validateOnMount: true,
-          validateOnBlur: true,
           enableReinitialize: true,
-
      })
 
      return (
