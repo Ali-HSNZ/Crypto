@@ -6,7 +6,7 @@ export type TCrypto_favoriteCoinsRes = {
      symbol: string,
      circulating_supply: number
 }
-// PriceChanges
+// PriceHistories
 export type TCrypto_priceHistoriesRes = {
      usd: number,
      usd_24h_change: number,

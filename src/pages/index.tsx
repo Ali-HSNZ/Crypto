@@ -55,7 +55,7 @@ const Home = (
 
         <div className={`${isOpenNavbar && isLgScreen ? "col-span-8" : "col-span-10"}  `}>
 
-          {/* 429 error when Fetching data from the server */}
+          {/* Show server errors */}
           {serverError && <p className='text-red-600 font-iranyekan-bold pb-6'>{serverError}</p>}
 
           <Header setIsOpenNavbar={setIsOpenNavbar} isOpenNavbar={isOpenNavbar} />
@@ -97,12 +97,13 @@ export const getServerSideProps = async () => {
 
   try {
 
+    // Fetching week Transactions Coins Data
     const weekTransactions = await axios.get(`${baseUrl}/coins/bitcoin/market_chart?vs_currency=usd&days=7`)
 
     // Fetching Favorite Coins Data
     const favoriteCoins = await axios.get(`${baseUrl}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&price_change_percentage=24h`)
 
-    // Fetching PriceChanges Data
+    // Fetching Price Histories Data
     const fetchCoins = async () => {
 
       const priceUrl = `${baseUrl}/simple/price?ids=ripple,ethereum,bitcoin,dogecoin,tether&vs_currencies=usd&include_24hr_change=true`;
