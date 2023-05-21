@@ -10,11 +10,11 @@ export type TCrypto_favoriteCoinsRes = {
 export type TCrypto_priceHistoriesRes = {
      usd: number,
      usd_24h_change: number,
-     history: Array<[number,number]>
+     history: Array<[number, number]>
      name: string,
      fa_name: string
-     symbol : string,
-     imageUrl : string
+     symbol: string,
+     imageUrl: string
 }
 // walletAssets
 export type TCrypto_walletAssetsResponse = {
@@ -23,7 +23,7 @@ export type TCrypto_walletAssetsResponse = {
      symbol: string
      balance: number
 }
-export type ICrypto_walletAssets = {
+export type TCrypto_walletAssets = {
      loading: boolean;
      error: string | null;
      data: Array<TCrypto_walletAssetsResponse> | null

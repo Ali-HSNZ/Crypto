@@ -1,5 +1,5 @@
 import { AppThunk, TAppDispatch, TRootState } from '@/redux/store';
-import { TCrypto_walletAssetsResponse, ICrypto_walletAssets } from '@/types/crypto.types';
+import { TCrypto_walletAssetsResponse, TCrypto_walletAssets } from '@/types/crypto.types';
 import { toPersianDigits } from '@/utils/toPersianDigits';
 import { useDispatch, useSelector } from 'react-redux';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
@@ -8,7 +8,7 @@ import { fetchWalletAssets } from '@/redux/slices/wallet_assets';
 
 const WalletAssets = () => {
 
-  const { data, error } = useSelector<TRootState>(state => state.wallet_assets) as ICrypto_walletAssets
+  const { data, error } = useSelector<TRootState>(state => state.wallet_assets) as TCrypto_walletAssets
 
   const dispatch = useDispatch<TAppDispatch>()
 
@@ -31,7 +31,6 @@ const WalletAssets = () => {
   //this function to generate a random color
   const generateColor = () => {
 
-    // Use RGB encoding based on coin value
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
