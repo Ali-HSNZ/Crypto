@@ -11,6 +11,7 @@ import { toEnDigits } from "@/utils/methods";
 import { useState } from "react";
 import Loading from 'react-loading';
 import Head from "next/head";
+import {useRouter} from 'next/router'
 
 type TPageInitailValues = {
      email: string,
@@ -21,6 +22,8 @@ const LoginPage = () => {
 
      const [loading, setLoading] = useState<boolean>(false)
 
+     const router = useRouter()
+
      const onSubmit = (values: TPageInitailValues) => {
           setLoading(true)
           axios.post('https://apingweb.com/api/login', {
@@ -30,9 +33,7 @@ const LoginPage = () => {
           .then(res => {
                setLoading(false)
                toast.success("با موفقیت وارد حساب کاربری خود شدید.")
-               if (typeof window !== "undefined") {
-                    window.location.href = "/"
-               }
+               router.push('/')
           })
           .catch(error => {
                setLoading(false)
