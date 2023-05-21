@@ -6,7 +6,7 @@ export type TSelectboxProps = {
      query: string,
      notFoundTitle: string,
      setQuery: React.Dispatch<React.SetStateAction<any>>,
-     filteredData: TProvince | TCity | any,
+     data: Array<TProvince> | Array<TCity> ,
      icon: JSX.Element
      title: string
      name: string
@@ -14,7 +14,6 @@ export type TSelectboxProps = {
      // optional =>
      isDisabled?: boolean,
      placeholder?: string,
-     disabled?: boolean
 }
 export type TInputProps = {
      title: string,
