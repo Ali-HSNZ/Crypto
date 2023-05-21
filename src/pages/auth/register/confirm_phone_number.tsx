@@ -59,7 +59,7 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
      }
 
      const onSubmit = (values: TPageInitailValues) => {
-          dispatch(confirm_phone_number(values))
+          dispatch(confirm_phone_number(values.password))
           router.push('/auth/register/contact_information')
      }
 
