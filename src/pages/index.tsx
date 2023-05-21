@@ -178,9 +178,11 @@ export const getServerSideProps = async () => {
     }
   } catch (error) {
 
+    const message = error?.response?.statusText
+    const statusCode = error?.response?.status
     return {
       props: {
-        serverError: "خطای 429 | Too Many Requests"
+        serverError: `خطای ${statusCode ?? 500} | ${message ?? " Internal Server Error"}`
       }
     }
   }
