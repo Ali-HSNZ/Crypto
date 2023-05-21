@@ -14,10 +14,11 @@ import { provinces } from '@/static/provinces';
 import { allCities } from '@/static/cities';
 import dynamic from "next/dynamic";
 import { IRegister, TCity, TProvince } from "@/types/register.types";
-import { registerAction } from "@/redux/slices/register";
 import Loading from "react-loading";
 import Head from "next/head";
-
+import axios from "axios";
+import { toast } from "react-toastify";
+import {useRouter} from 'next/router'
 
 type TPageInitailValues = {
      address: string,
@@ -34,6 +35,8 @@ const RegisterPage = () => {
      const dispatch = useDispatch<TAppDispatch>()
      const { email, phone, password, name, loading } = useSelector<TRootState>(state => state.register) as IRegister
 
+     const router = useRouter()
+     const [isPendingRequest , setIsPendingRequest] = useState<boolean>(false)
 
      // Map
      // Renderd Map in Client Side
@@ -92,8 +95,23 @@ const RegisterPage = () => {
 
 
      const onSubmit = () => {
-          dispatch(registerAction({ name, password, email, phone }))
-          //after registered redirecting page to home page
+          setIsPendingRequest(true)
+          axios.post('https://apingweb.com/api/register', {
+               password,
+               name,
+               phone: toEnDigits(phone.substring(0, 10)),
+               email,
+               password_confirmation: password,
+          })
+          .then(res => {
+               setIsPendingRequest(false)
+               toast.success("با موفقیت وارد حساب کاربری خود شدید.")
+               router.push('/')
+          })
+          .catch(error => {
+               setIsPendingRequest(false)
+               toast.error(error?.response?.data?.message ?? "خطای احراز هویت")
+          })
      }
 
 
@@ -293,8 +311,8 @@ const RegisterPage = () => {
                                    <Link href={'/auth/register/contact_information'} className="rounded-md flex gap-x-4 font-iranyekan-bold text-blue-600">
                                         مرحله قبل
                                    </Link>
-                                   <button type={'submit'} disabled={loading} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"}  disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
-                                        {loading ? (
+                                   <button type={'submit'} disabled={isPendingRequest} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"}  disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+                                        {isPendingRequest ? (
                                              <Loading color="white" width={20} height={20} type="spin" />
                                         ) : (
                                              <>

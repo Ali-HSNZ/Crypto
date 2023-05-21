@@ -13,34 +13,6 @@ import { toast } from "react-toastify";
  * Step 5 => choose_location
  */
 
-export const registerAction = createAsyncThunk(
-     "auth/register",
-     async (payload: TRegisterActionPayload) => {
-          const { password, name, email, phone } = payload;
-
-          try {
-               await axios.post(
-                    "https://apingweb.com/api/register",
-                    {
-                         password,
-                         name,
-                         phone: toEnDigits(phone.substring(0, 10)),
-                         email,
-                         password_confirmation: password,
-                    }
-               );
-               toast.success("حساب کاربری شما با موفقیت ایجاد شد.")
-
-               // Redirect to 'auth/login' After Registered
-               if(typeof window !== "undefined"){
-                    window.location.href = "/"
-               }
-          } catch (error: AxiosError | any) {
-               error?.response?.data?.errors.forEach((message: string) => toast.error(message));
-          }
-     }
-);
-
 const initialState: IRegister = {
      name: "",
      national_code: "",
@@ -103,17 +75,6 @@ const register = createSlice({
           choose_location: (state, action) => {
                state.name = action.payload;
           },
-     },
-     extraReducers: ({ addCase }) => {
-          addCase(registerAction.pending, (state, action) => {
-               state.loading = true;
-          }),
-          addCase(registerAction.fulfilled, (state, action) => {
-               state.loading = false;
-          }),
-          addCase(registerAction.rejected, (state, action) => {
-               state.loading = false;
-          });
      },
 });
 
