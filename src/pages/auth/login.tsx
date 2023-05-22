@@ -20,23 +20,24 @@ type TPageInitailValues = {
 
 const LoginPage = () => {
 
-     const [loading, setLoading] = useState<boolean>(false)
+     // The variable isPendingRequest indicates whether a login request is pending or not.
+     const [isPendingRequest, setIsPendingRequest] = useState<boolean>(false)
 
      const router = useRouter()
 
      const onSubmit = (values: TPageInitailValues) => {
-          setLoading(true)
+          setIsPendingRequest(true)
           axios.post('https://apingweb.com/api/login', {
                email: values.email,
                password: toEnDigits(values.password)
           })
           .then(res => {
-               setLoading(false)
+               setIsPendingRequest(false)
                toast.success("با موفقیت وارد حساب کاربری خود شدید.")
                router.push('/')
           })
           .catch(error => {
-               setLoading(false)
+               setIsPendingRequest(false)
                toast.error(error?.response?.data?.message ?? "خطای احراز هویت")
           })
      }
@@ -125,8 +126,10 @@ const LoginPage = () => {
                                    placeholder="حداقل ۸ کاراکتر"
                               />
                          </section>
-                         <button type={'submit'} disabled={loading} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"}  disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
-                              {loading ? (
+                         <button type={'submit'} 
+                         disabled={isPendingRequest} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"}  disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
+
+                              {isPendingRequest ? (
                                    <Loading color="white" width={20} height={20} type="spin" />
                               ) : (
                                    <>
