@@ -11,5 +11,31 @@
 /* Swiper Styles */
 @import url('swiper.styles.css');
 
-/* others Styles */
-@import url('others.styles.css');
+
+body{
+     background-color: #E8F4FF;
+}
+
+/* autoFull Styles */
+input[type=text],
+input[type=password]:-webkit-autofill{
+     -webkit-box-shadow: 0 0 0 40px #FFFFFF  inset !important;
+}
+
+/* otp inputs */
+.otp_inputs{
+     width: 50px !important;
+     height: 50px !important;
+}
+.otp_inputs:focus{
+     outline: none;
+     border: 2px solid gray;
+}
+
+
+/* Toastify */
+.Toastify__toast-body { font-family: 'iranyekan-medium'; font-size: 14px;}
+.Toastify {
+     position: absolute;
+     z-index: 100;
+}
