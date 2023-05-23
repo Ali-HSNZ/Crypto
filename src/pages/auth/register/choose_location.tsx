@@ -172,7 +172,7 @@ const RegisterPage = () => {
                          </section>
                     </Modal>
 
-                    {/* SidePanel */}
+                    {/* sideBar */}
                     <div className="bg-[#388AEA]  w-full md:w-[270px] md:min-w-[270px] h-fit md:h-full gap-x-6 px-6 py-6 md:py-16 flex justify-between items-center md:justify-start md:flex-col xl:rounded-r-md   ">
                          <div className="w-fit md:w-full flex justify-center  items-center flex-col">
                               <img src={logo.src} alt="" className="w-[70px] md:w-20" />
@@ -184,7 +184,7 @@ const RegisterPage = () => {
                               {/* Step 1 */}
                               <div className="flex items-center  md:flex-row gap-x-4">
                                    <div className="p-[10px] md:p-3 rounded-full bg-blue-100 border-[3px] border-blue-100 w-fit h-fit"></div>
-                                   <p className="font-iranyekan-bold text-sm md:text-base text-blue-50">
+                                   <p className="font-iranyekan-bold text-sm md:text-base text-blue-100">
                                         اطلاعات فردی
                                    </p>
                               </div>
@@ -193,16 +193,16 @@ const RegisterPage = () => {
                               {/* Step 2 */}
                               <div className="flex items-center gap-x-4">
                                    <div className="p-[10px] md:p-3 rounded-full border-[3px] border-blue-100 bg-blue-100 w-fit h-fit"></div>
-                                   <p className="font-iranyekan-regular text-sm md:text-base text-blue-200">
+                                   <p className="font-iranyekan-regular text-sm md:text-base text-blue-100">
                                         اطلاعات ارتباطی
                                    </p>
                               </div>
-                              <div className="mr-[2px] px-2.5 md:px-3 h-fit rotate-90 border border-blue-300 my-4 md:my-6"></div>
+                              <div className="mr-[2px] px-2.5 md:px-3 h-fit rotate-90 border border-blue-100 my-4 md:my-6"></div>
 
                               {/* Step 3 */}
                               <div className="flex items-center gap-x-4">
                                    <div className="p-[10px] md:p-3 rounded-full border-[3px] border-blue-100 bg-blue-400  w-fit h-fit"></div>
-                                   <p className="font-iranyekan-regular text-sm md:text-base text-blue-200">
+                                   <p className="font-iranyekan-regular text-sm md:text-base text-blue-100">
                                         اطلاعات مکانی
                                    </p>
                               </div>
