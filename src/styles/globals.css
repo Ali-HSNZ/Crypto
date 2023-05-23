@@ -34,7 +34,7 @@ input[type=password]:-webkit-autofill{
 
 
 /* Toastify */
-.Toastify__toast-body { font-family: 'iranyekan-medium'; font-size: 14px;}
+.Toastify__toast-body { font-family: 'iranyekan-medium'; font-size: 16px;}
 .Toastify {
      position: absolute;
      z-index: 100;
