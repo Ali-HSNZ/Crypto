@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import L, { LatLngExpression } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 
-type TMapWrapperProps ={
+type TMapWrapperProps = {
   setSelectedLocation: any
   onClose: React.Dispatch<React.SetStateAction<boolean>>
-  currentLocation: [number , number] | undefined  
+  currentLocation: [number, number] | undefined
 }
 
 const MapWrapper: React.FC<TMapWrapperProps> = ({ onClose, setSelectedLocation, currentLocation }) => {
@@ -58,7 +59,7 @@ const MapWrapper: React.FC<TMapWrapperProps> = ({ onClose, setSelectedLocation, 
           position={position}
           draggable={false}
           icon={L.icon({ iconUrl: '/marker.png', iconSize: [40, 40], iconAnchor: [15, 15] })}
-          eventHandlers={{ dragend: (e:any) => setPosition([e.target.getLatLng().lat, e.target.getLatLng().lng]) }}
+          eventHandlers={{ dragend: (e: any) => setPosition([e.target.getLatLng().lat, e.target.getLatLng().lng]) }}
         />
 
         <UpdateMarkerPosition />
@@ -66,11 +67,11 @@ const MapWrapper: React.FC<TMapWrapperProps> = ({ onClose, setSelectedLocation, 
       </MapContainer>
 
       <div className="absolute z-20 left-0 right-0 w-fit bottom-5 mx-auto flex gap-x-4 justify-center items-center">
-        
+
         <button type='button' onClick={() => onClose(false)} className='bg-gray-500 text-sm hover:bg-gray-600 duration-150 rounded-md font-iranyekan-bold text-blue-50 px-6 py-3'>
           بستن
         </button>
-        
+
         <button type='button' onClick={confirmLocationHandler} className='bg-orange-500 text-sm hover:bg-orange-600 duration-150  rounded-md flex gap-x-3 font-iranyekan-bold text-blue-50 px-6 py-3'>
           ثبت موقعیت
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
