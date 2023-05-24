@@ -25,5 +25,5 @@ export const toPersianDigits = (requestDigits: string | number) => {
     return requestDigits.replace(/\d/g, (e) => persianDigits[parseInt(e)]);
   }
 
-  return "";
+  return requestDigits;
 };
