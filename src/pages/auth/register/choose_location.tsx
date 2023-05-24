@@ -29,7 +29,7 @@ type TPageInitailValues = {
      currentLocation: [number, number] | undefined
 }
 
-const RegisterPage = () => {
+const Register_chooseLocation = () => {
 
      const { email, phone, password, name } = useSelector<TRootState>(state => state.register) as IRegister
 
@@ -327,4 +327,4 @@ const RegisterPage = () => {
      );
 }
 
-export default RegisterPage;
+export default Register_chooseLocation;

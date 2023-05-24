@@ -22,7 +22,7 @@ type TPageInitailValues = {
      password: string
 }
 
-const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolean }) => {
+const Register_confirmPhoneNumber = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolean }) => {
 
      const router = useRouter()
 
@@ -217,4 +217,4 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
      );
 }
 
-export default RegisterPage;
+export default Register_confirmPhoneNumber;

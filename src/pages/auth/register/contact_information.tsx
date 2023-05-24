@@ -18,7 +18,7 @@ type TPageInitailValues = {
      phone: string,
      email: string
 }
-const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolean }) => {
+const Register_contactInformation = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolean }) => {
 
      const dispatch = useDispatch<TAppDispatch>()
      const { completedStep, email, phone } = useSelector<TRootState>(state => state.register) as IRegister
@@ -186,4 +186,4 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
      );
 }
 
-export default RegisterPage;
+export default Register_contactInformation;
