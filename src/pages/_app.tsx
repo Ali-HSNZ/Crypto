@@ -11,15 +11,15 @@ import store from '@/redux/store'
 
 function App({ Component, pageProps }: AppProps) {
 
-  const [buildingLoading, setBuildingLoading] = useState(false);
+  const [isBuildingPageLoading, setIsBuildingLoading] = useState(false);
 
-  Router.events.on('routeChangeStart', () => setBuildingLoading(true));
-  Router.events.on('routeChangeComplete', () => setBuildingLoading(false));
-  Router.events.on('routeChangeError', () => setBuildingLoading(false));
+  Router.events.on('routeChangeStart', () => setIsBuildingLoading(true));
+  Router.events.on('routeChangeComplete', () => setIsBuildingLoading(false));
+  Router.events.on('routeChangeError', () => setIsBuildingLoading(false));
 
   return(
     <Provider store={store}>
-      <Component {...pageProps} loading={buildingLoading} isBuildingPageLoading={buildingLoading}/>
+      <Component {...pageProps} isBuildingPageLoading={isBuildingPageLoading}/>
       <ToastContainer 
         position="top-right" 
         autoClose={4000} 
