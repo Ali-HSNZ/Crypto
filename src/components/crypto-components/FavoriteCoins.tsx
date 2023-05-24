@@ -1,5 +1,5 @@
 import { TCrypto_favoriteCoinsRes } from "@/types/crypto.types";
-import { toPersianDigits } from "@/utils/toPersianDigits";
+import { toPersianDigits } from "@/utils/methods";
 import { truncateNumber } from "@/utils/methods";
 
 

@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import { Navigation } from "swiper";
 import "swiper/css/free-mode";
 
-import { toPersianDigits } from '@/utils/toPersianDigits';
+import { toPersianDigits } from '@/utils/methods';
 import { truncateNumber } from '@/utils/methods';
 import { TCrypto_priceHistoriesRes } from '@/types/crypto.types';
 

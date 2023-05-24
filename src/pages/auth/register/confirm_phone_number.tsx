@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TAppDispatch, TRootState } from "@/redux/store";
 import { useRouter } from "next/router";
-import { toPersianDigits } from "@/utils/toPersianDigits";
+import { toPersianDigits } from "@/utils/methods";
 import { confirm_phone_number } from "@/redux/slices/register";
 import { IRegister } from "src/types/register.types";
 import Loading from "react-loading";

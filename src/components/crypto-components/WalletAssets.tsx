@@ -1,6 +1,6 @@
 import { AppThunk, TAppDispatch, TRootState } from '@/redux/store';
 import { TCrypto_walletAssetsResponse, TCrypto_walletAssets } from '@/types/crypto.types';
-import { toPersianDigits } from '@/utils/toPersianDigits';
+import { toPersianDigits } from '@/utils/methods';
 import { useDispatch, useSelector } from 'react-redux';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { useEffect } from 'react'

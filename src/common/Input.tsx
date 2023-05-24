@@ -1,5 +1,5 @@
 import { TInputProps } from '@/types/other.types';
-import { toPersianDigits } from '@/utils/toPersianDigits';
+import { toPersianDigits } from '@/utils/methods';
 import { FC, useRef, useState } from 'react';
 
 const Input: FC<TInputProps> = ({ dir, icon, maxLength, disabled, type, title, placeholder, children, formik, name }): JSX.Element => {
