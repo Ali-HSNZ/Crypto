@@ -42,14 +42,14 @@ const Register_contactInformation = ({ isBuildingPageLoading }: { isBuildingPage
 
      const validationSchema = yup.object({
           phone: yup.string()
-               .required('شماره موبایل الزامی میباشد.')
+               .required('شماره موبایل الزامی می‌باشد.')
                .test('validate', "شماره موبایل وارد شده معتبر نیست.", (values) => {
                     if (VALIDATION_PHONE_NUMBER.test(toEnDigits(values)))
                          return true;
                     else return false
                }),
           email: yup.string()
-               .required('ایمیل الزامی میباشد.')
+               .required('ایمیل الزامی می‌باشد.')
                .test('validate', "ایمیل وارد شده معتبر نیست.", (values) => {
                     if (VALIDATION_EMAIL.test(toEnDigits(values)))
                          return true;
@@ -140,7 +140,7 @@ const Register_contactInformation = ({ isBuildingPageLoading }: { isBuildingPage
                               >
                                    <>
                                         {!formik.errors.phone && !isBuildingPageLoading && completedStep !== "confirm_phone_number" && (
-                                             <button type="button" onClick={getOtpCode_handler} className="font-iranyekan-bold text-sm text-blue-500 hover:text-blue-600">
+                                             <button type="button" onClick={getOtpCode_handler} className="font-iranyekan-bold text-sm outline-none focus:text-blue-700 text-blue-500 hover:text-blue-700">
                                                   ارسال کد
                                              </button>
                                         )}

@@ -116,21 +116,21 @@ const Register_chooseLocation = () => {
 
      const validationSchema = yup.object({
           province: yup.string()
-               .required('انتخاب استان الزامی می‌باشد'),
+               .required('انتخاب استان الزامی می‌باشد.'),
           city: yup.string()
-               .required('انتخاب شهر الزامی می‌باشد'),
+               .required('انتخاب شهر الزامی می‌باشد.'),
           address: yup.string()
-               .required('آدرس الزامی میباشد.'),
+               .required('آدرس الزامی می‌باشد.'),
           lat: yup.string()
-               .required("موقعیت عرض جغرافیایی الزامی است.")
+               .required("موقعیت عرض جغرافیایی الزامی می‌باشد.")
                .test('validate', "موقعیت عرض جغرافیایی معتبر نیست.", (values) => {
                     if (VALIDATION_MAP_POSITION.test(toEnDigits(values)))
                          return true;
                     else return false
                }),
           lng: yup.string()
-               .required("موقعیت عرض جغرافیایی الزامی است.")
-               .test('validate', "موقعیت عرض جغرافیایی معتبر نیست.", (values) => {
+               .required("موقعیت طول جغرافیایی الزامی می‌باشد.")
+               .test('validate', "موقعیت طول جغرافیایی معتبر نیست.", (values) => {
                     if (VALIDATION_MAP_POSITION.test(toEnDigits(values)))
                          return true;
                     else return false

@@ -65,7 +65,7 @@ const Register_confirmPhoneNumber = ({ isBuildingPageLoading }: { isBuildingPage
 
      const validationSchema = Yup.object({
           password: Yup.string()
-               .required('رمز عبور الزامی میباشد')
+               .required('رمز عبور الزامی می‌باشد')
                .min(8, "رمز عبور نمی تواند کمتر از ۸ کاراکتر باشد.")
                .test('validate', "رمز عبور معتبر نیست | رمز عبور میتواند ترکیبی از عدد و حروف انگلیسی باشد.", (values) => {
                     if (VALIDATION_PASSWORD.test(toEnDigits(values)))

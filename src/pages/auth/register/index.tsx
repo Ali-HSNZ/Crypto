@@ -50,12 +50,12 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
 
      const validationSchema = yup.object({
           name: yup.string()
+               .required("نام و نام خوانوادگی الزامی می‌باشد.")
                .matches(VALIDATION_PERSIAN_ALPHABET, "نام و نام خوانوادگی معتبر نیست.")
                .max(30, "نام و نام خانوادگی نمی‌تواند بیشتر از ۳۰ نویسه باشد.")
-               .min(4, "نام و نام خانوادگی نمی‌تواند کم تر از 4 نویسه باشد")
-               .required("نام و نام خوانوادگی الزامی است."),
+               .min(4, "نام و نام خانوادگی نمی‌تواند کم تر از 4 نویسه باشد"),
           national_code: yup.string()
-               .required("کد ملی الزامی میباشد.")
+               .required("کد ملی الزامی می‌باشد.")
                .test('validate', "کد ملی وارد شده معتبر نیست.", (values) => {
                     if (VALIDATION_NATIONAL_CODE.test(toEnDigits(values)))
                          return true;
@@ -63,7 +63,7 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                })
                .max(10, "کد ملی وارد شده معتبر نیست"),
           birthday: yup.string()
-               .required("تاریخ تولد الزامی میباشد.")
+               .required("تاریخ تولد الزامی می‌باشد.")
                .test('validate', "تاریخ تولد وارد شده صحیح نیست.", (values) => {
                     if (VALIDATION_BIRTHDAY.test(toEnDigits(values)))
                          return true;
