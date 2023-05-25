@@ -6,7 +6,7 @@ export type TSelectboxProps = {
      query: string,
      notFoundTitle: string,
      setQuery: React.Dispatch<React.SetStateAction<any>>,
-     data: Array<TProvince> | Array<TCity> ,
+     data: Array<TProvince> | Array<TCity> | undefined,
      icon: JSX.Element
      title: string
      name: string
