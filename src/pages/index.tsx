@@ -177,7 +177,7 @@ export const getServerSideProps = async () => {
         favoriteCoins: favoriteCoins.data.sort((a: TCrypto_favoriteCoinsRes, b: TCrypto_favoriteCoinsRes) => b.circulating_supply - a.circulating_supply),
       }
     }
-  } catch (error) {
+  } catch (error : any) {
 
     const message = error?.response?.statusText
     const statusCode = error?.response?.status
