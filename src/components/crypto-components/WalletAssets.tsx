@@ -14,7 +14,7 @@ const WalletAssets = () => {
 
   useEffect(() => {
     dispatch(fetchWalletAssets())
-  }, [])
+  }, [dispatch])
 
   // Render Label
   const renderCustomizedLabel = ({ symbol, cx, cy, midAngle, innerRadius, outerRadius }: { symbol: number, cx: number, cy: number, midAngle: number, innerRadius: number, outerRadius: number }) => {
