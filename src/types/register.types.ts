@@ -10,14 +10,14 @@ export interface IRegister {
 }
 // choose Location
 export type TProvince = {
-     id? : number,
-     name? : string
+     id : number,
+     name : string
 }
 export type TCity = {
-     id? : number,
-     name? : string
-     slug? : string,
-     province_id? : number
+     id : number,
+     name : string
+     slug : string,
+     province_id : number
 }
 export type TRegisterActionPayload = {
      name: string
