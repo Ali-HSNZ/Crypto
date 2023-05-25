@@ -48,7 +48,7 @@ const MapWrapper: React.FC<TMapWrapperProps> = ({ onClose, setSelectedLocation, 
         document.removeEventListener('click', mapClickHandler);
       }
     };
-  }, []);
+  }, [mapClickHandler]);
 
   return (
     <div className='relative w-full h-full rounded-xl overflow-hidden'>
