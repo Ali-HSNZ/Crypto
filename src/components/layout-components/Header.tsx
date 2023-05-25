@@ -1,4 +1,5 @@
-import logo from '@/images/Logo.png'
+import logo from '@/images/profile.jpg'
+import Image from 'next/image'
 import {FC} from 'react'
 
 type THeaderProps = {
@@ -23,7 +24,13 @@ const Header : FC<THeaderProps> = ({isOpenNavbar , setIsOpenNavbar}) => {
                          </svg>
                          <div className='bg-green-500 p-1.5 w-fit h-fit rounded-full absolute top-0 right-0'></div>
                     </button>
-                    <img src={logo.src} className='w-14 rounded-full object-cover' />
+                    <Image 
+                         alt='نیوکوین اسپیس'
+                         src={logo.src}
+                         width={50}
+                         height={50}
+                         className='rounded-full h-12  object-cover'
+                    />
                </div>
           </div>
      );

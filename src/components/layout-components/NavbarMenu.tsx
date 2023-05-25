@@ -1,4 +1,5 @@
 import logo from '@/images/Logo.png'
+import Image from 'next/image';
 import Link from 'next/link';
 
 const NavbarMenu = () => {
@@ -6,7 +7,13 @@ const NavbarMenu = () => {
      return (
           <div className="w-full h-full   bg-white rounded-lg p-4 hidden lg:block">
                <div className="w-full flex justify-center items-center flex-col">
-                    <img src={logo.src} alt="" className='w-[80px] xl:w-[90px]' />
+                    <Image 
+                         alt='نیوکوین اسپیس'
+                         src={logo.src}
+                         width={80}
+                         height={80}
+                         className=''
+                    />
                     <h1 className='font-iranyekan-bold mt-4 lg:text-base xl:text-xl'>نیوکوین اسپیس</h1>
                </div>
                <hr className='border-gray-300 mt-6' />

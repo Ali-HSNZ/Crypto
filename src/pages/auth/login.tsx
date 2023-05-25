@@ -11,7 +11,9 @@ import { toEnDigits } from "@/utils/methods";
 import { useState } from "react";
 import Loading from 'react-loading';
 import Head from "next/head";
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
+
 
 type TPageInitailValues = {
      email: string,
@@ -88,7 +90,13 @@ const LoginPage = () => {
                                    </div>
                               </div>
                               <div className="flex justify-center md:mt-2 ">
-                                   <img src={Rectangle.src} alt="" className="h-auto w-[100px] md:w-[200px] lg:w-[220px] " />
+                                   <Image
+                                        src={Rectangle.src}
+                                        width={100}
+                                        height={100}
+                                        alt="نیوکوین اسپیس"
+                                        className="h-auto w-[100px] md:w-[150px] lg:w-[180px]"
+                                   />
                               </div>
                          </div>
                     </div>
@@ -96,7 +104,13 @@ const LoginPage = () => {
                     {/* Login Form */}
                     <form onSubmit={formik.handleSubmit} className="bg-white w-full rounded-l-md py-16 flex items-center flex-col h-full">
                          <div>
-                              <img src={logo.src} alt="" className="w-20" />
+                              <Image
+                                   alt='نیوکوین اسپیس'
+                                   src={logo.src}
+                                   width={80}
+                                   height={80}
+                                   className=''
+                              />
                          </div>
                          <h1 className="text-2xl font-iranyekan-extraBold mt-6">ورود به داشبورد</h1>
                          <Link href={'/auth/register'} className="font-iranyekan-bold text-sm hover:underline underline-offset-4 text-[#388AEA] mt-4">هنوز ثبت نام نکرده‌اید؟</Link>
@@ -126,9 +140,7 @@ const LoginPage = () => {
                                    placeholder="حداقل ۸ کاراکتر"
                               />
                          </section>
-                         <button type={'submit'} 
-                         disabled={isPendingRequest} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"}  disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
-
+                         <button type={'submit'} disabled={isPendingRequest} className={`${formik.isValid ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"}  disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}>
                               {isPendingRequest ? (
                                    <Loading color="white" width={20} height={20} type="spin" />
                               ) : (

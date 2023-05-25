@@ -18,7 +18,8 @@ import Loading from "react-loading";
 import Head from "next/head";
 import axios from "axios";
 import { toast } from "react-toastify";
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
+import Image from "next/image";
 
 type TPageInitailValues = {
      address: string,
@@ -34,9 +35,9 @@ const Register_chooseLocation = () => {
      const { email, phone, password, name } = useSelector<TRootState>(state => state.register) as IRegister
 
      const router = useRouter()
-     
+
      // The variable isPendingRequest indicates whether a register request is pending or not.
-     const [isPendingRequest , setIsPendingRequest] = useState<boolean>(false)
+     const [isPendingRequest, setIsPendingRequest] = useState<boolean>(false)
 
 
      // Renderd Map in Client Side
@@ -59,12 +60,12 @@ const Register_chooseLocation = () => {
 
 
      // Choose/Select City
-     const [cities, setCities] = useState<Array<TCity> | undefined>()
+     const [cities, setCities] = useState<Array<TCity>>()
      const [cityQuery, setCityQuery] = useState<string>("")
      const [selectedCity, setSelectedCity] = useState<TCity | string>()
 
      // find City
-     const queriedCityResults: Array<TProvince> = useMemo(() => {
+     const queriedCityResults: Array<TCity> | undefined = useMemo(() => {
           if (cityQuery === "" || !cities) {
                // return all cities if cityQuery is empty
                return cities;
@@ -80,7 +81,7 @@ const Register_chooseLocation = () => {
           if (selectedProvience?.id) {
                const cities = allCities.filter(city => city.province_id === selectedProvience?.id)
                setCities(cities)
-          } else setCities(null)
+          } else setCities(undefined)
      }, [selectedProvience])
 
 
@@ -110,7 +111,8 @@ const Register_chooseLocation = () => {
           })
           .catch(error => {
                setIsPendingRequest(false)
-               error?.response?.data?.errors.forEach((message: string) => toast.error(message));          })
+               error?.response?.data?.errors.forEach((message: string) => toast.error(message));
+          })
      }
 
 
@@ -175,7 +177,13 @@ const Register_chooseLocation = () => {
                     {/* sideBar */}
                     <div className="bg-[#388AEA]  w-full md:w-[270px] md:min-w-[270px] h-fit md:h-full gap-x-6 px-6 py-6 md:py-16 flex justify-between items-center md:justify-start md:flex-col xl:rounded-r-md   ">
                          <div className="w-fit md:w-full flex justify-center  items-center flex-col">
-                              <img src={logo.src} alt="" className="w-[70px] md:w-20" />
+                              <Image
+                                   alt="نیوکوین اسپیس"
+                                   width={70}
+                                   height={70}
+                                   className="w-[70px] md:w-20"
+                                   src={logo.src}
+                              />
                               <h1 className="font-iranyekan-extraBold text-xl xl:text-2xl text-center text-blue-100  mt-4 md:mt-6 xl:mt-8">
                                    ثبت نام
                               </h1>

@@ -23,6 +23,7 @@ import DatePicker from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import "react-multi-date-picker/styles/layouts/mobile.css"
+import Image from "next/image";
 
 type TPageInitialValues = {
      name: string;
@@ -93,7 +94,13 @@ const RegisterPage = ({ isBuildingPageLoading }: { isBuildingPageLoading: boolea
                     {/* sideBar */}
                     <div className="bg-[#388AEA]  w-full md:w-[270px] md:min-w-[270px] h-fit md:h-full gap-x-6 px-6 py-6 md:py-16 flex justify-between items-center md:justify-start md:flex-col xl:rounded-r-md   ">
                          <div className="w-fit md:w-full flex justify-center  items-center flex-col">
-                              <img src={logo.src} alt="" className="w-[70px] md:w-20" />
+                              <Image 
+                                   alt="نیوکوین اسپیس"
+                                   width={70}
+                                   height={70}
+                                   className="w-[70px] md:w-20"
+                                   src={logo.src}
+                              />
                               <h1 className="font-iranyekan-extraBold text-xl xl:text-2xl text-center text-blue-100  mt-4 md:mt-6 xl:mt-8">
                                    ثبت نام
                               </h1>

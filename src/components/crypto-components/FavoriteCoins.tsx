@@ -1,6 +1,7 @@
 import { TCrypto_favoriteCoinsRes } from "@/types/crypto.types";
 import { toPersianDigits } from "@/utils/methods";
 import { truncateNumber } from "@/utils/methods";
+import Image from "next/image";
 
 
 const FavoriteCoins = ({ favoriteCoins }: { favoriteCoins: Array<TCrypto_favoriteCoinsRes> }) => {
@@ -22,17 +23,22 @@ const FavoriteCoins = ({ favoriteCoins }: { favoriteCoins: Array<TCrypto_favorit
                     <p className="text-sm text-gray-500 font-iranyekan-regular">۲۴ ساعت گذشته</p>
                </div>
                <section className=" xl:max-h-[700px] overflow-y-auto flex flex-col mt-4">
-                    {favoriteCoins?.map((item: TCrypto_favoriteCoinsRes, index: number) => (
+                    {favoriteCoins?.map((coin: TCrypto_favoriteCoinsRes, index: number) => (
                          <div key={index} className="w-full flex flex-row items-center justify-between px-4 py-3 border-t first:border-t-0">
                               <div className="flex gap-x-4 items-center">
-                                   <img className="w-10  object-cover " src={item?.image} alt="" />
+                                   <Image
+                                        width={40}
+                                        height={40}
+                                        alt=""
+                                        src={coin?.image}
+                                   />
                                    <div className="flex gap-x-2">
-                                        <p className="text-sm font-quicksand-medium">{item.name}</p>
-                                        <p className="text-xs font-quicksand-bold text-gray-400">{String(item?.symbol).toUpperCase()}</p>
+                                        <p className="text-sm font-quicksand-medium">{coin.name}</p>
+                                        <p className="text-xs font-quicksand-bold text-gray-400">{coin?.symbol.toUpperCase()}</p>
                                    </div>
                               </div>
-                              <p className={`text-sm font-iranyekan-regular ${item.price_change_24h > 0 ? "text-green-600" : "text-red-600"}`}>
-                                   {toPersianDigits(truncateNumber(item?.price_change_24h, 3))}
+                              <p className={`text-sm font-iranyekan-regular ${coin.price_change_24h > 0 ? "text-green-600" : "text-red-600"}`}>
+                                   {toPersianDigits(truncateNumber(coin?.price_change_24h, 3))}
                               </p>
                          </div>
                     ))}

@@ -1,14 +1,15 @@
 import { Modal } from "@mui/material";
 import Link from "next/link";
 import logo from '@/images/Logo.png'
-import {FC} from 'react'
+import { FC } from 'react'
+import Image from "next/image";
 
 type TNavBarModalProps = {
-     isOpenNavbar : boolean
-     setIsOpenNavbar : React.Dispatch<React.SetStateAction<boolean>>
+     isOpenNavbar: boolean
+     setIsOpenNavbar: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const NavBarModal : FC<TNavBarModalProps> = ({isOpenNavbar , setIsOpenNavbar}) => {
+const NavBarModal: FC<TNavBarModalProps> = ({ isOpenNavbar, setIsOpenNavbar }) => {
 
      return (
           <Modal open={isOpenNavbar} onClose={() => setIsOpenNavbar(false)}>
@@ -21,7 +22,13 @@ const NavBarModal : FC<TNavBarModalProps> = ({isOpenNavbar , setIsOpenNavbar}) =
                     </button>
 
                     <div className="w-full flex justify-center items-center flex-col">
-                         <img src={logo.src} alt="" className='w-[80px] xl:w-[90px]' />
+                         <Image
+                              alt='نیوکوین اسپیس'
+                              src={logo.src}
+                              width={80}
+                              height={80}
+                              className=''
+                         />
                          <h1 className='font-iranyekan-bold mt-4 lg:text-base xl:text-xl'>نیوکوین اسپیس</h1>
                     </div>
                     <hr className='border-gray-300 mt-6' />

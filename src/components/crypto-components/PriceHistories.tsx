@@ -10,6 +10,7 @@ import "swiper/css/free-mode";
 import { toPersianDigits } from '@/utils/methods';
 import { truncateNumber } from '@/utils/methods';
 import { TCrypto_priceHistoriesRes } from '@/types/crypto.types';
+import Image from 'next/image';
 
 
 const PriceHistories = ({ priceHistories }: { priceHistories: Array<TCrypto_priceHistoriesRes> }) => {
@@ -35,7 +36,13 @@ const PriceHistories = ({ priceHistories }: { priceHistories: Array<TCrypto_pric
             <div className="w-full bg-white p-4 rounded-lg">
               <div className='w-full flex justify-between'>
                 <div className="flex justify-center gap-x-4 items-center h-14 ">
-                  <img src={coin.imageUrl} className="w-auto h-auto object-contain max-h-full max-w-full" alt="" />
+                  <Image
+                    width={50}
+                    height={50}
+                    alt={`${coin.name}`}
+                    src={coin?.imageUrl}
+                    className=" object-contain max-h-full max-w-full"
+                  />
                   <div className="flex flex-col gap-y-2">
                     <p className="font-iranyekan-bold">{coin.fa_name}</p>
                     <p className="font-iranyekan-bold text-gray-400">{coin.symbol}</p>
