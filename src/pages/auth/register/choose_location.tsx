@@ -58,20 +58,19 @@ const Register_chooseLocation = () => {
           return provinces.filter((province) => province.name.includes(provinceQuery));
      }, [provinceQuery]);
 
-
      // Choose/Select City
-     const [cities, setCities] = useState<Array<TCity>>()
+     const [cities, setCities] = useState<Array<TCity>>([])
      const [cityQuery, setCityQuery] = useState<string>("")
      const [selectedCity, setSelectedCity] = useState<TCity | string>()
 
      // find City
-     const queriedCityResults: Array<TCity> | undefined = useMemo(() => {
-          if (cityQuery === "" || !cities) {
+     const queriedCityResults: Array<TCity> = useMemo(() => {
+          if (cityQuery === "") {
                // return all cities if cityQuery is empty
                return cities;
           }
           return cities.filter((city) => city.name.includes(cityQuery));
-     }, [cities, cityQuery]);
+     }, [cityQuery, cities]);
 
 
      // Clearing and updating city state based on selected Province
@@ -81,7 +80,7 @@ const Register_chooseLocation = () => {
           if (selectedProvience?.id) {
                const cities = allCities.filter(city => city.province_id === selectedProvience?.id)
                setCities(cities)
-          } else setCities(undefined)
+          } else setCities([])
      }, [selectedProvience])
 
 
