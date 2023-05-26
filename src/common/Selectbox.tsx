@@ -49,10 +49,10 @@ const SelectBox: FC<TSelectboxProps> = ({ name, formik, isDisabled, icon, title,
                     </div>
                     <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0" afterLeave={() => setQuery('')}>
                         <Combobox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            {data && data.length === 0 ? (
+                            {data.length === 0 ? (
                                 <p className="relative cursor-pointer select-none py-2 px-4 text-gray-700 font-iranyekan-regular">{notFoundTitle}</p>
                             ) : (
-                                data && data.map((item: TProvince | TCity) => (
+                                data.map((item: TProvince | TCity) => (
                                     <Combobox.Option value={item} key={item.id} className={({ active }) => `relative cursor-pointer select-none py-2 pl-10 pr-4 ${active ? 'bg-gray-100' : 'text-gray-900'}`}>
                                         {({ selected }) => (
                                             <>
