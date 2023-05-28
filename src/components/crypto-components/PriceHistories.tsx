@@ -39,7 +39,7 @@ const PriceHistories = ({ priceHistories }: { priceHistories: Array<TCrypto_pric
                   <Image
                     width={50}
                     height={50}
-                    alt={`${coin.name}`}
+                    alt={`${coin.name} image`}
                     src={coin?.imageUrl}
                     className=" object-contain max-h-full max-w-full"
                   />
