@@ -29,7 +29,7 @@ const FavoriteCoins = ({ favoriteCoins }: { favoriteCoins: Array<TCrypto_favorit
                                    <Image
                                         width={40}
                                         height={40}
-                                        alt=""
+                                        alt={`${coin.name} image`}
                                         src={coin?.image}
                                    />
                                    <div className="flex gap-x-2">
