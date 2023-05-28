@@ -55,8 +55,13 @@ const WalletAssets = () => {
                   {/* point */}
                   <div className="w-3 h-3 bg-[#F7931A] rounded-full"></div>
 
-                  <h6 className="font-iranyekan-medium text-base">{wallet.name}</h6>
-                  <p className="whitespace-nowrap text-gray-400 text-sm font-iranyekan-regular">{toPersianDigits(wallet.balance)} درصد</p>
+                  <h6 className="font-iranyekan-medium text-base">
+                    {wallet.name}
+                  </h6>
+
+                  <p className="whitespace-nowrap text-gray-400 text-sm font-iranyekan-regular">
+                    {toPersianDigits(wallet.balance)} درصد
+                  </p>
                 </div>
               ))}
             </div>
