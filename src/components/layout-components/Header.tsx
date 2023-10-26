@@ -1,18 +1,19 @@
 import logo from '@/images/profile.jpg'
 import Image from 'next/image'
-import {FC} from 'react'
+import Link from 'next/link'
+import { FC } from 'react'
 
 type THeaderProps = {
-     isOpenNavbar : boolean,
-     setIsOpenNavbar : React.Dispatch<React.SetStateAction<boolean>>
+     isOpenNavbar: boolean,
+     setIsOpenNavbar: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Header : FC<THeaderProps> = ({isOpenNavbar , setIsOpenNavbar}) => {
+const Header: FC<THeaderProps> = ({ isOpenNavbar, setIsOpenNavbar }) => {
 
      return (
           <div className="bg-white h-auto w-full rounded-xl p-4 flex justify-between items-center">
                {/* Menu Button */}
-               <button onClick={()=>setIsOpenNavbar(!isOpenNavbar)}>
+               <button onClick={() => setIsOpenNavbar(!isOpenNavbar)}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
                          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
@@ -24,13 +25,15 @@ const Header : FC<THeaderProps> = ({isOpenNavbar , setIsOpenNavbar}) => {
                          </svg>
                          <div className='bg-green-500 p-1.5 w-fit h-fit rounded-full absolute top-0 right-0'></div>
                     </button>
-                    <Image 
-                         alt='نیوکوین اسپیس'
-                         src={logo.src}
-                         width={50}
-                         height={50}
-                         className='rounded-full h-12  object-cover'
-                    />
+                    <Link href={'/auth/login'}>
+                         <Image
+                              alt='نیوکوین اسپیس'
+                              src={logo.src}
+                              width={50}
+                              height={50}
+                              className='rounded-full h-12  object-cover'
+                         />
+                    </Link>
                </div>
           </div>
      );
