@@ -11,28 +11,26 @@
 /* Swiper Styles */
 @import url('swiper.styles.css');
 
-
-body{
-     background-color: #E8F4FF;
+body {
+    background-color: #e8f4ff;
 }
 
 /* otp inputs */
-.otp_inputs{
-     width: 50px !important;
-     height: 50px !important;
+.otp_inputs {
+    width: 50px !important;
+    height: 50px !important;
 }
-.otp_inputs:focus{
-     outline: none;
-     border: 2px solid gray;
+.otp_inputs:focus {
+    outline: none;
+    border: 2px solid gray;
 }
-
 
 /* Toastify */
-.Toastify__toast-body { 
-     font-family: 'iranyekan-medium'; 
-     font-size: 16px;
+.Toastify__toast-body {
+    font-family: 'iranyekan-medium';
+    font-size: 16px;
 }
 .Toastify {
-     position: absolute;
-     z-index: 100;
+    position: absolute;
+    z-index: 100;
 }

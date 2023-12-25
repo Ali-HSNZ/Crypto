@@ -1,74 +1,65 @@
-import { Line } from "react-chartjs-2";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  Chart as ChartJs, 
-  Title, 
-  LineElement,
-  Filler,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  PointElement
+    CategoryScale,
+    Chart as ChartJs,
+    Filler,
+    Legend,
+    LinearScale,
+    LineElement,
+    PointElement,
+    Title,
 } from 'chart.js'
+import { Line } from 'react-chartjs-2'
 
+ChartJs.register(Title, LineElement, Legend, CategoryScale, LinearScale, PointElement, Filler)
 
-ChartJs.register(
-  Title, 
-  LineElement, 
-  Legend,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  Filler,
-)
+const LineChart = ({ chart }: { chart: Array<[number, number]> }) => {
+    const data: any = {
+        // For Get/Show Time
+        labels: chart.map((data: [number, number]) => data[0]),
+        datasets: [
+            {
+                // for Get/Show Price
+                data: chart.map((data: [number, number]) => data[1]),
 
+                fill: true,
 
-const LineChart = ({chart} : {chart : Array<[number,number]>}) => {
+                // Line
+                borderWidth: 4,
+                borderColor: '#2AC479',
+                tension: '0.5',
 
-  const data : any = {
-    // For Get/Show Time
-    labels : chart.map((data : [number,number]) => data[0]),
-    datasets : [
-      {
-        // for Get/Show Price
-        data : chart.map((data : [number,number]) => data[1]),
-        
-        fill : true,
+                // Point
+                pointHoverBorderWidth: 3,
+                pointBackgroundColor: 'white',
+                pointBorderColor: '#2AC479',
+                pointRadius: 5,
+                pointBorderWidth: 3,
+            },
+        ],
+    }
 
-        // Line
-        borderWidth : 4,
-        borderColor : '#2AC479',
-        tension : '0.5',
+    const options: object = {
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+            datalabels: { display: false },
+            tooltip: { display: false },
+            legend: { display: false },
+        },
+        scales: {
+            x: { display: false },
+            y: { display: false },
+        },
+    }
 
-        // Point
-        pointHoverBorderWidth: 3,
-        pointBackgroundColor : 'white',
-        pointBorderColor : "#2AC479",
-        pointRadius : 5,
-        pointBorderWidth : 3
-      }
-    ]
-  }
-
-  const options : object = {
-    maintainAspectRatio : false,
-    responsive : true,
-      plugins: {
-          datalabels: {display : false},
-          tooltip: {display : false},
-          legend: {display: false}
-      },
-      scales: {
-          x: {display : false},
-          y: {display : false}
-      }
-  }
-  
-
-  return (  
-    <div className="w-[full] h-auto max-h-[120px]">
-      <Line data={data} options={options}>Data</Line>
-    </div>
-  );
+    return (
+        <div className='w-[full] h-auto max-h-[120px]'>
+            <Line data={data} options={options}>
+                Data
+            </Line>
+        </div>
+    )
 }
- 
-export default LineChart;
+
+export default LineChart
