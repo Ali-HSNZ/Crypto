@@ -18,7 +18,7 @@ import { VALIDATION_EMAIL, VALIDATION_PASSWORD } from '@utils/regix'
 import logo from '@images/Logo.png'
 import Rectangle from '@images/Rectangle.png'
 
-type TPageInitailValues = {
+type TPageInitialValues = {
     email: string
     password: string
 }
@@ -29,7 +29,7 @@ const LoginPage = () => {
 
     const router = useRouter()
 
-    const onSubmit = (values: TPageInitailValues) => {
+    const onSubmit = (values: TPageInitialValues) => {
         setIsPendingRequest(true)
         axios
             .post('https://apingweb.com/api/login', {
@@ -47,7 +47,7 @@ const LoginPage = () => {
             })
     }
 
-    const initialValues: TPageInitailValues = {
+    const initialValues: TPageInitialValues = {
         email: '',
         password: '',
     }
@@ -178,27 +178,29 @@ const LoginPage = () => {
                             formik.isValid ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-400 cursor-not-allowed'
                         }  disabled:bg-gray-400 disabled:cursor-not-allowed duration-150 mt-6 rounded-md flex gap-x-4 font-iranyekan-bold text-blue-50 px-6 py-3`}
                     >
-                        {isPendingRequest ? (
-                            <Loading color='white' width={20} height={20} type='spin' />
-                        ) : (
-                            <>
-                                ورود به حساب
-                                <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    fill='none'
-                                    viewBox='0 0 24 24'
-                                    strokeWidth={1.5}
-                                    stroke='currentColor'
-                                    className='w-6 h-6'
-                                >
-                                    <path
-                                        strokeLinecap='round'
-                                        strokeLinejoin='round'
-                                        d='M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18'
-                                    />
-                                </svg>
-                            </>
-                        )}
+                        <>
+                            {isPendingRequest ? (
+                                <Loading color='white' width={20} height={20} type='spin' />
+                            ) : (
+                                <>
+                                    ورود به حساب
+                                    <svg
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        fill='none'
+                                        viewBox='0 0 24 24'
+                                        strokeWidth={1.5}
+                                        stroke='currentColor'
+                                        className='w-6 h-6'
+                                    >
+                                        <path
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
+                                            d='M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18'
+                                        />
+                                    </svg>
+                                </>
+                            )}
+                        </>
                     </button>
                 </form>
             </section>

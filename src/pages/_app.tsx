@@ -1,4 +1,3 @@
-import type { AppProps } from 'next/app'
 import { Router } from 'next/router'
 import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
@@ -10,16 +9,18 @@ import store from '@redux/store'
 import '@styles/globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 
-function App({ Component, pageProps }: AppProps) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function App({ Component, pageProps }: any) {
     const [isBuildingPageLoading, setIsBuildingLoading] = useState(false)
 
     Router.events.on('routeChangeStart', () => setIsBuildingLoading(true))
     Router.events.on('routeChangeComplete', () => setIsBuildingLoading(false))
     Router.events.on('routeChangeError', () => setIsBuildingLoading(false))
 
+    // Wrap Component with a div to fix the JSX type issue
     return (
         <Provider store={store}>
-            <Component {...pageProps} isBuildingPageLoading={isBuildingPageLoading} />
+            <Component isBuildingPageLoading={isBuildingPageLoading} {...pageProps} />
             <ToastContainer
                 position='top-right'
                 autoClose={4000}

@@ -112,7 +112,7 @@ export const getServerSideProps = async () => {
 
             return [
                 {
-                    history: rippleRes.data.prices.slice(0, 10),
+                    history: rippleRes.data.prices.map((e: [number, number]) => e[1]),
                     usd: priceRes.data.ripple.usd,
                     usd_24h_change: priceRes.data.ripple.usd_24h_change,
                     symbol: 'XRP',
@@ -121,7 +121,7 @@ export const getServerSideProps = async () => {
                     imageUrl: 'https://cdn.iconscout.com/icon/free/png-512/free-ripple-13-646080.png?f=avif&w=256',
                 },
                 {
-                    history: bitcoinRes.data.prices.slice(0, 10),
+                    history: bitcoinRes.data.prices.map((e: [number, number]) => e[1]),
                     usd: priceRes.data.bitcoin.usd,
                     usd_24h_change: priceRes.data.bitcoin.usd_24h_change,
                     symbol: 'BTC',
@@ -130,7 +130,7 @@ export const getServerSideProps = async () => {
                     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg',
                 },
                 {
-                    history: dogecoinRes.data.prices.slice(0, 10),
+                    history: dogecoinRes.data.prices.map((e: [number, number]) => e[1]),
                     usd: priceRes.data.dogecoin.usd,
                     usd_24h_change: priceRes.data.dogecoin.usd_24h_change,
                     symbol: 'DOGE',
@@ -139,7 +139,7 @@ export const getServerSideProps = async () => {
                     imageUrl: 'https://upload.wikimedia.org/wikipedia/fa/d/d0/Dogecoin_Logo.png',
                 },
                 {
-                    history: tetherRes.data.prices.slice(0, 10),
+                    history: tetherRes.data.prices.map((e: [number, number]) => e[1]),
                     usd: priceRes.data.tether.usd,
                     usd_24h_change: priceRes.data.tether.usd_24h_change,
                     symbol: 'USDT',
@@ -149,7 +149,7 @@ export const getServerSideProps = async () => {
                         'https://images.revain.org/blob/tether_logo_67a1be67_6568_475e_ac29_8790e2d210ad_84d8fedf45@128x128.png.webp',
                 },
                 {
-                    history: ethereumRes.data.prices.slice(0, 10),
+                    history: ethereumRes.data.prices.map((e: [number, number]) => e[1]),
                     usd: priceRes.data.ethereum.usd,
                     usd_24h_change: priceRes.data.ethereum.usd_24h_change,
                     symbol: 'ETH',
@@ -164,11 +164,8 @@ export const getServerSideProps = async () => {
         return {
             props: {
                 priceHistories: priceHistories,
-                weekTransactions: weekTransactions.data.prices.slice(0, 10),
-                favoriteCoins: favoriteCoins.data.sort(
-                    (a: TCrypto_favoriteCoinsRes, b: TCrypto_favoriteCoinsRes) =>
-                        b.circulating_supply - a.circulating_supply
-                ),
+                weekTransactions: weekTransactions,
+                favoriteCoins: favoriteCoins,
             },
         }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

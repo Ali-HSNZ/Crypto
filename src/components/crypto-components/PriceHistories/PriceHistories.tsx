@@ -2,8 +2,11 @@ import Image from 'next/image'
 import { Navigation } from 'swiper'
 // Swiper
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { type TCrypto_priceHistoriesRes } from '@core/types/crypto.types'
 
-import LineChart from '@components/LineChart'
+import { type FC } from 'react'
+
+import { DAreaChart } from '@common/AreaChart'
 
 import { toPersianDigits } from '@utils/methods'
 import { truncateNumber } from '@utils/methods'
@@ -13,9 +16,9 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/free-mode'
 
-import { type TCrypto_priceHistoriesRes } from '../../core/types/crypto.types'
+import { type IPriceHistoriesProps } from './resources'
 
-const PriceHistories = ({ priceHistories }: { priceHistories: Array<TCrypto_priceHistoriesRes> }) => {
+const PriceHistories: FC<IPriceHistoriesProps> = ({ priceHistories }) => {
     return (
         <div className='w-full px-12 relative mt-6'>
             <Swiper
@@ -33,8 +36,8 @@ const PriceHistories = ({ priceHistories }: { priceHistories: Array<TCrypto_pric
             >
                 {priceHistories?.map((coin: TCrypto_priceHistoriesRes, index: number) => (
                     <SwiperSlide key={index}>
-                        <div className='w-full bg-white p-4 rounded-lg'>
-                            <div className='w-full flex justify-between'>
+                        <div className='w-full bg-white  rounded-lg'>
+                            <div className='w-full p-4 flex justify-between'>
                                 <div className='flex justify-center gap-x-4 items-center h-14 '>
                                     <Image
                                         width={50}
@@ -61,8 +64,16 @@ const PriceHistories = ({ priceHistories }: { priceHistories: Array<TCrypto_pric
                                     </p>
                                 </div>
                             </div>
-                            <div className='w-full pt-4'>
-                                <LineChart chart={coin.history} />
+                            <div className='w-full '>
+                                <DAreaChart
+                                    seriesData={[
+                                        {
+                                            name: coin.fa_name,
+                                            type: 'areaspline',
+                                            data: coin.history,
+                                        },
+                                    ]}
+                                />
                             </div>
                         </div>
                     </SwiperSlide>

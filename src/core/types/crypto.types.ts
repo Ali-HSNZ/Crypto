@@ -10,7 +10,7 @@ type TCrypto_favoriteCoinsRes = {
 type TCrypto_priceHistoriesRes = {
     usd: number
     usd_24h_change: number
-    history: Array<[number, number]>
+    history: number[]
     name: string
     fa_name: string
     symbol: string
